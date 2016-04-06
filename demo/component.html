@@ -1,0 +1,254 @@
+<!--
+## Usage
+To use this component in your custom component do the following:
+```
+<dom-module id="demo-view">
+  <template>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: 'demo-view',
+    behaviors:['pxmSidebarBehavior']
+  });
+</script>
+```
+@element component.html
+@blurb pxm-sidebar Element description
+@demo demo.html
+@homepage index.html
+-->
+<link rel="import" href="../pxm-base-element/behavior.html"/>
+<link rel="import" href="behavior.html"/>
+<dom-module id="pxm-sidebar">
+	<!-- TODO: Style for pxm-sidebar -->
+	<style>
+		:host {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			display: block;
+			position: absolute;
+			z-index: 200;
+			-webkit-transform: translate(-125%, 0);
+			-ms-transform: translate(-125%, 0);
+			transform: translate(-125%, 0);
+			-webkit-transition: all 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+			transition: all 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+		}
+
+		:host.pxm-sidebar-open {
+			-webkit-transform: translate(0, 0);
+			-ms-transform: translate(0, 0);
+			transform: translate(0, 0);
+		}
+
+		:host .nav-menu .icon {
+			display: inline-block;
+			width: 32px;
+			text-align: center;
+			margin-left: 10px;
+		}
+
+		:host .nav-menu li:hover a {
+			color: #fff;
+		}
+
+		:host .side-menu li:hover {
+
+		}
+
+
+		:host.pxm-sidebar-open aside {
+
+		}
+
+		:host aside {
+			height: 100%;
+			display: block;
+			width: 250px;
+			top: 0;
+			bottom: 0;
+			overflow: hidden;
+			position: relative;
+			box-shadow: inset  -10px 0px 25px 0px rgba(0, 0, 0, 0.2);
+			-webkit-box-shadow:  inset -10px 0px 25px 0px rgba(0, 0, 0, 0.2);
+
+		}
+
+		:host .side-menu-slider {
+			position: absolute;
+
+			height: auto;
+			width: 100%;
+			left: 0;
+			top: 45px;
+			bottom: 0;
+			transform: translate(125%, 0);
+			display: block;
+			bottom: 0px;
+		}
+
+		:host .nav-link:before {
+			position: absolute;
+			right: 16px;
+			top: 50%;
+			color: #ddd;
+			line-height: 28px;
+			height: 28px;
+			-webkit-transform: translateY(-50%);
+			-moz-transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			-o-transform: translateY(-50%);
+			transform: translateY(-50%);
+			font-size: 28px;
+			font-family: FontAwesome;
+			font-style: normal;
+			font-weight: normal;
+			content: "\f105";
+		}
+	</style>
+	<template>
+		<aside class="side-menu background-color-">
+			<nav class="side-nav">
+				<ul class="nav-menu no-margin no-padding">
+					<template is="dom-repeat" items="{{menu}}">
+						<li data-id$="{{item.id}}"
+								data-title$="{{item.title}}"
+								data-href$="{{item.href}}"
+								data-view$="{{item.view}}"
+								data-icon$="{{item.icon}}"
+								class="nav-item no-padding no-margin transition-background transition-fast">
+
+							<a on-click="_handleMenuSelect"
+								 href="{{item.href}}"
+								 class="nav-link btn block bare cursor-pointer text-left color-white">
+                <span class="icon">
+                  <i class$="{{item.icon}}"></i>
+                </span>
+								<span class="title">{{item.title}}</span>
+							</a>
+
+						</li>
+					</template>
+				</ul>
+			</nav>
+		</aside>
+	</template>
+	<script>
+		Polymer({
+			is: 'pxm-sidebar',
+			behaviors: [pxMobile.behaviors.BaseElement],
+			properties: {
+				open: {
+					type: Boolean
+				},
+				//Automatically build menu based on the view container views.
+				autoMenu: {
+					type: Boolean
+				},
+				side: {
+					type: String, value: 'left'
+				},
+				maxSlideDistance: {
+					type: String, value: '300px'
+				},
+				var: {
+					type: Object
+				},
+				viewContainer: {
+					type: String
+				},
+				menu: {
+					type: Array,
+					value: [
+						{
+							id: 'home',
+							title: 'Home',
+							icon: 'fa fa-lg fa-home',
+							view: 'home-view'
+						}
+					]
+				}
+			},
+			attached: function () {
+				var _this = this;
+				if (this.viewContainer) {
+					this.views = document.getElementById(this.viewContainer);
+					this.views.addEventListener('pxm:view:change', function (e) {
+						_this.title = e.detail.title;
+						_this.debounce('buildMenu();', function () {
+							_this.back = !_this.views.currentView.main;
+							//_this.backBtnText = (_this.views.prevView ? _this.views.prevView.title : '');
+						}, 50);
+					});
+
+					//this.viewContainer = document.getElementById(this.viewContainer);
+					this.debounce('buildMenu();', function () {
+						_this.buildMenu();
+					}, 150);
+				}
+			},
+			buildMenu: function () {
+				var _this = this;
+				if (this.views.ViewList && this.views.ViewList.length) {
+					this.menu = [];
+					var _menu = [];
+					for (var i = 0; i < this.views.ViewList.length; i++) {
+						var view = this.views.ViewList[i];
+						//_this.logApi('add view', view.title, view.href);
+						_menu.push({
+							id: view.id,
+							icon: view.icon,
+							href: view.route,
+							hash: view.hash,
+							route: view.route,
+							title: view.title
+						});
+					}
+					this.menu = _menu;
+				}
+			},
+
+			toggle: function (e) {
+				this.open = !this.open;
+				this.toggleClass('pxm-sidebar-open', this.open);
+				this.fire('toggle', this);
+			},
+			_handleMenuSelect: function (e) {
+				e.preventDefault();
+				var model = e.model;
+
+				if (this.viewContainer && this.views) {
+					this.views.goto(model.item.id);
+					this.title = model.item.title;
+					this.icon = model.item.icon;
+				}
+				if (model.item.href) {
+					location.hash = model.item.href;
+				}
+				this.toggle();
+				this.fire('select', model);
+				return false;
+			},
+			handleTrack: function (e) {
+				var message = '';
+
+				switch (e.detail.state) {
+					case 'start':
+						message = 'Tracking started!';
+						break;
+					case 'track':
+						message = 'Tracking in progress... ' +
+						e.detail.x + ', ' + e.detail.y;
+
+						break;
+					case 'end':
+						message = 'Tracking ended!';
+						break;
+				}
+
+			}
+		});
+	</script>
+</dom-module>

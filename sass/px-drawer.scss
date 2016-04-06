@@ -1,0 +1,113 @@
+////
+/// px-action-sheet styles
+/// @group px-component-boilerplate
+/// @author Jonnie Spratley
+/// @since 0.0.1
+/// @todo Need to finalize all documentation.
+////
+
+@import "px-mobile-mixin-designs/mixins";
+
+/// px-component-boilerplate style variables
+$px-component-boilerplate-button-font-color: #111;
+$px-component-boilerplate-button-selected-font-color: blue;
+
+@mixin element($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+/// Block Modifier
+/// @access public
+/// @param {String} $modifier - Modifier's name
+/// @example
+///     @include modifier('modifier') {
+///        // CSS declarations for .block--modifier
+///        @include element('element') {
+///           // CSS declarations for .block--modifier__element
+///        }
+///     }
+@mixin modifier($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}
+/// @alias element
+@mixin e($element) {
+  @include element($element) {
+    @content;
+  }
+}
+/// @alias modifier
+@mixin m($modifier) {
+  @include modifier($modifier) {
+    @content;
+  }
+}
+
+.drawer{
+	display: block;
+	position: absolute;
+	z-index: 100;
+	transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+	//background-color: rgba(0,0,0,.5);
+
+	@include element('content'){
+		padding: 15px 20px;
+		height: 100%;
+		width: 100%;
+		display: block;
+		overflow: hidden;
+		position: relative;
+		box-shadow: inset  -10px 0px 25px 0px rgba(0, 0, 0, 0.2);
+  }
+
+	@include modifier('dark') {
+		background-color: rgba(0,0,0,.9);
+		color: #fff;
+    @include element('button') {
+      color:#fff;
+    }
+  }
+
+	@include modifier('left') {
+		left: 0;
+		top: 0;
+		bottom: 0;
+	  transform: translateX(-100%);
+		&.is-open{
+			transform: translateX(0);
+		}
+	}
+
+	@include modifier('right') {
+		top: 0;
+		bottom: 0;
+		right: 0;
+		transform: translateX(100%);
+		&.is-open{
+			transform: translateX(0);
+		}
+	}
+
+	@include modifier('top') {
+		top: 0;
+		right: 0;
+		left: 0;
+		transform: translateY(-100%);
+		&.is-open{
+			transform: translateY(0);
+		}
+	}
+
+	@include modifier('bottom') {
+		bottom: 0;
+		right: 0;
+		left: 0;
+		transform: translateY(100%);
+		&.is-open{
+			transform: translateY(0);
+		}
+	}
+
+}

@@ -1,0 +1,54 @@
+.drawer {
+  display: block;
+  position: absolute;
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1); }
+  .drawer__content {
+    padding: 15px 20px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset -10px 0px 25px 0px rgba(0, 0, 0, 0.2); }
+  .drawer--dark {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff; }
+    .drawer--dark__button {
+      color: #fff; }
+  .drawer--left {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%); }
+    .drawer--left.is-open {
+      -webkit-transform: translateX(0);
+      transform: translateX(0); }
+  .drawer--right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%); }
+    .drawer--right.is-open {
+      -webkit-transform: translateX(0);
+      transform: translateX(0); }
+  .drawer--top {
+    top: 0;
+    right: 0;
+    left: 0;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%); }
+    .drawer--top.is-open {
+      -webkit-transform: translateY(0);
+      transform: translateY(0); }
+  .drawer--bottom {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%); }
+    .drawer--bottom.is-open {
+      -webkit-transform: translateY(0);
+      transform: translateY(0); }

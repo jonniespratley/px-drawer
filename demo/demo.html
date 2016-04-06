@@ -1,0 +1,50 @@
+<html class="pxm">
+<head>
+  <title>pxm sidebar demo</title>
+
+
+    <script src="../../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../../../polymer/polymer.html">
+    <link rel="import" href="../../../dist/px-mobile.min.html">
+    <link rel="import" href="../pxm-example/component.html">
+
+
+</head>
+<body>
+
+  <div class="container gutters">
+    <div class="col-12">
+
+      <!-- TODO: px-view docs -->
+      <h2>pxm sidebar</h2>
+      <p>The pxm sidebar..</p>
+
+      <pxm-button theme="block large">Button Label</pxm-button>
+      <pxm-button theme="block primary">Button Label</pxm-button>
+      <pxm-icon icon="gear" size="2x"></pxm-icon>
+
+      <pxm-example>
+        <div class="background-color-alt padding- height-400 position-relative overflow-hidden">
+          <pxm-navbar id="myNavbar" sidebar-container="mySidebar" class="background-color-dark" title="My Navbar"></pxm-navbar>
+          <pxm-sidebar id="mySidebar"></pxm-sidebar>
+          <script type="text/javascript">
+            var myMenu = [
+              { title: 'Menu item 1', icon:'fa fa-dashboard' },
+              { title: 'Menu item 2', icon:'fa fa-user' },
+              { title: 'Menu item 3', icon:'fa fa-gear' },
+              { title: 'Menu item 4', icon:'fa fa-file' }
+            ];
+            document.addEventListener('WebComponentsReady', function(){
+              document.getElementById('mySidebar').menu = myMenu;
+            });
+          </script>
+        </div>
+      </pxm-example>
+
+
+
+    </div>
+  </div>
+
+</body>
+</html>
