@@ -29,6 +29,12 @@ To use this component in your custom component do the following:
         open: {
           type: Boolean
         },
+        fixed: {
+          type: Boolean
+        },
+        theme: {
+          type: String
+        },
         side: {
           type: String,
           value: 'left'
@@ -40,6 +46,12 @@ To use this component in your custom component do the following:
       },
       ready: function() {
         console.log(this.tagName, 'setting to', this.side);
+        if(this.theme){
+        this.toggleClass('drawer--'+ this.theme, true);
+        }
+        if(this.fixed){
+        this.toggleClass('drawer--fixed', true);
+        }
         this.toggleClass('drawer', true);
         this.toggleClass('drawer--' + this.side, true);
       },
