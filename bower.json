@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.5",
-    "px-mobile-mixin-designs": "https://github.build.ge.com/PredixComponents/px-mobile-mixin-designs.git",
-    "px-example": "https://github.build.ge.com/PredixComponents/px-example.git"
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.3",
+    "px-mobile-mixin-designs": "https://github.build.ge.com/PredixComponents/px-mobile-mixin-designs.git"
   },
   "resolutions": {
     "polymer": "^1.2.0"
