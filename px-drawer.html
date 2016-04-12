@@ -15,7 +15,17 @@ To use this component in your custom component do the following:
   <link rel="stylesheet" href="css/px-drawer.min.css">
   <style>
   :host{
-
+    display: block;
+  }
+  :host.drawer--top,
+  :host.drawer--bottom{
+    height: var(--px-drawer-height, 25%);
+    width: 100%;
+  }
+  :host.drawer--left,
+  :host.drawer--right{
+    height: 100%;
+    width: var(--px-drawer-width, 45%);
   }
   </style>
   <template>
@@ -43,7 +53,7 @@ To use this component in your custom component do the following:
         },
         width: {
           type: String,
-          value: '25%'
+          value: '45%'
         },
         maxSlideDistance: {
           type: String,
@@ -64,11 +74,19 @@ To use this component in your custom component do the following:
       toggle: function(e) {
         this.open = !this.open;
         this.toggleClass('is-open', this.open);
+        if(this.open){
+          //document.addEventListener('click', this._handleOffClick.bind(this));
+        }
         this.fire('toggle', this);
       },
       handleTrack: function(e) {
 
       },
+      _handleOffClick: function(e) {
+        console.log('_handleOffClick', e);
+        this.toggle();
+      //  document.removeEventListener('click', this._handleOffClick.bind(this));
+      }
     });
   </script>
 </dom-module>

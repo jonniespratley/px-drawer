@@ -11,12 +11,14 @@
   <link rel="import" href="px-drawer.html">
   <style media="screen">
     body {
-      padding: 15px;
-      background: #eee;
+      padding: 5px;
+      overflow:hidden;
+      position: relative;
     }
 
     .box {
       background: #fff;
+
     }
     .demo{
       overflow:hidden;
@@ -35,29 +37,31 @@
         <button type="button" onclick="example2.toggle()" class="btn btn--large btn--full">Toggle Right</button>
         <button type="button" onclick="example3.toggle()" class="btn btn--large btn--full">Toggle Top</button>
         <button type="button" onclick="example4.toggle()" class="btn btn--large btn--full">Toggle Bottom</button>
-        <px-drawer id="example1" side="left" fixed theme="dark">
-          <p>
-            This is content
-          </p>
-        </px-drawer>
-        <px-drawer id="example2" side="right" fixed theme="dark">
-          <p>
-            This is content
-          </p>
-        </px-drawer>
-        <px-drawer id="example3" side="top" fixed theme="dark">
-          <p>
-            This is content
-          </p>
-        </px-drawer>
-        <px-drawer id="example4" side="bottom" fixed theme="dark">
-          <p>
-            This is content
-          </p>
-        </px-drawer>
+
       </div>
     </px-example>
   </div>
+
+  <px-drawer id="example1" side="left" fixed theme="dark">
+    <p>
+      This is content
+    </p>
+  </px-drawer>
+  <px-drawer id="example2" side="right" fixed theme="dark">
+    <p>
+      This is content
+    </p>
+  </px-drawer>
+  <px-drawer id="example3" side="top" fixed theme="dark">
+    <p>
+      This is content
+    </p>
+  </px-drawer>
+  <px-drawer id="example4" side="bottom" fixed theme="dark">
+    <p>
+      This is content
+    </p>
+  </px-drawer>
 
 </body>
 
