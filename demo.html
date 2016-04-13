@@ -6,22 +6,21 @@
   <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
 
   <link rel='stylesheet prefetch' href='http://predixdev.github.io/px-library-design/css/style.css'>
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'>
-  <link rel="import" href="../px-example/px-example.html">
+  <link rel="import" href="../iron-demo-helpers/demo-snippet.html" />
   <link rel="import" href="px-drawer.html">
   <style media="screen">
     body {
       padding: 5px;
-      overflow:hidden;
+      overflow: hidden;
       position: relative;
     }
 
     .box {
       background: #fff;
-
     }
-    .demo{
-      overflow:hidden;
+
+    .demo {
+      overflow: hidden;
       height: 500px;
       position: relative;
     }
@@ -29,39 +28,45 @@
 </head>
 
 <body>
-  <div class="box box--small u-mb++">
-    <h2>Default</h2>
-    <px-example>
-      <div class="demo">
-        <button type="button" onclick="example1.toggle()" class="btn btn--large btn--full">Toggle Left</button>
-        <button type="button" onclick="example2.toggle()" class="btn btn--large btn--full">Toggle Right</button>
-        <button type="button" onclick="example3.toggle()" class="btn btn--large btn--full">Toggle Top</button>
-        <button type="button" onclick="example4.toggle()" class="btn btn--large btn--full">Toggle Bottom</button>
+  <main class="position-relative viewport">
+    <div class="box u-mt">
+      <h1>px-drawer</h1>
+      <p>The px-drawer component lets you hide content outside the viewport.</p>
 
-      </div>
-    </px-example>
-  </div>
+      <demo-snippet>
+        <template id="">
+          <button type="button" onclick="example1.toggle()" class="btn btn--large btn--full">Toggle Left</button>
+          <px-drawer id="example1" side="left" fixed theme="dark">
+            <p>
+              This is content
+            </p>
+          </px-drawer>
 
-  <px-drawer id="example1" side="left" fixed theme="dark">
-    <p>
-      This is content
-    </p>
-  </px-drawer>
-  <px-drawer id="example2" side="right" fixed theme="dark">
-    <p>
-      This is content
-    </p>
-  </px-drawer>
-  <px-drawer id="example3" side="top" fixed theme="dark">
-    <p>
-      This is content
-    </p>
-  </px-drawer>
-  <px-drawer id="example4" side="bottom" fixed theme="dark">
-    <p>
-      This is content
-    </p>
-  </px-drawer>
+          <button type="button" onclick="example2.toggle()" class="btn btn--large btn--full">Toggle Right</button>
+          <px-drawer id="example2" side="right" fixed theme="dark">
+            <p>
+              This is content
+            </p>
+          </px-drawer>
+
+          <button type="button" onclick="example3.toggle()" class="btn btn--large btn--full">Toggle Top</button>
+          <px-drawer id="example3" side="top" fixed theme="dark">
+            <p>
+              This is content
+            </p>
+          </px-drawer>
+
+          <button type="button" onclick="example4.toggle()" class="btn btn--large btn--full">Toggle Bottom</button>
+          <px-drawer id="example4" side="bottom" fixed theme="dark">
+            <p>
+              This is content
+            </p>
+          </px-drawer>
+
+        </template>
+      </demo-snippet>
+  </main>
+
 
 </body>
 
