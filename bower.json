@@ -4,12 +4,12 @@
   "authors": [
     "Jonnie Spratley <jonnie.spratley@ge.com>"
   ],
-  "description": "A web component for px.",
+  "description": "A responsive mobile first web component for hiding content off screen.",
   "repository": {
     "type": "git",
-    "url": "https://github.build.ge.com/PredixComponents/px-component-boilerplate.git"
+    "url": "https://github.build.ge.com/PredixComponents/px-drawer.git"
   },
-  "main": "px-component-boilerplate.html",
+  "main": "px-drawer.html",
   "keywords": [
     "px",
     "px-mobile"
