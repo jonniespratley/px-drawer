@@ -1,0 +1,96 @@
+<html>
+
+<head>
+  <title>px-drawer mobile demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="../webcomponentsjs/webcomponents.min.js"></script>
+
+  <link rel='stylesheet prefetch' href='http://predixdev.github.io/px-library-design/css/style.css'>
+
+  <link rel="import" href="px-drawer.html">
+  <style media="screen">
+    body {
+      padding: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .box {
+      background: #fff;
+    }
+
+    .demo {
+      overflow: hidden;
+      height: 500px;
+      position: relative;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="position-relative viewport">
+
+    <h1>px-drawer</h1>
+    <p>The px-drawer component lets you hide content outside the viewport.</p>
+
+    <button type="button" onclick="example5.toggle()" class="btn btn--large btn--full">Toggle Bottom</button>
+    <px-drawer id="example5" side="bottom" fixed theme="dark" grid>
+      <ul class="list-bare flex flex--row flex--wrap flex--spaced">
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-copy"></i>
+            <span>Copy</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-paste"></i>
+            <span>Paste</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-share"></i>
+            <span>Share</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-upload"></i>
+            <span>Upload</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-edit"></i>
+            <span>Edit</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-message"></i>
+            <span>Message</span>
+          </a>
+        </li>
+
+        <li class="grid__item">
+          <a href="">
+            <i class="fa fa-2x fa-mail"></i>
+            <span>Mail</span>
+          </a>
+        </li>
+
+      </ul>
+    </px-drawer>
+  </main>
+
+
+</body>
+
+</html>

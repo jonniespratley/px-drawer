@@ -5,117 +5,142 @@
 /// @since 0.0.1
 /// @todo Need to finalize all documentation.
 ////
-
-@import "px-mobile-mixin-designs/mixins";
-
+@import "px-mobile-mixin-design/mixins";
 /// px-component-boilerplate style variables
 $px-component-boilerplate-button-font-color: #111;
 $px-component-boilerplate-button-selected-font-color: blue;
 
-@mixin element($element) {
-  &__#{$element} {
-    @content;
-  }
-}
-/// Block Modifier
-/// @access public
-/// @param {String} $modifier - Modifier's name
-/// @example
-///     @include modifier('modifier') {
-///        // CSS declarations for .block--modifier
-///        @include element('element') {
-///           // CSS declarations for .block--modifier__element
-///        }
-///     }
-@mixin modifier($modifier) {
-  &--#{$modifier} {
-    @content;
-  }
-}
-/// @alias element
-@mixin e($element) {
-  @include element($element) {
-    @content;
-  }
-}
-/// @alias modifier
-@mixin m($modifier) {
-  @include modifier($modifier) {
-    @content;
-  }
-}
+///
+.drawer {
+  display: block;
+  position: absolute;
+  z-index: 20;
+  transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
 
-.drawer{
-	display: block;
-	position: absolute;
-	z-index: 100;
-	transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
-	//background-color: rgba(0,0,0,.5);
+  /// The overlay that is behind the action sheet.
+  ///@example html
+  ///	<div class="action-dialog--mask"></div>
+  @include modifier('mask') {
 
-	@include element('content'){
-		padding: 15px 20px;
-		height: 100%;
-		width: 100%;
-		display: block;
-		overflow: hidden;
-		position: relative;
-		box-shadow: inset  -10px 0px 25px 0px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
+  //  transition: all .3s;
+    background-color: rgba(0,0,0,0.20);
+  }
+    /// The overlays visible state.
+    ///@example html
+    ///	<div class="action-dialog--mask action-dialog--mask--is-open"></div>
+    @include modifier('is-open') {
+      z-index: 100;
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+  ///
+  @include element('content') {
+    padding: 15px 20px;
+
+    width: 100%;
+    height: 50%;
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 50;
+
+    ///
+    @include modifier('grid') {
+      .grid__item {
+        padding-left: 24px;
+        padding-right: 24px;
+        &:hover {
+          background: rgba(0,0,0,.2);
+        }
+      }
+      a {
+        text-align: center;
+        padding: 5px 12px;
+        text-decoration: none;
+        display: block;
+        i {
+          height: 48px;
+          width: 48px;
+          font-size: 48px;
+          display: block;
+          margin-bottom: 6px;
+        }
+      }
+    }
   }
 
+  ///
   @include modifier('fixed') {
     position: fixed;
   }
 
-	@include modifier('dark') {
-		background-color: rgba(0,0,0,.9);
-		color: #fff;
+  ///
+  @include modifier('dark') {
+    background-color: rgba(0,0,0,.3);
+    color: #fff;
     @include element('button') {
-      color:#fff;
+      color: #fff;
     }
   }
 
-	@include modifier('left') {
-		left: 0;
-		top: 0;
-		bottom: 0;
-	  transform: translateX(-100%);
+  ///
+  @include modifier('left') {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
     width: 25%;
-		&.is-open{
-			transform: translateX(0);
-		}
-	}
+    &.is-open {
+      transform: translateX(0);
+    }
+  }
 
-	@include modifier('right') {
-		top: 0;
-		bottom: 0;
-		right: 0;
-		transform: translateX(100%);
+  ///
+  @include modifier('right') {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(100%);
     width: 25%;
-		&.is-open{
-			transform: translateX(0);
-		}
-	}
+    &.is-open {
+      transform: translateX(0);
+    }
+  }
 
-	@include modifier('top') {
-		top: 0;
-		right: 0;
-		left: 0;
-		transform: translateY(-100%);
+  ///
+  @include modifier('top') {
+    top: 0;
+    right: 0;
+    left: 0;
+    transform: translateY(-100%);
     width: 100%;
-		&.is-open{
-			transform: translateY(0);
-		}
-	}
+    &.is-open {
+      transform: translateY(0);
+    }
+  }
 
-	@include modifier('bottom') {
-		bottom: 0;
-		right: 0;
-		left: 0;
+  ///
+  @include modifier('bottom') {
+    bottom: 0;
+    right: 0;
+    left: 0;
     width: 100%;
-		transform: translateY(100%);
-		&.is-open{
-			transform: translateY(0);
-		}
-	}
-
+    transform: translateY(100%);
+    &.is-open {
+      transform: translateY(0);
+    }
+  }
 }
