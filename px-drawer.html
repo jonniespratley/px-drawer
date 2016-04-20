@@ -12,89 +12,90 @@ To use this component in your custom component do the following:
 -->
 
 <dom-module id="px-drawer">
-  <link rel="stylesheet" href="css/px-drawer.min.css">
+  <link rel="stylesheet" href="css/px-drawer.css">
   <style>
-  :host{
+  :host {
     display: block;
+    height: calc(100vh - 55px);
+    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   }
-  :host.drawer--top,
-  :host.drawer--bottom{
-    height: var(--px-drawer-height, 100%);
-    width: 100%;
+  
+  :host .drawer__content: {
+    color: #000;
   }
-  :host.drawer--left,
-  :host.drawer--right{
-    height: 100%;
-    width: var(--px-drawer-width, 100%);
-  }
+
   </style>
   <template>
-    <div class="drawer drawer--mask" on-click="toggle"></div>
+
+    <div class="drawer__mask" on-click="toggle"></div>
     <div class="drawer__content" on-click="toggle">
       <content select="*"></content>
     </div>
+
   </template>
   <script>
-    Polymer({
-      is: 'px-drawer',
-      //behaviors: [pxMobile.behaviors.BaseElement],
-      properties: {
-        open: {
-          type: Boolean
-        },
-        grid: {
-          type: Boolean
-        },
-        fixed: {
-          type: Boolean
-        },
-        theme: {
-          type: String
-        },
-        side: {
-          type: String,
-          value: 'left'
-        },
-        width: {
-          type: String,
-          value: '45%'
-        },
-        maxSlideDistance: {
-          type: String,
-          value: '300px'
-        }
+  Polymer({
+    is: 'px-drawer',
+    //behaviors: [pxMobile.behaviors.BaseElement],
+    properties: {
+      open: {
+        type: Boolean
       },
-      ready: function() {
-        console.log(this.tagName, 'setting to', this.side);
-        if (this.theme) {
-          this.toggleClass('drawer--' + this.theme, true);
-        }
-        if (this.grid) {
-          this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
-        }
-        if (this.fixed) {
-          this.toggleClass('drawer--fixed', true);
-        }
-        this.toggleClass('drawer', true);
-        this.toggleClass('drawer--' + this.side, true);
+      grid: {
+        type: Boolean
       },
-      toggle: function(e) {
-        this.open = !this.open;
-        this.toggleClass('is-open', this.open, this.$$('.drawer--mask'));
-        this.toggleClass('is-open', this.open);
-        if(this.open){
-          //document.addEventListener('click', this._handleOffClick.bind(this));
-        }
-        this.fire('toggle', this);
+      fixed: {
+        type: Boolean
       },
-      handleTrack: function(e) {
-
+      theme: {
+        type: String
       },
-      _handleOffClick: function(e) {
-        console.log('_handleOffClick', e);
-        this.toggle();
-      //  document.removeEventListener('click', this._handleOffClick.bind(this));
+      side: {
+        type: String,
+        value: 'left'
+      },
+      width: {
+        type: String,
+        value: '45%'
+      },
+      maxSlideDistance: {
+        type: String,
+        value: '300px'
       }
-    });
+    },
+    ready: function() {
+
+      this.toggleClass('drawer', true);
+      this.toggleClass('drawer--' + this.side, true);
+      if (this.theme) {
+        this.toggleClass('drawer--' + this.theme, true);
+      }
+      if (this.grid) {
+        this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
+      }
+      if (this.fixed) {
+        this.toggleClass('drawer--fixed', true);
+      }
+
+    },
+    toggle: function(e) {
+      this.open = !this.open;
+      this.toggleClass('is-open', this.open, this.$$('.drawer--mask'));
+      this.toggleClass('is-open', this.open);
+      if (this.open) {
+        //document.addEventListener('click', this._handleOffClick.bind(this));
+      }
+      this.fire('toggle', this);
+    },
+    handleTrack: function(e) {
+
+    },
+    _handleOffClick: function(e) {
+
+      this.toggle();
+      //  document.removeEventListener('click', this._handleOffClick.bind(this));
+    }
+  });
+
   </script>
 </dom-module>

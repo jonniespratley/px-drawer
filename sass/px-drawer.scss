@@ -1,146 +1,214 @@
 ////
-/// px-action-sheet styles
-/// @group px-component-boilerplate
+/// px-drawer styles
 /// @author Jonnie Spratley
 /// @since 0.0.1
 /// @todo Need to finalize all documentation.
 ////
+@import 'px-mobile-design/sass/_variables';
 @import "px-mobile-mixin-design/mixins";
-/// px-component-boilerplate style variables
-$px-component-boilerplate-button-font-color: #111;
-$px-component-boilerplate-button-selected-font-color: blue;
 
-///
+$drawer-transition: 'all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1)';
+$drawer-dark-background-color: $black;
+$drawer-dark-font-color: $white;
+
 .drawer {
-  display: block;
-  position: absolute;
-  z-index: 20;
-  transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+  display   : block;
+  position  : absolute;
+  z-index   : 350;
+  transition: $drawer-transition;
+  visibility: hidden;
 
   /// The overlay that is behind the action sheet.
   ///@example html
   ///	<div class="action-dialog--mask"></div>
-  @include modifier('mask') {
-
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    z-index: 0;
-    opacity: 0;
-    visibility: hidden;
-  //  transition: all .3s;
-    background-color: rgba(0,0,0,0.20);
-  }
+  @include element ('mask') {
+    position        : fixed;
+    top             : 0;
+    bottom          : 0;
+    left            : 0;
+    right           : 0;
+    z-index         : 0;
+    opacity         : 0;
+    visibility      : hidden;
+    background-color: var(--px-drawer-background-color, rgba(0,0,0,0.50));
     /// The overlays visible state.
     ///@example html
     ///	<div class="action-dialog--mask action-dialog--mask--is-open"></div>
-    @include modifier('is-open') {
-      z-index: 100;
-      opacity: 1;
+  }
+
+  &.is-open {
+    visibility: visible;
+
+    .drawer__mask {
+
+      opacity   : 1;
       visibility: visible;
     }
 
+    .drawer__content {
+      z-index   : 360;
+      opacity   : 1;
+      visibility: visible;
+      overflow  : hidden;
+    }
+
+  }
 
   ///
-  @include element('content') {
-    padding: 15px 20px;
+  @include modifier ('fixed') {
+    position: fixed;
+  }
 
-    width: 100%;
-    height: 50%;
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    bottom: 0;
-    background-color: #fff;
-    z-index: 50;
+  ///
+  @include modifier ('dark') {
+    background-color: $drawer-dark-background-color;
+    background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
+    color           : $drawer-dark-font-color;
+
+    @include element ('button') {
+      color: #fff;
+    }
+  }
+
+  ///
+  @include modifier ('left') {
+    left     : 0;
+    top      : 0;
+    bottom   : 0;
+    transform: translateX(-100%);
+    width    : var(--px-drawer-width, 30%);
+    height   : var(--px-drawer-height, 100%);
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    @include respond ('desktop') {
+      width: var(--px-drawer-width, 30%);
+    }
+
+    @include respond ('mobile') {
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('tablet') {
+      width: var(--px-drawer-width, 50%);
+    }
+  }
+
+  ///
+  @include modifier ('right') {
+    top      : 0;
+    bottom   : 0;
+    right    : 0;
+    transform: translateX(100%);
+
+    height   : var(--px-drawer-height, 100%);
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    @include respond ('desktop') {
+      width: var(--px-drawer-width, 30%);
+    }
+
+    @include respond ('mobile') {
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('tablet') {
+      width: var(--px-drawer-width, 50%);
+    }
+  }
+
+  ///
+  @include modifier ('top') {
+    top      : 0;
+    right    : 0;
+    left     : 0;
+    transform: translateY(-100%);
+    width    : var(--px-drawer-width, 100%);
+
+    &.is-open {
+      transform: translateY(0);
+    }
+
+    @include respond ('desktop') {
+      height: var(--px-drawer-height, 50%);
+    }
+
+    @include respond ('mobile') {
+      height: var(--px-drawer-height, 100%);
+    }
+
+    @include respond ('tablet') {
+      height: var(--px-drawer-height, 50%);
+    }
+  }
+
+  ///
+  @include modifier ('bottom') {
+    bottom   : 0;
+    right    : 0;
+    left     : 0;
+    width    : var(--px-drawer-width, 100%);
+
+    transform: translateY(100%);
+
+    &.is-open {
+      transform: translateY(0);
+    }
+
+    @include respond ('desktop') {
+      height: var(--px-drawer-height, 50%);
+    }
+
+    @include respond ('mobile') {
+      height: var(--px-drawer-height, 100%);
+    }
+
+    @include respond ('tablet') {
+      height: var(--px-drawer-height, 50%);
+    }
+  }
+
+  ///
+  @include element ('content') {
+    padding    : 0;
+    width      : 100%;
+    height     : 100%;
+    display    : block;
+    overflow   : hidden;
+    position   : relative;
+    user-select: none;
 
     ///
-    @include modifier('grid') {
+    @include modifier ('grid') {
       .grid__item {
-        padding-left: 24px;
+        padding-left : 24px;
         padding-right: 24px;
+
         &:hover {
           background: rgba(0,0,0,.2);
         }
       }
+
       a {
-        text-align: center;
-        padding: 5px 12px;
+        text-align     : center;
+        padding        : 5px 12px;
         text-decoration: none;
-        display: block;
+        display        : block;
+
         i {
-          height: 48px;
-          width: 48px;
-          font-size: 48px;
-          display: block;
+          height       : 48px;
+          width        : 48px;
+          font-size    : 48px;
+          display      : block;
           margin-bottom: 6px;
         }
       }
     }
   }
 
-  ///
-  @include modifier('fixed') {
-    position: fixed;
-  }
-
-  ///
-  @include modifier('dark') {
-    background-color: rgba(0,0,0,.3);
-    color: #fff;
-    @include element('button') {
-      color: #fff;
-    }
-  }
-
-  ///
-  @include modifier('left') {
-    left: 0;
-    top: 0;
-    bottom: 0;
-    transform: translateX(-100%);
-    width: 25%;
-    &.is-open {
-      transform: translateX(0);
-    }
-  }
-
-  ///
-  @include modifier('right') {
-    top: 0;
-    bottom: 0;
-    right: 0;
-    transform: translateX(100%);
-    width: 25%;
-    &.is-open {
-      transform: translateX(0);
-    }
-  }
-
-  ///
-  @include modifier('top') {
-    top: 0;
-    right: 0;
-    left: 0;
-    transform: translateY(-100%);
-    width: 100%;
-    &.is-open {
-      transform: translateY(0);
-    }
-  }
-
-  ///
-  @include modifier('bottom') {
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    transform: translateY(100%);
-    &.is-open {
-      transform: translateY(0);
-    }
-  }
 }
