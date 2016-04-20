@@ -83,16 +83,26 @@ $drawer-dark-font-color: $white;
       transform: translateX(0);
     }
 
-    @include respond ('desktop') {
-      width: var(--px-drawer-width, 30%);
-    }
-
-    @include respond ('mobile') {
+    @include respond ('small') {
+      width: 100%;
       width: var(--px-drawer-width, 100%);
     }
 
+    @include respond ('mobile') {
+      width: 100%;
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('desktop') {
+      max-width: 330px;
+      width    : 25%;
+      width    : var(--px-drawer-width, 30%);
+    }
+
     @include respond ('tablet') {
-      width: var(--px-drawer-width, 50%);
+      width    : 35%;
+      max-width: 330px;
+      width    : var(--px-drawer-width, 35%);
     }
   }
 
@@ -102,23 +112,32 @@ $drawer-dark-font-color: $white;
     bottom   : 0;
     right    : 0;
     transform: translateX(100%);
-
     height   : var(--px-drawer-height, 100%);
 
     &.is-open {
       transform: translateX(0);
     }
 
-    @include respond ('desktop') {
-      width: var(--px-drawer-width, 30%);
-    }
-
-    @include respond ('mobile') {
+    @include respond ('small') {
+      width: 100%;
       width: var(--px-drawer-width, 100%);
     }
 
+    @include respond ('mobile') {
+      width: 100%;
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('desktop') {
+      max-width: 330px;
+      width    : 25%;
+      width    : var(--px-drawer-width, 30%);
+    }
+
     @include respond ('tablet') {
-      width: var(--px-drawer-width, 50%);
+      width    : 35%;
+      max-width: 330px;
+      width    : var(--px-drawer-width, 35%);
     }
   }
 
@@ -162,6 +181,11 @@ $drawer-dark-font-color: $white;
 
     @include respond ('desktop') {
       height: var(--px-drawer-height, 50%);
+    }
+
+    @include respond ('small') {
+      height: 100%;
+      height: var(--px-drawer-height, 100%);
     }
 
     @include respond ('mobile') {
