@@ -1,0 +1,9 @@
+@import 'px-mobile-design/sass/_variables';
+
+//$drawer-transition           : all .5s;
+$drawer-transition           : all .5s cubic-bezier(0.1, 0.7, 0.1, 1);
+
+$drawer-mask-background-color: $gray10;
+$drawer-dark-background-color: $gray10;
+
+$drawer-dark-font-color      : $white;

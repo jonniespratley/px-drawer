@@ -15,89 +15,80 @@ To use this component in your custom component do the following:
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
   <style>
-    :host {
-      display: block;
-      height: calc(100vh - 55px);
-      transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-    }
+  :host {
+    display: block;
+    height: calc(100vh - 55px);
+  }
 
-    :host .drawer__content: {
-      color: #000;
-    }
   </style>
   <template>
-    <div class="drawer__mask" on-click="toggle"></div>
     <div class="drawer__content" on-click="toggle">
       <content select="*"></content>
     </div>
   </template>
   <script>
-    Polymer({
-      is: 'px-drawer',
-      //behaviors: [pxMobile.behaviors.BaseElement],
-      properties: {
-        open: {
-          type: Boolean
-        },
-        grid: {
-          type: Boolean
-        },
-        fixed: {
-          type: Boolean
-        },
-        theme: {
-          type: String
-        },
-        side: {
-          type: String,
-          value: 'left'
-        },
-        width: {
-          type: String,
-          value: '45%'
-        },
-        type: {
-          type: String,
-          observer: '_typeHandler'
-        }
+  Polymer({
+    is: 'px-drawer',
+    //behaviors: [pxMobile.behaviors.BaseElement],
+    properties: {
+      open: {
+        type: Boolean
       },
-      ready: function() {
-
-        this.toggleClass('drawer', true);
-        this.toggleClass('drawer--' + this.side, true);
-        if (this.theme) {
-          this.toggleClass('drawer--' + this.theme, true);
-        }
-        if (this.grid) {
-          this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
-        }
-        if (this.fixed) {
-          this.toggleClass('drawer--fixed', true);
-        }
-
+      grid: {
+        type: Boolean
       },
-      toggle: function(e) {
-        this.open = !this.open;
-        this.toggleClass('is-open', this.open, this.$$('.drawer--mask'));
-        this.toggleClass('is-open', this.open);
-        if (this.open) {
-          //document.addEventListener('click', this._handleOffClick).bind(this);
-        }
-        console.log(this.tagName, this.target);
-        this.fire('toggle', this);
+      fixed: {
+        type: Boolean
       },
-      _handleTrack: function(e) {
-        console.log('Track', e);
+      theme: {
+        type: String
       },
-      _handleOffClick: function(e) {
-        this.toggle();
-        document.removeEventListener('click', _handleOffClick).bind(this);
+      side: {
+        type: String,
+        value: 'left'
       },
-      _typeHandler: function(newVal, oldVal) {
-        console.log('change type to', newVal);
-        this.toggleClass('drawer--' + oldVal, false);
-        this.toggleClass('drawer--' + newVal, true);
+      width: {
+        type: String,
+        value: '45%'
+      },
+      type: {
+        type: String,
+        observer: '_typeHandler'
       }
-    });
+    },
+    attached: function() {
+      this.toggleClass('drawer', true);
+      this.toggleClass('drawer--' + this.side, true);
+      if (this.theme) {
+        this.toggleClass('drawer--' + this.theme, true);
+      }
+      if (this.grid) {
+        this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
+      }
+      if (this.fixed) {
+        this.toggleClass('drawer--fixed', true);
+      }
+    },
+    toggle: function(e) {
+      this.open = !this.open;
+      this.toggleClass('is-open', this.open);
+      if (this.open) {
+        //document.addEventListener('click', this._handleOffClick).bind(this);
+      }
+      this.fire('toggle', this);
+    },
+    _handleTrack: function(e) {
+      console.log('Track', e);
+    },
+    _handleOffClick: function(e) {
+      this.toggle();
+      document.removeEventListener('click', _handleOffClick).bind(this);
+    },
+    _typeHandler: function(newVal, oldVal) {
+      this.toggleClass('drawer--' + oldVal, false);
+      this.toggleClass('drawer--' + newVal, true);
+    }
+  });
+
   </script>
 </dom-module>
