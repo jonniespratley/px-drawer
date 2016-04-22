@@ -47,7 +47,11 @@
     
     .navbar {
       position: relative;
-      ;
+    }
+    
+    .layout__item p {
+      background: transparent;
+      text-align: left;
     }
     
     px-navbar {
@@ -99,11 +103,11 @@
             </ul>
             <br>
             <ul class="table-view table-view--bare">
-              <px-table-row title="Home" icon="fa fa-home" type="nav-right" href="#home"></px-table-row>
-              <px-table-row title="Dashboard" icon="fa fa-dashboard" type="nav-right" href="#dashboard"></px-table-row>
-              <px-table-row title="Alerts" icon="fa fa-exclamation-triangle" type="nav-right" href="#alerts"></px-table-row>
-              <px-table-row title="Cases" icon="fa fa-briefcase" type="nav-right" href="#cases"></px-table-row>
-              <px-table-row title="Analysis" icon="fa fa-bar-chart" type="nav-right" href="#analysis"></px-table-row>
+              <px-table-row title="Home" icon="fa fa-home" type="tappable" href="#home"></px-table-row>
+              <px-table-row title="Dashboard" icon="fa fa-dashboard" type="tappable" href="#dashboard"></px-table-row>
+              <px-table-row title="Alerts" icon="fa fa-exclamation-triangle" type="tappable" href="#alerts"></px-table-row>
+              <px-table-row title="Cases" icon="fa fa-briefcase" type="tappable" href="#cases"></px-table-row>
+              <px-table-row title="Analysis" icon="fa fa-bar-chart" type="tappable" href="#analysis"></px-table-row>
             </ul>
           </px-drawer>
 
