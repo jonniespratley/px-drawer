@@ -6,233 +6,282 @@
 ////
 @import 'px-mobile-design/sass/_variables';
 @import "px-mobile-mixin-design/mixins";
-
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
 $drawer-transition: 'all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1)';
 $drawer-dark-background-color: $black;
 $drawer-dark-font-color: $white;
-
 .drawer {
-  display   : block;
-  position  : absolute;
-  z-index   : 350;
+  display: block;
+  position: absolute;
+  z-index: 350;
   transition: $drawer-transition;
   visibility: hidden;
-
   /// The overlay that is behind the action sheet.
   ///@example html
   ///	<div class="action-dialog--mask"></div>
   @include element ('mask') {
-    position        : fixed;
-    top             : 0;
-    bottom          : 0;
-    left            : 0;
-    right           : 0;
-    z-index         : 0;
-    opacity         : 0;
-    visibility      : hidden;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    opacity: 0;
+    visibility: hidden;
     background-color: var(--px-drawer-background-color, rgba(0,0,0,0.50));
     /// The overlays visible state.
     ///@example html
     ///	<div class="action-dialog--mask action-dialog--mask--is-open"></div>
   }
-
   &.is-open {
     visibility: visible;
-
     .drawer__mask {
-
-      opacity   : 1;
+      opacity: 1;
       visibility: visible;
     }
-
     .drawer__content {
-      z-index   : 360;
-      opacity   : 1;
+      z-index: 360;
+      opacity: 1;
       visibility: visible;
-      overflow  : hidden;
+      overflow: hidden;
     }
-
   }
-
-  ///
-  @include modifier ('fixed') {
-    position: fixed;
+  hr {
+    height: 1px;
+    width: 100%;
+    margin: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.01);
   }
-
   ///
   @include modifier ('dark') {
     background-color: $drawer-dark-background-color;
     background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
-    color           : $drawer-dark-font-color;
-
+    color: $drawer-dark-font-color;
     @include element ('button') {
       color: #fff;
     }
   }
-
   ///
   @include modifier ('left') {
-    left     : 0;
-    top      : 0;
-    bottom   : 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     transform: translateX(-100%);
-    width    : var(--px-drawer-width, 30%);
-    height   : var(--px-drawer-height, 100%);
-
+    width: 30%;
+    height: 100%;
+    width: var(--px-drawer-width, 30%);
+    height: var(--px-drawer-height, 100%);
     &.is-open {
       transform: translateX(0);
     }
-
     @include respond ('small') {
       width: 100%;
       width: var(--px-drawer-width, 100%);
     }
-
     @include respond ('mobile') {
       width: 100%;
       width: var(--px-drawer-width, 100%);
     }
-
     @include respond ('desktop') {
       max-width: 330px;
-      width    : 25%;
-      width    : var(--px-drawer-width, 30%);
+      width: 25%;
+      width: var(--px-drawer-width, 30%);
     }
-
     @include respond ('tablet') {
-      width    : 35%;
+      width: 35%;
       max-width: 330px;
-      width    : var(--px-drawer-width, 35%);
+      width: var(--px-drawer-width, 35%);
     }
   }
-
   ///
   @include modifier ('right') {
-    top      : 0;
-    bottom   : 0;
-    right    : 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
     transform: translateX(100%);
-    height   : var(--px-drawer-height, 100%);
-
+    height: var(--px-drawer-height, 100%);
     &.is-open {
       transform: translateX(0);
     }
-
     @include respond ('small') {
       width: 100%;
       width: var(--px-drawer-width, 100%);
     }
-
     @include respond ('mobile') {
       width: 100%;
       width: var(--px-drawer-width, 100%);
     }
-
     @include respond ('desktop') {
       max-width: 330px;
-      width    : 25%;
-      width    : var(--px-drawer-width, 30%);
+      width: 25%;
+      width: var(--px-drawer-width, 30%);
     }
-
     @include respond ('tablet') {
-      width    : 35%;
+      width: 35%;
       max-width: 330px;
-      width    : var(--px-drawer-width, 35%);
+      width: var(--px-drawer-width, 35%);
     }
   }
-
   ///
   @include modifier ('top') {
-    top      : 0;
-    right    : 0;
-    left     : 0;
+    top: 0;
+    right: 0;
+    left: 0;
     transform: translateY(-100%);
-    width    : var(--px-drawer-width, 100%);
-
+    width: var(--px-drawer-width, 100%);
     &.is-open {
       transform: translateY(0);
     }
-
     @include respond ('desktop') {
       height: var(--px-drawer-height, 50%);
     }
-
     @include respond ('mobile') {
       height: var(--px-drawer-height, 100%);
     }
-
     @include respond ('tablet') {
       height: var(--px-drawer-height, 50%);
     }
   }
-
   ///
   @include modifier ('bottom') {
-    bottom   : 0;
-    right    : 0;
-    left     : 0;
-    width    : var(--px-drawer-width, 100%);
-
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: var(--px-drawer-width, 100%);
     transform: translateY(100%);
-
+    //@include aspect-ratio(16, 9);
     &.is-open {
       transform: translateY(0);
     }
-
     @include respond ('desktop') {
-      height: var(--px-drawer-height, 50%);
+      height: 25%;
+      height: var(--px-drawer-height, 25%);
     }
-
     @include respond ('small') {
       height: 100%;
       height: var(--px-drawer-height, 100%);
     }
-
-    @include respond ('mobile') {
-      height: var(--px-drawer-height, 100%);
-    }
-
     @include respond ('tablet') {
-      height: var(--px-drawer-height, 50%);
+      height: 35%;
+      height: var(--px-drawer-height, 35%);
     }
   }
-
+  ///
+  @include modifier ('mini') {
+    transition: width 0.3s ease;
+    position: static;
+    visibility: visible;
+    /* margin-left: -25px; */
+    float: left;
+    width: 44px;
+    //  margin-top: -10px;
+    transform: translateX(0) !important;
+    .viewport:parent {
+      margin-left: -20px;
+    }
+    &.is-open {
+      width: 20%;
+      @include respond('desktop') {
+        width: 20%;
+      }
+      @include respond('mobile') {
+        width: 100%;
+      }
+      @include respond('tablet') {
+        width: 100%;
+      }
+      .table-row__content__title {
+        width: auto;
+      }
+    }
+    &:not(.is-open) .table-row--nav-right {
+      &:before {
+        content: '';
+      }
+      .table-row__content__title {
+        //opacity: 0;
+        width: 0;
+        overflow: hidden;
+      }
+    }
+  }
+  ///
+  @include modifier ('temporary') {
+    transition: $drawer-transition;
+    position: absolute;
+  }
+  ///
+  @include modifier ('persistent') {
+    transition: width 0.5s ease-in-out;
+    position: static;
+    visibility: visible;
+    float: left;
+    //  margin-right: 25px;
+    width: 20%;
+    margin-top: -10px;
+    margin-left: -25px;
+    transform: translateX(0) !important;
+    @include respond('desktop') {
+      margin-top: 0;
+    }
+    @include respond('mobile') {
+      margin-left: 0;
+    }
+    @include respond('tablet') {
+      margin-top: 0;
+      margin-left: 0;
+    }
+  }
+  ///
+  @include modifier ('fixed') {
+    position: fixed;
+  }
   ///
   @include element ('content') {
-    padding    : 0;
-    width      : 100%;
-    height     : 100%;
-    display    : block;
-    overflow   : hidden;
-    position   : relative;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
     user-select: none;
-
     ///
     @include modifier ('grid') {
       .grid__item {
-        padding-left : 24px;
+        padding-left: 24px;
         padding-right: 24px;
-
         &:hover {
           background: rgba(0,0,0,.2);
         }
       }
-
       a {
-        text-align     : center;
-        padding        : 5px 12px;
+        text-align: center;
+        padding: 5px 12px;
         text-decoration: none;
-        display        : block;
-
+        display: block;
         i {
-          height       : 48px;
-          width        : 48px;
-          font-size    : 48px;
-          display      : block;
+          height: 48px;
+          width: 48px;
+          font-size: 48px;
+          display: block;
           margin-bottom: 6px;
         }
       }
     }
   }
-
 }

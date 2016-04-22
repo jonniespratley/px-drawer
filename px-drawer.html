@@ -6,96 +6,98 @@ To use this component in your custom component do the following:
 
 ```
 @element px-drawer.html
-@blurb px-drawer Element description
+@blurb px-drawer A responsive drawer.
 @demo demo.html
+@demo mobile-demo.html
 @homepage index.html
 -->
 
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
   <style>
-  :host {
-    display: block;
-    height: calc(100vh - 55px);
-    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-  }
-  
-  :host .drawer__content: {
-    color: #000;
-  }
+    :host {
+      display: block;
+      height: calc(100vh - 55px);
+      transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+    }
 
+    :host .drawer__content: {
+      color: #000;
+    }
   </style>
   <template>
-
     <div class="drawer__mask" on-click="toggle"></div>
     <div class="drawer__content" on-click="toggle">
       <content select="*"></content>
     </div>
-
   </template>
   <script>
-  Polymer({
-    is: 'px-drawer',
-    //behaviors: [pxMobile.behaviors.BaseElement],
-    properties: {
-      open: {
-        type: Boolean
+    Polymer({
+      is: 'px-drawer',
+      //behaviors: [pxMobile.behaviors.BaseElement],
+      properties: {
+        open: {
+          type: Boolean
+        },
+        grid: {
+          type: Boolean
+        },
+        fixed: {
+          type: Boolean
+        },
+        theme: {
+          type: String
+        },
+        side: {
+          type: String,
+          value: 'left'
+        },
+        width: {
+          type: String,
+          value: '45%'
+        },
+        type: {
+          type: String,
+          observer: '_typeHandler'
+        }
       },
-      grid: {
-        type: Boolean
-      },
-      fixed: {
-        type: Boolean
-      },
-      theme: {
-        type: String
-      },
-      side: {
-        type: String,
-        value: 'left'
-      },
-      width: {
-        type: String,
-        value: '45%'
-      },
-      maxSlideDistance: {
-        type: String,
-        value: '300px'
-      }
-    },
-    ready: function() {
+      ready: function() {
 
-      this.toggleClass('drawer', true);
-      this.toggleClass('drawer--' + this.side, true);
-      if (this.theme) {
-        this.toggleClass('drawer--' + this.theme, true);
-      }
-      if (this.grid) {
-        this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
-      }
-      if (this.fixed) {
-        this.toggleClass('drawer--fixed', true);
-      }
+        this.toggleClass('drawer', true);
+        this.toggleClass('drawer--' + this.side, true);
+        if (this.theme) {
+          this.toggleClass('drawer--' + this.theme, true);
+        }
+        if (this.grid) {
+          this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
+        }
+        if (this.fixed) {
+          this.toggleClass('drawer--fixed', true);
+        }
 
-    },
-    toggle: function(e) {
-      this.open = !this.open;
-      this.toggleClass('is-open', this.open, this.$$('.drawer--mask'));
-      this.toggleClass('is-open', this.open);
-      if (this.open) {
-        //document.addEventListener('click', this._handleOffClick.bind(this));
+      },
+      toggle: function(e) {
+        this.open = !this.open;
+        this.toggleClass('is-open', this.open, this.$$('.drawer--mask'));
+        this.toggleClass('is-open', this.open);
+        if (this.open) {
+          //document.addEventListener('click', this._handleOffClick).bind(this);
+        }
+        console.log(this.tagName, this.target);
+        this.fire('toggle', this);
+      },
+      _handleTrack: function(e) {
+        console.log('Track', e);
+      },
+      _handleOffClick: function(e) {
+        this.toggle();
+        document.removeEventListener('click', _handleOffClick).bind(this);
+      },
+      _typeHandler: function(newVal, oldVal) {
+        console.log('change type to', newVal);
+        this.toggleClass('drawer--' + oldVal, false);
+        this.toggleClass('drawer--' + newVal, true);
       }
-      this.fire('toggle', this);
-    },
-    handleTrack: function(e) {
-
-    },
-    _handleOffClick: function(e) {
-
-      this.toggle();
-      //  document.removeEventListener('click', this._handleOffClick.bind(this));
-    }
-  });
-
+    });
   </script>
 </dom-module>
