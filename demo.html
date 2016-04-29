@@ -8,12 +8,8 @@
     <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
 
-    <link rel='stylesheet prefetch' href='https://github.build.ge.com/pages/PXd/px-library-design/css/style.css'>
-    <link rel='stylesheet prefetch' href='https://github.build.ge.com/pages/PredixComponents/px-table-view/bower_components/px-table-view/css/px-table-view.css'>
     <script src="../webcomponentsjs/webcomponents.min.js"></script>
-
     <link rel='stylesheet prefetch' href='https://predixdev.github.io/px-library-design/css/style.css'>
     <link rel="import" href="../px-table-view/px-table-view.html">
     <link rel="import" href="../px-navbar/px-navbar.html">
@@ -25,40 +21,43 @@
       height: 100vh;
       overflow: auto;
     }
-    
+
     .box {
       background: #fff;
     }
-    
+
     .demo {
       overflow: hidden;
       height: 500px;
       position: relative;
     }
-    
+
     .table-view--avatars {}
-    
+
     .table-view--avatars .table-row__media--image {
       padding-right: .5rem;
     }
-    
+
     .viewport {}
     /* TODO: Fixes for static drawer */
-    
+
     .navbar {
       position: relative;
-      ;
     }
-    
+
     px-navbar {
       position: static;
     }
-    
+
+    .table-row {
+      border-bottom: none !important;
+    }
+
     .table-view--bottom {
       position: absolute;
       bottom: 0;
+      width: 100%;
     }
-
     </style>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
@@ -68,14 +67,12 @@
         FastClick.attach(document.body);
       }, false);
     }
-
     </script>
   </head>
 
   <body unresolved>
 
     <template id="tmpl" is="dom-bind">
-
 
       <main class="position-relative">
 
@@ -94,16 +91,16 @@
           </px-navbar>
 
           <px-drawer id="myLeftDrawer" side="left" theme="dark">
-            <ul class="table-view table-view--bare table-view--botto table-view--avatars">
+            <ul class="table-view table-view--small table-view--bottom table-view--avatars">
               <px-table-row title="Jonnie Spratley" type="tappable" image="http://s3-us-west-2.amazonaws.com/s.cdpn.io/49212/profile/profile-80_4.jpg"></px-table-row>
             </ul>
             <br>
-            <ul class="table-view table-view--bare">
-              <px-table-row title="Home" icon="fa fa-home" type="nav-right" href="#home"></px-table-row>
-              <px-table-row title="Dashboard" icon="fa fa-dashboard" type="nav-right" href="#dashboard"></px-table-row>
-              <px-table-row title="Alerts" icon="fa fa-exclamation-triangle" type="nav-right" href="#alerts"></px-table-row>
-              <px-table-row title="Cases" icon="fa fa-briefcase" type="nav-right" href="#cases"></px-table-row>
-              <px-table-row title="Analysis" icon="fa fa-bar-chart" type="nav-right" href="#analysis"></px-table-row>
+            <ul class="table-view table-view--small">
+              <px-table-row title="Home" icon="fa fa-home" type="tappable" href="#home"></px-table-row>
+              <px-table-row title="Dashboard" icon="fa fa-dashboard" type="tappable" href="#dashboard"></px-table-row>
+              <px-table-row title="Alerts" icon="fa fa-exclamation-triangle" type="tappable" href="#alerts"></px-table-row>
+              <px-table-row title="Cases" icon="fa fa-briefcase" type="tappable" href="#cases"></px-table-row>
+              <px-table-row title="Analysis" icon="fa fa-bar-chart" type="tappable" href="#analysis"></px-table-row>
             </ul>
           </px-drawer>
 
@@ -123,7 +120,6 @@
                   <button type="button" onclick="myLeftDrawer.type = 'temporary'" class="btn btn--full">Temporary</button>
                 </div>
 
-
                 <div class="box box--small u-mb">
                   <h2>2. Persistent</h2>
                   <p>Persistent drawers can toggle open or closed. The drawer sits on the same surface elevation as the content. It is closed by default and opens by selecting the menu icon, and stays open until closed by the user.</p>
@@ -135,7 +131,6 @@
                   </p>
                   <button type="button" onclick="myLeftDrawer.type = 'persistent'" class="btn btn--full">Persistent</button>
                 </div>
-
 
                 <div class="box box--small u-mb">
                   <h2>3. Mini variant</h2>
@@ -150,11 +145,9 @@
 
               </div>
 
-
             </section>
 
           </div>
-
 
           <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
             <div class="u-m">
@@ -178,19 +171,13 @@
     var tmpl = document.getElementById('tmpl');
     tmpl.title = 'px-drawer';
     //	tmpl.subtitle = "View Context";
-
     var toggleLeftDrawer = function() {
       document.getElementById('myLeftDrawer').toggle();
     };
     var toggleRightDrawer = function() {
       document.getElementById('myRightDrawer').toggle();
     };
-
     </script>
-
-
-
-
 
   </body>
 

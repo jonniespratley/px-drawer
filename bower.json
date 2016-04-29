@@ -7,7 +7,7 @@
   "description": "A responsive mobile first web component for hiding content off screen.",
   "repository": {
     "type": "git",
-    "url": "https://github.build.ge.com/PredixComponents/px-drawer.git"
+    "url": "https://github.com/PredixDev/px-drawer.git"
   },
   "main": "px-drawer.html",
   "keywords": [
@@ -28,10 +28,10 @@
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.5",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.3",
-    "px-navbar": "https://github.build.ge.com/PredixComponents/px-navbar.git",
-    "px-table-view": "https://github.build.ge.com/PredixComponents/px-table-view.git",
-    "px-mobile-design": "https://github.build.ge.com/PredixComponents/px-mobile-design.git",
-    "px-mobile-mixin-design": "https://github.build.ge.com/PredixComponents/px-mobile-mixin-design.git"
+    "px-navbar": "https://github.com/PredixDev/px-navbar.git",
+    "px-table-view": "https://github.com/PredixDev/px-table-view.git",
+    "px-mobile-design": "https://github.com/PredixDev/px-mobile-design.git",
+    "px-mobile-mixin-design": "https://github.com/PredixDev/px-mobile-mixin-design.git"
   },
   "resolutions": {
     "polymer": "^1.2.0"
