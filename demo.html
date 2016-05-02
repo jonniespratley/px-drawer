@@ -76,14 +76,17 @@
 
     <main class="position-relative">
 
-      <div class="viewport viewport--full-height">
-        <px-navbar id="navbar1" title="{{title}}" subtitle="{{subtitle}}" theme="">
-          <div>
+      <div class="viewpor viewport--full-height">
+        <px-navbar id="navbar1"  theme="">
+          <div class="navbar__left">
             <button class="navbar__button" onclick="toggleLeftDrawer()">
               <i class="fa fa-lg fa-bars"></i>
             </button>
           </div>
-          <div>
+          <div class="navbar__center">
+            px-drawer
+          </div>
+          <div class="navbar__right">
             <button class="navbar__button" onclick="toggleRightDrawer()">
               <i class="fa fa-lg fa-ellipsis-v"></i>
             </button>
