@@ -4,23 +4,21 @@
   <meta charset="UTF-8">
   <script src="../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../web-component-tester/browser.js"></script>
-    <link rel="import" href="px-icon.html">
+    <link rel="import" href="px-drawer.html">
 </head>
 <body>
-  <px-icon id="fixture" icon="home" size="2x"></px-icon>
+  <px-drawer id="fixture" side="left" theme="dark">
+ 
+  </px-drawer>
+
 
     <script>
-      suite('<px-icon>', function() {
+      suite('<px-drawer>', function() {
         var element = document.getElementById('fixture');
         test('renders', function() {
           assert.ok(element);
         });
-        test('has correct icon', function() {
-          assert.ok(element.icon === 'home');
-        });
-        test('has correct size', function() {
-          assert.ok(element.size === '2x');
-        });
+
       });
     </script>
 </body>
