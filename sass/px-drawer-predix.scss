@@ -1,0 +1,311 @@
+////
+/// px-drawer styles
+/// @author Jonnie Spratley
+/// @since 0.0.1
+/// @todo Need to finalize all documentation.
+////
+@import "variables";
+@import "px-mobile-mixin-design/mixins";
+
+///---------------------------------------
+/// Drawer
+///---------------------------------------
+.drawer {
+  display: block;
+  position: absolute;
+  z-index: 350;
+  transition: $drawer-transition;
+  will-change: translate;
+  visibility: hidden;
+  height: calc(100vh - 55px);
+  > * {
+    user-select: none;
+  }
+  &.is-open {
+    visibility: visible;
+
+    .drawer__mask {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .drawer__content {
+      z-index: 360;
+      opacity: 1;
+      visibility: visible;
+      overflow: hidden;
+    }
+  }
+
+  ///
+  @include modifier ('left') {
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    width: 30%;
+    height: 100%;
+    width: var(--px-drawer-width, 30%);
+    height: var(--px-drawer-height, 100%);
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    @include respond ('small') {
+      width: 100%;
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('large') {
+      max-width: 330px;
+      width: 25%;
+      width: var(--px-drawer-width, 30%);
+    }
+
+    @include respond ('medium') {
+      width: 35%;
+      max-width: 330px;
+      width: var(--px-drawer-width, 35%);
+    }
+  }
+  ///------------------------------------------------------
+  /// .drawer--right
+  @include modifier ('right') {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateX(100%);
+    height: var(--px-drawer-height, 100%);
+    position: absolute !important;
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    @include respond ('small') {
+      width: 100%;
+      width: var(--px-drawer-width, 100%);
+    }
+
+    @include respond ('medium') {
+      width: 35%;
+      max-width: 330px;
+      width: var(--px-drawer-width, 35%);
+    }
+
+    @include respond ('large') {
+      max-width: 330px;
+      width: 25%;
+      width: var(--px-drawer-width, 30%);
+    }
+  }
+
+  ///------------------------------------------------------
+  /// .drawer--top
+  @include modifier ('top') {
+    top: 0;
+    right: 0;
+    left: 0;
+    transform: translateY(-100%);
+    width: var(--px-drawer-width, 100%);
+
+    &.is-open {
+      transform: translateY(0);
+    }
+
+    @include respond ('large') {
+      height: var(--px-drawer-height, 50%);
+    }
+
+    @include respond ('small') {
+      height: var(--px-drawer-height, 100%);
+    }
+
+    @include respond ('medium') {
+      height: var(--px-drawer-height, 50%);
+    }
+  }
+
+  ///------------------------------------------------------
+  /// .drawer--bottom
+  @include modifier ('bottom') {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: var(--px-drawer-width, 100%);
+    width: var(--px-drawer-width, 100%);
+    transform: translateY(100%);
+    box-shadow: $drawer-box-shadow;
+    height: $drawer-bottom-height;
+    &.is-open {
+      transform: translateY(0);
+      z-index: 500;
+    }
+
+    @include respond ('small') {
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: $drawer-bottom-height-small;
+      height: var(--px-drawer-height, $drawer-bottom-height-small);
+    }
+
+    @include respond ('medium') {
+      right: 15%;
+      left: 15%;
+      width: auto;
+      height: $drawer-bottom-height-medium;
+      height: var(--px-drawer-height, $drawer-bottom-height-medium);
+    }
+
+    @include respond ('large') {
+      width: auto;
+      height: $drawer-bottom-height-large;
+      height: var(--px-drawer-height, $drawer-bottom-height-large);
+      right: 25%;
+      left: 25%;
+    }
+
+    @include modifier ('full-width') {
+      width: 100% !important;
+      left: 0;
+      right: 0;
+    }
+
+  }
+
+  ///------------------------------------------------------
+  /// .drawer--mini
+  @include modifier ('mini') {
+    transition: $drawer-mini-transition;
+    //position: static;
+    visibility: visible;
+    float: left;
+    min-width: $drawer-mini-width;
+    width: $drawer-mini-width;
+    overflow: hidden;
+    transform: translateX(0) !important;
+
+    .viewport:parent {
+      margin-left: -20px;
+    }
+
+    &.is-open {
+      width: $drawer-mini-open-width;
+
+      @include respond ('large') {
+        width: $drawer-mini-open-width-large;
+      }
+
+      @include respond ('small') {
+        width: $drawer-mini-open-width-small;
+      }
+
+      @include respond ('medium') {
+        width: $drawer-mini-open-width-medium;
+      }
+
+      .hidden-mini-closed,
+      .table-row__content__title {
+        width: auto;
+      }
+    }
+
+    //Mini closed
+    &:not(.is-open) {
+      text-align: center;
+      &:before {
+        content: '';
+      }
+
+      .hidden-mini-closed,
+      .table-row__content__title {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+      }
+    }
+  }
+  ///------------------------------------------------------
+  /// .drawer--temporary
+  @include modifier ('temporary') {
+    transition: $drawer-transition;
+    position: absolute;
+    box-shadow: $drawer-box-shadow;
+  }
+  ///------------------------------------------------------
+  /// .drawer--persistent
+  @include modifier ('persistent') {
+    transition: $drawer-persistent-transition;
+    position: static;
+    visibility: visible;
+    float: left;
+    width: 20%;
+    margin-top: -10px;
+    margin-left: -25px;
+    transform: translateX(0) !important;
+
+    @include respond ('large') {
+      margin-top: 0;
+    }
+
+    @include respond ('small') {
+      margin-left: 0;
+    }
+
+    @include respond ('medium') {
+      margin-top: 0;
+      margin-left: 0;
+    }
+
+    &.drawer--right {
+      float: right !important;
+      position: static !important;
+    }
+  }
+
+  ///
+  @include modifier ('fixed') {
+    position: fixed;
+  }
+
+  ///------------------------------------------------------
+  /// .drawer__content
+  @include element ('content') {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    ///
+    @include modifier ('grid') {
+      .grid__item {
+        padding-left: 24px;
+        padding-right: 24px;
+
+        &:hover {
+          background: rgba(0, 0, 0, .2);
+        }
+      }
+
+      a {
+        text-align: center;
+        padding: 5px 12px;
+        text-decoration: none;
+        display: block;
+
+        i {
+          height: 48px;
+          width: 48px;
+          font-size: 48px;
+          display: block;
+          margin-bottom: 6px;
+        }
+      }
+    }
+  }
+}

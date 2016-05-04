@@ -1,20 +1,17 @@
 <html>
 
 <head>
-  <title>px-drawer mobile demo</title>
-  <!-- Sets initial viewport load and disables zooming  -->
+  <title>px-drawer demo</title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <script src="../webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="../iron-demo-helpers/demo-snippet.html" />
+
+
   <script src="../webcomponentsjs/webcomponents.min.js"></script>
-  <link rel='stylesheet prefetch' href='https://predixdev.github.io/px-library-design/css/style.css'>
+  <link rel='stylesheet' href='https://predixdev.github.io/px-library-design/css/style.css'>
 
-
-  <link rel="import" href="../px-design-system/px-design-system-theme.html">
+  <link rel="import" href="../iron-demo-helpers/demo-snippet.html"/>
   <link rel="import" href="../px-table-view/px-table-view.html">
   <link rel="import" href="../px-navbar/px-navbar.html">
   <link rel="import" href="px-drawer.html">
@@ -23,13 +20,13 @@
       background: #fff;
     }
 
-
-
-    .table-view--avatars {}
+    .table-view--avatars {
+    }
 
     .table-view--avatars .table-row__media--image {
       padding-right: .5rem;
     }
+
     /* TODO: Fixes for static drawer */
 
     .navbar {
@@ -44,8 +41,15 @@
       border-bottom: none !important;
     }
 
+    button {
+      outline: 0;
+    }
+
     .box {
       flex: 1 0 200px;
+      position: relative;
+      height: 250px;
+      overflow: hidden;
     }
 
     .table-view--bottom {
@@ -53,172 +57,317 @@
       bottom: 0;
       width: 100%;
     }
+
+    .list-ui li {
+      border: none;
+    }
+
+    .flex > * {
+      border: 1px solid #ccc;
+      background: #efefef;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .flex__item--g1 {
+      flex-grow: 1;
+    }
+
+    .flex__item--g2 {
+      flex-grow: 2;
+    }
+
+    .flex__item--g3 {
+      flex-grow: 3;
+    }
+
+    .flex__item--g4 {
+      flex-grow: 4;
+    }
   </style>
 
 </head>
 
 <body unresolved>
 
-  <template id="tmpl" is="dom-bind">
 
-    <main class="position-relative viewport--full-height">
-      <px-drawer id="myLeftDrawer" side="left" theme="dark">
-        <ul class="list-ui">
-          <li><i class="fa fa-home fa-lg"></i><span class="hidden-mini-closed">Home</span></li>
-        </ul>
+<main class="position-relative viewport--full-height">
+  <px-drawer id="myLeftDrawer" side="left" theme="dark">
+    <ul class="list-ui">
+      <li><i class="fa fa-home fa-lg"></i><span class="hidden-mini-closed u-ml">Home</span></li>
+      <li><i class="fa fa-gear fa-lg"></i><span class="hidden-mini-closed u-ml">Settings</span></li>
+    </ul>
+  </px-drawer>
 
-      </px-drawer>
-      <div class="viewport ">
-        <px-drawer id="myBottom" side="bottom" theme="dark">
-          <p>
-            Bottom Drawer
-          </p>
-        </px-drawer>
-        <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
-          <div class="u-m">
-            <p>
-              This is content inside of the drawer
-            </p>
+
+  <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
+    <div class="u-m">
+      <p>
+        This is content inside of the drawer
+      </p>
+    </div>
+  </px-drawer>
+
+  <px-drawer id="myTopDrawer" side="top" theme="dark" fixed>
+    <div class="u-m">
+      <p>
+        This is content inside of the drawer
+      </p>
+    </div>
+  </px-drawer>
+
+  <px-drawer id="myBottomDrawer" side="bottom" theme="dark" fixed>
+    <div class="u-m">
+      <p>
+        This is content inside of the drawer
+      </p>
+    </div>
+  </px-drawer>
+
+
+  <div class="viewport">
+    <section class="">
+      <div class="u-m-">
+        <h1>px-drawer</h1>
+        <p>The px-drawer component lets you store content outside the viewport.</p>
+
+        <div class="u-mb">
+          <h2>Toggle Drawers</h2>
+          <div class="flex flex--row">
+            <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
+              Toggle Left
+            </button>
+            <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
+              Toggle Right
+            </button>
+            <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
+              Toggle Top
+            </button>
+            <button class="btn btn--full" onclick="toggleDrawer('myBottomDrawer')">
+              Toggle Bottom
+            </button>
           </div>
-        </px-drawer>
-        <px-drawer id="myTopDrawer" side="top" theme="dark" fixed>
-          <div class="u-m">
-            <p>
-              This is content inside of the drawer
-            </p>
-          </div>
-        </px-drawer>
-        <px-drawer id="myBottomDrawer" side="bottom" theme="dark" fixed>
-          <div class="u-m">
-            <p>
-              This is content inside of the drawer
-            </p>
-          </div>
-        </px-drawer>
 
-
-
-
-
-        <div class="layout">
-          <section class="layout__item">
-            <div class="u-m-">
-              <h1>px-drawer</h1>
-              <p>The px-drawer component lets you store content outside the viewport.</p>
-
-              <div class="u-mb">
-                <h2>Toggle Drawers</h2>
-                <div class="flex flex--row">
-                  <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
-                    Toggle Left
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
-                    Toggle Right
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
-                    Toggle Top
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myBottomDrawer')">
-                    Toggle Bottom
-                  </button>
-                </div>
-
-              </div>
-
-              <div class="flex flex--wrap">
-                <div class="box box--small u-m-">
-                  <button type="button" onclick="myLeftDrawer.type = 'temporary'" class="btn btn--full">Temporary</button>
-
-                  <ul>
-                    <li>Recommended for: <strong>Tablet</strong></li>
-                    <li>Required for: <strong>Mobile</strong></li>
-                  </ul>
-
-                </div>
-
-                <div class="box box--small u-m-">
-                  <button type="button" onclick="myLeftDrawer.type = 'persistent'" class="btn btn--full">Persistent</button>
-                  <ul>
-                    <li>Persistent navigation drawers are acceptable for all sizes larger than mobile</li>
-                  </ul>
-
-                </div>
-
-                <div class="box box--small u-m-">
-                  <button type="button" onclick="myLeftDrawer.type = 'mini'" class="btn btn--full">Mini</button>
-
-                  <ul>
-                    <li>Recommended for Apps that need quick selection access alongside content</li>
-                  </ul>
-
-                </div>
-
-              </div>
-
-            </div>
-          </section>
         </div>
+
+        <div class="flex flex--wrap">
+          <div class="box box--small u-m-">
+            <button type="button" onclick="toggleDrawerType('myLeftDrawer', 'temporary')" class="btn btn--full">Temporary
+            </button>
+            <p>Recommended for: <strong>Tablet</strong></p>
+            <p>Required for: <strong>Mobile</strong></p>
+
+          </div>
+
+          <div class="box box--small u-m-">
+            <button type="button" onclick="toggleDrawerType('myLeftDrawer', 'persistent')" class="btn btn--full">Persistent
+            </button>
+            <p>Persistent navigation drawers are acceptable for all sizes larger than mobile</p>
+
+          </div>
+
+          <div class="box box--small u-m-">
+            <button type="button" onclick="toggleDrawerType('myLeftDrawer', 'mini')" class="btn btn--full">Mini</button>
+            <p>Recommended for Apps that need quick selection access alongside content</p>
+          </div>
+        </div>
+
+
+        <h2>Drawer - Temporary - Left</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer1 {
+                  background-color: lime;
+                }
+              </style>
+              <px-drawer id="drawer1" side="left">
+                <p class="u-m">
+                  This is content inside of the drawer
+                </p>
+              </px-drawer>
+              <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
+                Toggle
+              </button>
+            </div>
+          </template>
+        </demo-snippet>
+
+        <h2>Drawer - Temporary - Right</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer1-right {
+                  background-color: lime;
+                }
+              </style>
+              <px-drawer id="drawer1-right" side="right">
+                <p class="u-m">
+                  This is content inside of the drawer
+                </p>
+              </px-drawer>
+              <button class="btn btn--full" onclick="document.getElementById('drawer1-right').toggle()">
+                Toggle
+              </button>
+            </div>
+          </template>
+        </demo-snippet>
+
+        <h2>Drawer - Temporary - Top</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer1-top {
+                  background-color: lime;
+                }
+              </style>
+              <px-drawer id="drawer1-top" side="top">
+                <p class="u-m">
+                  This is content inside of the drawer
+                </p>
+              </px-drawer>
+              <button class="btn btn--full" onclick="document.getElementById('drawer1-top').toggle()">
+                Toggle
+              </button>
+            </div>
+          </template>
+        </demo-snippet>
+
+        <h2>Drawer - Temporary - Bottom</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer1-bottom {
+                  background-color: lime;
+                }
+              </style>
+              <px-drawer id="drawer1-bottom" side="bottom">
+                <p class="u-m">
+                  This is content inside of the drawer
+                </p>
+              </px-drawer>
+              <button class="btn btn--full" onclick="document.getElementById('drawer1-bottom').toggle()">
+                Toggle
+              </button>
+            </div>
+          </template>
+        </demo-snippet>
+
+
+        <h2>Drawer - Mini - Left</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer2 {
+                  background-color: crimson;
+                }
+              </style>
+              <div class="u-ml">
+                <px-drawer id="drawer2" side="left" type="mini">
+                  <ul class="list-ui">
+                    <li><i class="fa fa-home fa-lg"></i><span class="hidden-mini-closed u-ml">Home</span></li>
+                  </ul>
+                </px-drawer>
+                <section class="u-ml++">
+                  <div class="flex flex--row">
+                    <div class="flex__item">1</div>
+                    <div class="flex__item">2</div>
+                    <div class="flex__item">3</div>
+                  </div>
+                </section>
+
+              </div>
+            </div>
+          </template>
+        </demo-snippet>
+
+
+        <h2>Drawer - Persistent - Left</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer3 {
+                  background-color: crimson;
+                }
+              </style>
+              <section>
+                <px-drawer id="drawer3" side="left" type="persistent" class="u-mr+">
+                  <p class="u-m">
+                    This is content inside of the drawer
+                  </p>
+                </px-drawer>
+                <div class="flex flex--row">
+                  <div class="flex__item">1</div>
+                  <div class="flex__item">2</div>
+                  <div class="flex__item">3</div>
+                </div>
+              </section>
+            </div>
+          </template>
+        </demo-snippet>
+
+
+        <h2>Drawer - Persistent - Right</h2>
+        <demo-snippet>
+          <template>
+            <div class="box">
+              <style>
+                #drawer4 {
+                  background-color: crimson;
+                }
+              </style>
+              <section>
+                <px-drawer id="drawer4" side="right" type="persistent" class="u-ml+">
+                  <p class="u-m">
+                    This is content inside of the drawer
+                  </p>
+                </px-drawer>
+                <div class="flex flex--row">
+                  <div class="flex__item">1</div>
+                  <div class="flex__item">2</div>
+                  <div class="flex__item">3</div>
+                </div>
+              </section>
+            </div>
+          </template>
+        </demo-snippet>
+
+
       </div>
+    </section>
+  </div>
 
 
+</main>
 
-    </main>
-  </template>
-  <script type="text/javascript">
-    var tmpl = document.getElementById('tmpl');
-    tmpl.title = 'px-drawer';
-    //	tmpl.subtitle = "View Context";
-    var toggleDrawer = function(id, type) {
-      document.getElementById(id).toggle(type);
-    };
-    var toggleRightDrawer = function() {
-      document.getElementById('myRightDrawer').toggle();
-    };
-    var navItems = [{
-      "path": "tab1",
-      "icon": "fa-warning",
-      "eventName": "firstItem",
-      "label": "Alerts",
-      "subitems": [{
-        "label": "Sub Category 1"
-      }, {
-        "label": "Sub Category 2",
-        "eventName": "subitemTwo"
-      }, {
-        "label": "Sub Category 3",
-        "path": "subitem3"
-      }]
-    }, {
-      "path": "tab2",
-      "icon": "fa-briefcase",
-      "label": "Cases",
-      "subitems": [{
-        "label": "Sub Category 1"
-      }, {
-        "label": "Sub Category 2"
-      }, {
-        "label": "Sub Category 3"
-      }]
-    }, {
-      "path": "tab3",
-      "icon": "fa-bar-chart",
-      "label": "Analysis"
-    }, {
-      "path": "tab4",
-      "icon": "fa-dashboard",
-      "label": "Dashboards"
-    }];
-    tmpl.navItems = navItems;
-  </script>
+<script type="text/javascript">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-  <script type="text/javascript">
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
+  //	tmpl.subtitle = "View Context";
+  function toggleDrawer(id, type) {
+    document.getElementById(id).toggle(type);
+  }
+
+  function toggleDrawerType(id, type) {
+    document.getElementById(id).type = type;
+  }
+
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+<script type="text/javascript">
+  if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function () {
+      FastClick.attach(document.body);
+    }, false);
+  }
+</script>
 
 </body>
 
