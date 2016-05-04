@@ -190,7 +190,7 @@
   ///------------------------------------------------------
   /// .drawer--mini
   @include modifier ('mini') {
-    transition: width .3s ease;
+    transition: width 0.3s ease;
     position  : static;
     visibility: visible;
     /* margin-left: -25px; */
@@ -218,6 +218,7 @@
         width: 100%;
       }
 
+      .hidden-mini-closed,
       .table-row__content__title {
         width: auto;
       }
@@ -228,6 +229,7 @@
         content: '';
       }
 
+      .hidden-mini-closed,
       .table-row__content__title {
         //opacity: 0;
         width   : 0;
@@ -244,7 +246,7 @@
   ///------------------------------------------------------
   /// .drawer--persistent
   @include modifier ('persistent') {
-    transition : width .5s ease-in-out;
+    transition : width 0.5s ease-in-out;
     position   : static;
     visibility : visible;
     float      : left;

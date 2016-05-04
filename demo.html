@@ -8,37 +8,28 @@
   <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
+  <script src="../webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../iron-demo-helpers/demo-snippet.html" />
   <script src="../webcomponentsjs/webcomponents.min.js"></script>
   <link rel='stylesheet prefetch' href='https://predixdev.github.io/px-library-design/css/style.css'>
+
+
+  <link rel="import" href="../px-design-system/px-design-system-theme.html">
   <link rel="import" href="../px-table-view/px-table-view.html">
   <link rel="import" href="../px-navbar/px-navbar.html">
   <link rel="import" href="px-drawer.html">
   <style media="screen">
-    body {
-      background: #efeff4;
-      margin: 0;
-      height: 100vh;
-      overflow: auto;
-    }
-
     .box {
       background: #fff;
     }
 
-    .demo {
-      overflow: hidden;
-      height: 500px;
-      position: relative;
-    }
+
 
     .table-view--avatars {}
 
     .table-view--avatars .table-row__media--image {
       padding-right: .5rem;
     }
-
-    .viewport {}
     /* TODO: Fixes for static drawer */
 
     .navbar {
@@ -53,129 +44,132 @@
       border-bottom: none !important;
     }
 
+    .box {
+      flex: 1 0 200px;
+    }
+
     .table-view--bottom {
       position: absolute;
       bottom: 0;
       width: 100%;
     }
   </style>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-  <script type="text/javascript">
-    if ('addEventListener' in document) {
-      document.addEventListener('DOMContentLoaded', function() {
-        FastClick.attach(document.body);
-      }, false);
-    }
-  </script>
+
 </head>
 
 <body unresolved>
 
   <template id="tmpl" is="dom-bind">
 
-    <main class="position-relative">
+    <main class="position-relative viewport--full-height">
+      <px-drawer id="myLeftDrawer" side="left" theme="dark">
+        <ul class="list-ui">
+          <li><i class="fa fa-home fa-lg"></i><span class="hidden-mini-closed">Home</span></li>
+        </ul>
 
-      <div class="viewpor viewport--full-height">
-        <px-navbar id="navbar1"  theme="">
-          <div class="navbar__left">
-            <button class="navbar__button" onclick="toggleLeftDrawer()">
-              <i class="fa fa-lg fa-bars"></i>
-            </button>
-          </div>
-          <div class="navbar__center">
-            px-drawer
-          </div>
-          <div class="navbar__right">
-            <button class="navbar__button" onclick="toggleRightDrawer()">
-              <i class="fa fa-lg fa-ellipsis-v"></i>
-            </button>
-          </div>
-        </px-navbar>
-
-        <px-drawer id="myLeftDrawer" side="left" theme="dark">
-          <ul class="table-view table-view--small table-view--bottom table-view--avatars">
-            <px-table-row title="Jonnie Spratley" type="tappable" image="http://s3-us-west-2.amazonaws.com/s.cdpn.io/49212/profile/profile-80_4.jpg"></px-table-row>
-          </ul>
-          <br>
-          <ul class="table-view table-view--small">
-            <px-table-row title="Home" icon="fa fa-home" type="tappable" href="#home"></px-table-row>
-            <px-table-row title="Dashboard" icon="fa fa-dashboard" type="tappable" href="#dashboard"></px-table-row>
-            <px-table-row title="Alerts" icon="fa fa-exclamation-triangle" type="tappable" href="#alerts"></px-table-row>
-            <px-table-row title="Cases" icon="fa fa-briefcase" type="tappable" href="#cases"></px-table-row>
-            <px-table-row title="Analysis" icon="fa fa-bar-chart" type="tappable" href="#analysis"></px-table-row>
-          </ul>
+      </px-drawer>
+      <div class="viewport ">
+        <px-drawer id="myBottom" side="bottom" theme="dark">
+          <p>
+            Bottom Drawer
+          </p>
         </px-drawer>
-
-        <div class="layout">
-          <section class="layout__item">
-            <h1>px-drawer</h1>
-            <p>The px-drawer component lets you store content outside the viewport.</p>
-
-            <div class="clearfix">
-              <div class="box box--small u-mb">
-                <h2>1. Temporary <small>(default)</small></h2>
-                <p>Temporary navigation drawers can toggle open or closed. Closed by default, the drawer opens temporarily above all other content until a section is selected.</p>
-                <ul>
-                  <li>Recommended for: <strong>Tablet</strong></li>
-                  <li>Required for: <strong>Mobile</strong></li>
-                </ul>
-                <button type="button" onclick="myLeftDrawer.type = 'temporary'" class="btn btn--full">Temporary</button>
-              </div>
-
-              <div class="box box--small u-mb">
-                <h2>2. Persistent</h2>
-                <p>Persistent drawers can toggle open or closed. The drawer sits on the same surface elevation as the content. It is closed by default and opens by selecting the menu icon, and stays open until closed by the user.</p>
-                <p>
-                  Sitting outside of the page grid, when opened the drawer forces other content to change size and adapt to the smaller viewport.
-                </p>
-                <p>
-                  Persistent navigation drawers are acceptable for all sizes larger than mobile
-                </p>
-                <button type="button" onclick="myLeftDrawer.type = 'persistent'" class="btn btn--full">Persistent</button>
-              </div>
-
-              <div class="box box--small u-mb">
-                <h2>3. Mini variant</h2>
-                <p>In this variation, the persistent navigation drawer changes its width. Its resting state is as a mini-drawer at the same elevation as the content, clipped by the app bar. When expanded, it appears as the standard persistent navigation
-                  drawer.
-                </p>
-                <ul>
-                  <li>Recommended for: Apps sections that need quick selection access alongside content</li>
-                </ul>
-                <button type="button" onclick="myLeftDrawer.type = 'mini'" class="btn btn--full">Mini</button>
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
-
         <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
           <div class="u-m">
             <p>
               This is content inside of the drawer
             </p>
-            <p class="flex flex--col">
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'default'">Default</button>
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'transparent'">Transparent</button>
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'chrome'">Chrome</button>
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'alt'">Alt</button>
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'dark'">Dark</button>
-              <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'primary'">Primary</button>
+          </div>
+        </px-drawer>
+        <px-drawer id="myTopDrawer" side="top" theme="dark" fixed>
+          <div class="u-m">
+            <p>
+              This is content inside of the drawer
             </p>
           </div>
         </px-drawer>
+        <px-drawer id="myBottomDrawer" side="bottom" theme="dark" fixed>
+          <div class="u-m">
+            <p>
+              This is content inside of the drawer
+            </p>
+          </div>
+        </px-drawer>
+
+
+
+
+
+        <div class="layout">
+          <section class="layout__item">
+            <div class="u-m-">
+              <h1>px-drawer</h1>
+              <p>The px-drawer component lets you store content outside the viewport.</p>
+
+              <div class="u-mb">
+                <h2>Toggle Drawers</h2>
+                <div class="flex flex--row">
+                  <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
+                    Toggle Left
+                  </button>
+                  <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
+                    Toggle Right
+                  </button>
+                  <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
+                    Toggle Top
+                  </button>
+                  <button class="btn btn--full" onclick="toggleDrawer('myBottomDrawer')">
+                    Toggle Bottom
+                  </button>
+                </div>
+
+              </div>
+
+              <div class="flex flex--wrap">
+                <div class="box box--small u-m-">
+                  <button type="button" onclick="myLeftDrawer.type = 'temporary'" class="btn btn--full">Temporary</button>
+
+                  <ul>
+                    <li>Recommended for: <strong>Tablet</strong></li>
+                    <li>Required for: <strong>Mobile</strong></li>
+                  </ul>
+
+                </div>
+
+                <div class="box box--small u-m-">
+                  <button type="button" onclick="myLeftDrawer.type = 'persistent'" class="btn btn--full">Persistent</button>
+                  <ul>
+                    <li>Persistent navigation drawers are acceptable for all sizes larger than mobile</li>
+                  </ul>
+
+                </div>
+
+                <div class="box box--small u-m-">
+                  <button type="button" onclick="myLeftDrawer.type = 'mini'" class="btn btn--full">Mini</button>
+
+                  <ul>
+                    <li>Recommended for Apps that need quick selection access alongside content</li>
+                  </ul>
+
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+        </div>
       </div>
+
+
+
     </main>
   </template>
   <script type="text/javascript">
     var tmpl = document.getElementById('tmpl');
     tmpl.title = 'px-drawer';
     //	tmpl.subtitle = "View Context";
-    var toggleLeftDrawer = function() {
-      document.getElementById('myLeftDrawer').toggle();
+    var toggleDrawer = function(id, type) {
+      document.getElementById(id).toggle(type);
     };
     var toggleRightDrawer = function() {
       document.getElementById('myRightDrawer').toggle();
@@ -215,6 +209,15 @@
       "label": "Dashboards"
     }];
     tmpl.navItems = navItems;
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+  <script type="text/javascript">
+    if ('addEventListener' in document) {
+      document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+      }, false);
+    }
   </script>
 
 </body>
