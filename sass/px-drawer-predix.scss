@@ -247,14 +247,13 @@
   ///------------------------------------------------------
   /// .drawer--persistent
   @include modifier ('persistent') {
-    transition : $drawer-persistent-transition;
-    position   : static;
-    visibility : visible;
-    float      : left;
-    width      : 20%;
-    margin-top : -10px;
-    margin-left: -25px;
-    transform  : translateX(0) !important;
+    transition: $drawer-persistent-transition;
+    position  : static;
+    visibility: visible;
+    float     : left;
+    width     : 20%;
+    z-index   : 0;
+    transform : translateX(0) !important;
 
     @include respond ('large') {
       margin-top: 0;

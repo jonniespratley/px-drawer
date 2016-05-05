@@ -178,8 +178,7 @@
     visibility: visible;
     float: left;
     width: 20%;
-    margin-top: -10px;
-    margin-left: -25px;
+    z-index: 0;
     -webkit-transform: translateX(0) !important;
             transform: translateX(0) !important; }
     @media (min-width: 1200px) {
