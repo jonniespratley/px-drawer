@@ -76,13 +76,16 @@
       transform: translateY(0); }
     @media (min-width: 1200px) {
       .drawer--top {
-        height: var(--px-drawer-height, 50%); } }
+        height: var(--px-drawer-height, 25%); } }
+    @media (min-width: 321px) {
+      .drawer--top {
+        height: var(--px-drawer-height, 20%); } }
     @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
       .drawer--top {
-        height: var(--px-drawer-height, 100%); } }
+        height: var(--px-drawer-height, 20%); } }
     @media (min-width: 767px) {
       .drawer--top {
-        height: var(--px-drawer-height, 50%); } }
+        height: var(--px-drawer-height, 35%); } }
   .drawer--bottom {
     bottom: 0;
     right: 0;
@@ -122,12 +125,14 @@
       right: 0; }
   .drawer--mini {
     transition: width 0.3s ease;
+    position: static;
     visibility: visible;
     float: left;
     min-width: 44px;
     width: 44px;
     overflow: hidden;
-    transform: translateX(0) !important; }
+    transform: translateX(0) !important;
+    text-align: left; }
     .drawer--mini .viewport:parent {
       margin-left: -20px; }
     .drawer--mini.is-open {
@@ -145,14 +150,12 @@
       .drawer--mini.is-open .table-row__content__title {
         width: auto; }
     .drawer--mini:not(.is-open) {
-      text-align: center; }
+      transition: width 0.3s ease; }
       .drawer--mini:not(.is-open):before {
         content: ''; }
       .drawer--mini:not(.is-open) .hidden-mini-closed,
       .drawer--mini:not(.is-open) .table-row__content__title {
-        opacity: 0;
-        width: 0;
-        overflow: hidden; }
+        opacity: 0; }
   .drawer--temporary {
     transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
     position: absolute;
