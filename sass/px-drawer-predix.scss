@@ -195,6 +195,7 @@
     overflow  : hidden;
     transform : translateX(0) !important;
     text-align: left;
+    min-height: 90vh;
 
     .viewport:parent {
       margin-left: -20px;
@@ -216,8 +217,9 @@
       }
 
       .hidden-mini-closed,
-      .table-row__content__title {
-        width: auto;
+      .table-row__content {
+        width  : auto;
+        display: block;
       }
     }
 
@@ -230,8 +232,9 @@
       }
 
       .hidden-mini-closed,
-      .table-row__content__title {
+      .table-row__content {
         opacity: 0;
+        display: none;
         //width   : 0;
         //overflow: hidden;
       }
