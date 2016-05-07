@@ -15,11 +15,10 @@ To use this component in your custom component do the following:
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
   <style>
-  :host {
-    display: block;
-    height: calc(100vh - 55px);
-  }
-
+    :host {
+      display: block;
+      height: calc(100vh - 55px);
+    }
   </style>
   <template>
     <div class="drawer__content" on-click="toggle">
@@ -27,68 +26,70 @@ To use this component in your custom component do the following:
     </div>
   </template>
   <script>
-  Polymer({
-    is: 'px-drawer',
-    //behaviors: [pxMobile.behaviors.BaseElement],
-    properties: {
-      open: {
-        type: Boolean
+    Polymer({
+      is: 'px-drawer',
+      //behaviors: [pxMobile.behaviors.BaseElement],
+      properties: {
+        open: {
+          type: Boolean
+        },
+        grid: {
+          type: Boolean
+        },
+        fixed: {
+          type: Boolean
+        },
+        theme: {
+          type: String
+        },
+        side: {
+          type: String,
+          value: 'left'
+        },
+        width: {
+          type: String,
+          value: '45%'
+        },
+        type: {
+          type: String,
+          observer: '_typeHandler'
+        }
       },
-      grid: {
-        type: Boolean
+      attached: function() {
+        this.toggleClass('drawer', true);
+        this.toggleClass('drawer--' + this.side, true);
+        if (this.theme) {
+          this.toggleClass('drawer--' + this.theme, true);
+        }
+        if (this.grid) {
+          this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
+        }
+        if (this.fixed) {
+          this.toggleClass('drawer--fixed', true);
+        }
       },
-      fixed: {
-        type: Boolean
+      toggle: function(e) {
+        this.open = !this.open;
+        if (this.type === 'mini') {
+          return;
+        }
+        this.toggleClass('is-open', this.open);
+        if (this.open) {
+          //document.addEventListener('click', this._handleOffClick).bind(this);
+        }
+        this.fire('toggle', this);
       },
-      theme: {
-        type: String
+      _handleTrack: function(e) {
+        console.log('Track', e);
       },
-      side: {
-        type: String,
-        value: 'left'
+      _handleOffClick: function(e) {
+        this.toggle();
+        document.removeEventListener('click', _handleOffClick).bind(this);
       },
-      width: {
-        type: String,
-        value: '45%'
-      },
-      type: {
-        type: String,
-        observer: '_typeHandler'
+      _typeHandler: function(newVal, oldVal) {
+        this.toggleClass('drawer--' + oldVal, false);
+        this.toggleClass('drawer--' + newVal, true);
       }
-    },
-    attached: function() {
-      this.toggleClass('drawer', true);
-      this.toggleClass('drawer--' + this.side, true);
-      if (this.theme) {
-        this.toggleClass('drawer--' + this.theme, true);
-      }
-      if (this.grid) {
-        this.toggleClass('drawer__content--grid', true, this.$$('.drawer__content'));
-      }
-      if (this.fixed) {
-        this.toggleClass('drawer--fixed', true);
-      }
-    },
-    toggle: function(e) {
-      this.open = !this.open;
-      this.toggleClass('is-open', this.open);
-      if (this.open) {
-        //document.addEventListener('click', this._handleOffClick).bind(this);
-      }
-      this.fire('toggle', this);
-    },
-    _handleTrack: function(e) {
-      console.log('Track', e);
-    },
-    _handleOffClick: function(e) {
-      this.toggle();
-      document.removeEventListener('click', _handleOffClick).bind(this);
-    },
-    _typeHandler: function(newVal, oldVal) {
-      this.toggleClass('drawer--' + oldVal, false);
-      this.toggleClass('drawer--' + newVal, true);
-    }
-  });
-
+    });
   </script>
 </dom-module>
