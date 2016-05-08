@@ -18,6 +18,7 @@
   will-change: translate;
   visibility : hidden;
   height     : calc(100vh - 55px);
+  min-height : 100vh;
 
   > * {
     user-select: none;
@@ -195,7 +196,6 @@
     overflow  : hidden;
     transform : translateX(0) !important;
     text-align: left;
-    min-height: 90vh;
 
     .viewport:parent {
       margin-left: -20px;

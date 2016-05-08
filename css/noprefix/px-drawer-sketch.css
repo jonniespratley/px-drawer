@@ -5,7 +5,8 @@
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   will-change: translate;
   visibility: hidden;
-  height: calc(100vh - 55px); }
+  height: calc(100vh - 55px);
+  min-height: 100vh; }
   .drawer > * {
     user-select: none; }
   .drawer.is-open {
@@ -132,8 +133,7 @@
     width: 44px;
     overflow: hidden;
     transform: translateX(0) !important;
-    text-align: left;
-    min-height: 90vh; }
+    text-align: left; }
     .drawer--mini .viewport:parent {
       margin-left: -20px; }
     .drawer--mini.is-open {
