@@ -17,8 +17,6 @@
   transition : $drawer-transition;
   will-change: translate;
   visibility : hidden;
-  height     : calc(100vh - 55px);
-  min-height : 100vh;
 
   > * {
     user-select: none;
@@ -196,6 +194,13 @@
     overflow  : hidden;
     transform : translateX(0) !important;
     text-align: left;
+    min-height: 100vh;
+
+    .hidden-mini-closed,
+    .table-row__content {
+
+      transition: $drawer-mini-transition;
+    }
 
     .viewport:parent {
       margin-left: -20px;
@@ -218,8 +223,8 @@
 
       .hidden-mini-closed,
       .table-row__content {
-        width  : auto;
-        display: block;
+        opacity: 1;
+
       }
     }
 
@@ -233,10 +238,9 @@
 
       .hidden-mini-closed,
       .table-row__content {
-        opacity: 0;
-        display: none;
-        //width   : 0;
-        //overflow: hidden;
+
+        opacity : 0;
+        overflow: hidden;
       }
     }
   }
@@ -257,6 +261,7 @@
     width     : 20%;
     z-index   : 0;
     transform : translateX(0) !important;
+    min-height: 100vh;
 
     @include respond ('large') {
       margin-top: 0;

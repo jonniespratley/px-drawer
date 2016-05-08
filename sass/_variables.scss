@@ -1,24 +1,24 @@
 @import 'px-mobile-design/sass/_variables';
 
 //$drawer-transition           : all .5s;
-$drawer-transition: all .5s cubic-bezier(0.1, 0.7, 0.1, 1);
+$drawer-transition            : all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
 
-$drawer-mask-background-color: $gray10;
-$drawer-dark-background-color: $gray10;
+$drawer-mask-background-color : $gray10;
+$drawer-dark-background-color : $gray10;
 
-$drawer-dark-font-color: $white;
-$drawer-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+$drawer-dark-font-color       : $white;
+$drawer-box-shadow            : 0 0 10px rgba(0, 0, 0, 0.4);
 
-$drawer-bottom-height: 50%;
-$drawer-bottom-height-small: 50%;
-$drawer-bottom-height-medium: 50%;
-$drawer-bottom-height-large: 50%;
+$drawer-bottom-height         : 45%;
+$drawer-bottom-height-small   : 35%;
+$drawer-bottom-height-medium  : 35%;
+$drawer-bottom-height-large   : 25%;
 
-$drawer-mini-transition: width .3s ease;
-$drawer-mini-width: 44px;
-$drawer-mini-open-width: 25%;
-$drawer-mini-open-width-small: 100%;
-$drawer-mini-open-width-medium: 50%;
-$drawer-mini-open-width-large: 25%;
+$drawer-mini-transition       : all 0.4s ease-in-out;
+$drawer-mini-width            : 44px;
+$drawer-mini-open-width       : 25%;
+$drawer-mini-open-width-small : 80%;
+$drawer-mini-open-width-medium: 40%;
+$drawer-mini-open-width-large : 25%;
 
-$drawer-persistent-transition: width 0.5s ease-in-out;
+$drawer-persistent-transition : width 0.5s ease-in-out;

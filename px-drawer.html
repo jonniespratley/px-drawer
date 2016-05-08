@@ -21,7 +21,7 @@ To use this component in your custom component do the following:
     }
   </style>
   <template>
-    <div class="drawer__content" on-click="toggle">
+    <div id="drawer__content" class="drawer__content">
       <content select="*"></content>
     </div>
   </template>
@@ -52,6 +52,7 @@ To use this component in your custom component do the following:
         },
         type: {
           type: String,
+          value: 'temporary',
           observer: '_typeHandler'
         }
       },
@@ -67,15 +68,16 @@ To use this component in your custom component do the following:
         if (this.fixed) {
           this.toggleClass('drawer--fixed', true);
         }
+        if (this.type === 'temporary') {
+          this.listen(this.$.drawer__content, 'click', 'toggle');
+        }
       },
       toggle: function(e) {
         this.open = !this.open;
-        if (this.type === 'mini') {
-          return;
-        }
+
         this.toggleClass('is-open', this.open);
         if (this.open) {
-          //document.addEventListener('click', this._handleOffClick).bind(this);
+          //  document.addEventListener('click', this._handleOffClick.bind(this));
         }
         this.fire('toggle', this);
       },
@@ -84,7 +86,7 @@ To use this component in your custom component do the following:
       },
       _handleOffClick: function(e) {
         this.toggle();
-        document.removeEventListener('click', _handleOffClick).bind(this);
+        document.removeEventListener('click', this._handleOffClick).bind(this);
       },
       _typeHandler: function(newVal, oldVal) {
         this.toggleClass('drawer--' + oldVal, false);
