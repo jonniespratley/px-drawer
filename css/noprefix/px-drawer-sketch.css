@@ -130,7 +130,7 @@
     min-width: 44px;
     width: 44px;
     overflow: hidden;
-    transform: translateX(0) !important;
+    transform: translateX(0);
     text-align: left;
     min-height: 100vh; }
     .drawer--mini .hidden-mini-closed,

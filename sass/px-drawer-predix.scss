@@ -192,7 +192,7 @@
     min-width : $drawer-mini-width;
     width     : $drawer-mini-width;
     overflow  : hidden;
-    transform : translateX(0) !important;
+    transform : translateX(0);
     text-align: left;
     min-height: 100vh;
 
@@ -206,6 +206,11 @@
       margin-left: -20px;
     }
 
+    @include respond ('xsmall') {
+      //  width    : 90%;
+      //transform: translateX(-90%);
+    }
+
     &.is-open {
       width: $drawer-mini-open-width;
 
@@ -215,6 +220,11 @@
 
       @include respond ('small') {
         width: $drawer-mini-open-width-small;
+      }
+
+      @include respond ('xsmall') {
+        //  width    : 90%;
+        //  transform: translateX(0);
       }
 
       @include respond ('medium') {
