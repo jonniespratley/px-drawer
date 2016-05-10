@@ -1,0 +1,76 @@
+@import "variables";
+@import "px-mobile-mixin-design/mixins";
+/// Drawer - Mini modifier
+///
+.drawer {
+
+  ///------------------------------------------------------
+  /// .drawer--mini
+  @include modifier ('mini') {
+    transition: $drawer-mini-transition;
+    position: absolute;
+    visibility: visible;
+    float: left;
+    width: $drawer-mini-width;
+    overflow: hidden;
+    transform: translateX(0);
+    text-align: left;
+    min-height: 100vh;
+
+    .hidden-mini-closed,
+    .table-row__content {
+      transition: $drawer-mini-transition;
+    }
+
+    .viewport:parent {
+      margin-left: -20px;
+    }
+
+    @include respond ('xsmall') {
+      //  width    : 90%;
+      //transform: translateX(-90%);
+    }
+
+    &.is-open {
+      width: $drawer-mini-open-width;
+
+      @include respond ('large') {
+        width: $drawer-mini-open-width-large !important;
+      }
+
+      @include respond ('small') {
+        width: $drawer-mini-open-width-small !important;
+      }
+
+      @include respond ('xsmall') {
+        //  width    : 90%;
+        //  transform: translateX(0);
+      }
+
+      @include respond ('medium') {
+        width: $drawer-mini-open-width-medium !important;
+      }
+
+      .hidden-mini-closed,
+      .table-row__content {
+        opacity: 1;
+      }
+    }
+
+    //Mini closed
+    &:not(.is-open) {
+      transition: $drawer-mini-transition;
+
+      &:before {
+        content: '';
+      }
+
+      .hidden-mini-closed,
+      .table-row__content {
+
+        opacity: 0;
+        overflow: hidden;
+      }
+    }
+  }
+}

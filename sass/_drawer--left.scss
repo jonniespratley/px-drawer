@@ -1,0 +1,39 @@
+@import "variables";
+@import "px-mobile-mixin-design/mixins";
+/// Drawer - Top modifier
+///
+.drawer{
+
+  ///
+  @include modifier ('left') {
+
+    left     : 0;
+    top      : 0;
+    bottom   : 0;
+    transform: translateX(-100%);
+    width    : 30%;
+    height   : $drawer-height;
+    width    : var(--px-drawer-width, 30%);
+    height   : var(--px-drawer-height, $drawer-height);
+
+    &.is-open {
+      transform: translateX(0);
+    }
+
+    @include respond ('small') {
+      width: $drawer-width-small;
+      width: var(--px-drawer-width, $drawer-width-small);
+    }
+
+    @include respond ('medium') {
+      width    :$drawer-width-medium;
+      width    : var(--px-drawer-width, $drawer-width-medium);
+    }
+
+    @include respond ('large') {
+      max-width: 330px;
+      width    : $drawer-width-large;
+      width    : var(--px-drawer-width, $drawer-width-large);
+    }
+  }
+}
