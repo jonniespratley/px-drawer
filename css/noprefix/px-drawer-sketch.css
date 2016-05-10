@@ -30,8 +30,8 @@
       transform: translateX(0); }
     @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
       .drawer--left {
-        width: 100%;
-        width: var(--px-drawer-width, 100%); } }
+        width: 80%;
+        width: var(--px-drawer-width, 80%); } }
     @media (min-width: 1200px) {
       .drawer--left {
         max-width: 330px;
@@ -53,8 +53,8 @@
       transform: translateX(0); }
     @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
       .drawer--right {
-        width: 100%;
-        width: var(--px-drawer-width, 100%); } }
+        width: 80%;
+        width: var(--px-drawer-width, 80%); } }
     @media (min-width: 767px) {
       .drawer--right {
         width: 35%;

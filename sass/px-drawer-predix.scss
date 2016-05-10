@@ -55,8 +55,8 @@
     }
 
     @include respond ('small') {
-      width: 100%;
-      width: var(--px-drawer-width, 100%);
+      width: 80%;
+      width: var(--px-drawer-width, 80%);
     }
 
     @include respond ('large') {
@@ -86,8 +86,8 @@
     }
 
     @include respond ('small') {
-      width: 100%;
-      width: var(--px-drawer-width, 100%);
+      width: 80%;
+      width: var(--px-drawer-width, 80%);
     }
 
     @include respond ('medium') {
