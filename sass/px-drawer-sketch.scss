@@ -1,20 +1,24 @@
 @import "variables";
 @import "px-drawer-predix";
+@import "_drawer--top";
+@import "_drawer--bottom";
+@import "_drawer--left";
+@import "_drawer--right";
+@import "_drawer--mini";
 
-
-.drawer{
-
+.drawer {
+  background-color: var(--px-drawer-background-color, transparent);
   hr {
-    height       : 1px;
-    width        : 100%;
-    margin       : 8px 0;
+    height: 1px;
+    width: 100%;
+    margin: 8px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.01);
   }
   ///
   @include modifier ('dark') {
     background-color: $drawer-dark-background-color;
     background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
-    color           : $drawer-dark-font-color;
+    color: $drawer-dark-font-color;
 
     @include element ('button') {
       color: $drawer-dark-font-color;

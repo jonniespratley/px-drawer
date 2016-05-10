@@ -1,9 +1,26 @@
 <link rel="import" href="../polymer/polymer.html">
 <!--
-## Usage
-To use this component in your custom component do the following:
-```
+<p>
+  For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
+</p>
 
+## Usage
+```
+<div class="box">
+  <style>
+    body {
+      --px-drawer-background-color: lime;
+    }
+  </style>
+  <px-drawer id="drawer1" side="left">
+    <p class="u-m">
+      This is content inside of the drawer
+    </p>
+  </px-drawer>
+  <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
+    Toggle
+  </button>
+</div>
 ```
 @element px-drawer.html
 @blurb px-drawer A responsive drawer.
@@ -11,13 +28,11 @@ To use this component in your custom component do the following:
 @demo mobile-demo.html
 @homepage index.html
 -->
-
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
   <style>
     :host {
       display: block;
-      height: calc(100vh - 55px);
     }
   </style>
   <template>
@@ -30,33 +45,33 @@ To use this component in your custom component do the following:
       is: 'px-drawer',
       //behaviors: [pxMobile.behaviors.BaseElement],
       properties: {
+        //The state of the drawer
         open: {
-          type: Boolean
+          type: Boolean,
+          value: false
         },
-        grid: {
-          type: Boolean
-        },
+        //To position the drawer in fixed mode
         fixed: {
-          type: Boolean
+          type: Boolean,
+          value: false
         },
+        //The theme to apply to the drawer
         theme: {
           type: String
         },
+        //The side to dock the drawer to
         side: {
           type: String,
           value: 'left'
         },
-        width: {
-          type: String,
-          value: '45%'
-        },
+        //The type of drawer (temporary, persistent, mini)
         type: {
           type: String,
           value: 'temporary',
           observer: '_typeHandler'
         }
       },
-      attached: function() {
+      attached: function () {
         this.toggleClass('drawer', true);
         this.toggleClass('drawer--' + this.side, true);
         if (this.theme) {
@@ -72,23 +87,22 @@ To use this component in your custom component do the following:
           this.listen(this.$.drawer__content, 'click', 'toggle');
         }
       },
-      toggle: function(e) {
+      //Handle toggling the display of the drawer.
+      toggle: function (e) {
         this.open = !this.open;
-
         this.toggleClass('is-open', this.open);
         if (this.open) {
           //  document.addEventListener('click', this._handleOffClick.bind(this));
         }
         this.fire('toggle', this);
       },
-      _handleTrack: function(e) {
-        console.log('Track', e);
-      },
-      _handleOffClick: function(e) {
+      //Handle when a click is outside the drawer.
+      _handleOffClick: function (e) {
         this.toggle();
         document.removeEventListener('click', this._handleOffClick).bind(this);
       },
-      _typeHandler: function(newVal, oldVal) {
+      //Handle when the drawer type is changed.
+      _typeHandler: function (newVal, oldVal) {
         this.toggleClass('drawer--' + oldVal, false);
         this.toggleClass('drawer--' + newVal, true);
       }
