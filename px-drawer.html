@@ -32,8 +32,9 @@
   <link rel="stylesheet" href="css/px-drawer.css">
   <style>
     :host {
-      display: block;
+      display: none;
     }
+
   </style>
   <template>
     <div id="drawer__content" class="drawer__content">
@@ -71,7 +72,7 @@
           observer: '_typeHandler'
         }
       },
-      attached: function () {
+      ready: function () {
         this.toggleClass('drawer', true);
         this.toggleClass('drawer--' + this.side, true);
         if (this.theme) {
