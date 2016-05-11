@@ -1,4 +1,4 @@
-@import 'px-mobile-design/sass/_variables';
+@import 'px-colors-design/_settings.colors.scss';
 
 //$drawer-transition           : all .5s;
 $drawer-transition            : all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
@@ -21,20 +21,19 @@ $drawer-mini-open-width-small : 80%;
 $drawer-mini-open-width-medium: 40%;
 $drawer-mini-open-width-large : 25%;
 
-$drawer-persistent-transition : allf 0.5s ease-in-out;
+$drawer-persistent-transition : all 0.5s ease-in-out;
 
+$drawer-height                : 100vh;
+$drawer-max-width             : 330px;
+$drawer-width-xsmall          : 80%;
+$drawer-width-small           : 80%;
+$drawer-width-medium          : 35%;
+$drawer-width-large           : 25%;
 
-$drawer-height: 100vh;
-$drawer-max-width: 330px;
-$drawer-width-xsmall: 80%;
-$drawer-width-small: 80%;
-$drawer-width-medium: 35%;
-$drawer-width-large: 25%;
+$drawer-height-top-xsmall     : 25%;
+$drawer-height-top-small      : 25%;
+$drawer-height-top-medium     : 25%;
+$drawer-height-top-large      : 25%;
 
-$drawer-height-top-xsmall: 25%;
-$drawer-height-top-small: 25%;
-$drawer-height-top-medium: 25%;
-$drawer-height-top-large: 25%;
-
-$drawer-persistent-width: 20%;
-$drawer-persistent-height: 100%;
+$drawer-persistent-width      : 20%;
+$drawer-persistent-height     : 100%;

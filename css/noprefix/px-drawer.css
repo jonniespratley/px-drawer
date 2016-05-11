@@ -7,6 +7,15 @@
  * with the terms and conditions stipulated in the agreement/contract
  * under which the software has been supplied.
  */
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro
  * level.
@@ -280,3 +289,12 @@
     overflow: hidden;
     position: relative;
     user-select: none; }
+
+.drawer {
+  background-color: var(--px-drawer-background-color, transparent); }
+  .drawer--dark {
+    background-color: #242326;
+    background-color: var(--px-drawer-background-color, #242326);
+    color: white; }
+    .drawer--dark .drawer__button {
+      color: white; }

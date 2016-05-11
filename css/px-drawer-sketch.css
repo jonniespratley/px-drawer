@@ -1,3 +1,240 @@
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+/**
+ * Margin and padding helper classes. Use these to tweak layout on a micro
+ * level.
+ *
+ * `.u-(m|p)(t|r|b|l|h|v)(-|+|0) {}` = utility - margin/padding top/right/bottom/left/horizontal/vertical less/more/none
+ */
+/**
+     * Margin helper classes.
+     *
+     * Add margins.
+     */
+.u-m {
+  margin: 1rem !important; }
+
+.u-mt {
+  margin-top: 1rem !important; }
+
+.u-mr {
+  margin-right: 1rem !important; }
+
+.u-mb {
+  margin-bottom: 1rem !important; }
+
+.u-ml {
+  margin-left: 1rem !important; }
+
+.u-mh {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important; }
+
+.u-mv {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important; }
+
+/*------------------------------------*    #PX-COLORS-DESIGN
+\*------------------------------------*/
+/**
+ * Brand Colors
+ */
+/**
+     * Primary
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+/**
+ * Monochromatic (gray10 is darkest, gray1 is lightest)
+ */
+/**
+ * Define grey = gray to avoid dev typos
+ */
+/**
+ * Buttons
+ */
+/**
+ * Selection
+ */
+/**
+ * Alerts
+ */
+/**
+ * Data Visualization
+ */
+/**
+     * Basic
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+.drawer--top {
+  top: 0;
+  right: 0;
+  left: 0;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  width: var(--px-drawer-width, 100%); }
+  .drawer--top.is-open {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  @media (max-width: 47.9em) {
+    .drawer--top {
+      height: 25%;
+      height: var(--px-drawer-height, 25%); } }
+  @media (max-width: 61.9em) {
+    .drawer--top {
+      height: 25%;
+      height: var(--px-drawer-height, 25%); } }
+  @media (max-width: 75em) {
+    .drawer--top {
+      height: 25%;
+      height: var(--px-drawer-height, 25%); } }
+
+.drawer--bottom {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: var(--px-drawer-width, 100%);
+  width: var(--px-drawer-width, 100%);
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  height: 45%; }
+  .drawer--bottom.is-open {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    z-index: 500; }
+  @media (max-width: 47.9em) {
+    .drawer--bottom {
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 35%;
+      height: var(--px-drawer-height, 35%); } }
+  @media (max-width: 61.9em) {
+    .drawer--bottom {
+      right: 15%;
+      left: 15%;
+      width: auto;
+      height: 35%;
+      height: var(--px-drawer-height, 35%); } }
+  @media (max-width: 75em) {
+    .drawer--bottom {
+      width: auto;
+      height: 25%;
+      height: var(--px-drawer-height, 25%);
+      right: 25%;
+      left: 25%; } }
+  .drawer--bottom--full-width {
+    width: 100% !important;
+    left: 0;
+    right: 0; }
+
+.drawer--left {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  width: 30%;
+  height: 100vh;
+  width: var(--px-drawer-width, 30%);
+  height: var(--px-drawer-height, 100vh); }
+  .drawer--left.is-open {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  @media (max-width: 47.9em) {
+    .drawer--left {
+      width: 80%;
+      width: var(--px-drawer-width, 80%); } }
+  @media (max-width: 61.9em) {
+    .drawer--left {
+      width: 35%;
+      width: var(--px-drawer-width, 35%); } }
+  @media (max-width: 75em) {
+    .drawer--left {
+      max-width: 330px;
+      width: 25%;
+      width: var(--px-drawer-width, 25%); } }
+
+.drawer--right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  height: var(--px-drawer-height, 100vh); }
+  .drawer--right.is-open {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  @media (max-width: 47.9em) {
+    .drawer--right {
+      width: 80%;
+      width: var(--px-drawer-width, 80%); } }
+  @media (max-width: 61.9em) {
+    .drawer--right {
+      width: 35%;
+      width: var(--px-drawer-width, 35%); } }
+  @media (max-width: 75em) {
+    .drawer--right {
+      max-width: 330px;
+      width: 25%;
+      width: var(--px-drawer-width, 25%); } }
+
+.drawer--mini {
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+  visibility: visible;
+  float: left;
+  width: 44px;
+  overflow: hidden;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  text-align: left;
+  min-height: 100vh; }
+  .drawer--mini .hidden-mini-closed,
+  .drawer--mini .table-row__content {
+    transition: all 0.4s ease-in-out; }
+  .drawer--mini .viewport:parent {
+    margin-left: -20px; }
+  .drawer--mini.is-open {
+    width: 25%; }
+    @media (max-width: 75em) {
+      .drawer--mini.is-open {
+        width: 25% !important; } }
+    @media (max-width: 47.9em) {
+      .drawer--mini.is-open {
+        width: 80% !important; } }
+    @media (max-width: 61.9em) {
+      .drawer--mini.is-open {
+        width: 40% !important; } }
+    .drawer--mini.is-open .hidden-mini-closed,
+    .drawer--mini.is-open .table-row__content {
+      opacity: 1; }
+  .drawer--mini:not(.is-open) {
+    transition: all 0.4s ease-in-out; }
+    .drawer--mini:not(.is-open):before {
+      content: ''; }
+    .drawer--mini:not(.is-open) .hidden-mini-closed,
+    .drawer--mini:not(.is-open) .table-row__content {
+      opacity: 0;
+      overflow: hidden; }
+
 .drawer {
   display: block;
   position: absolute;
@@ -27,7 +264,7 @@
     position: absolute;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
   .drawer--persistent {
-    transition: allf 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
     position: static;
     visibility: visible;
     float: left;
@@ -35,13 +272,13 @@
     -webkit-transform: translateX(0) !important;
             transform: translateX(0) !important;
     min-height: 100%; }
-    @media (min-width: 1200px) {
+    @media (max-width: 75em) {
       .drawer--persistent {
         margin-top: 0; } }
-    @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+    @media (max-width: 47.9em) {
       .drawer--persistent {
         margin-left: 0; } }
-    @media (min-width: 767px) {
+    @media (max-width: 61.9em) {
       .drawer--persistent {
         margin-top: 0;
         margin-left: 0; } }
@@ -59,186 +296,3 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none; }
-    .drawer__content--grid .grid__item {
-      padding-left: 24px;
-      padding-right: 24px; }
-      .drawer__content--grid .grid__item:hover {
-        background: rgba(0, 0, 0, 0.2); }
-    .drawer__content--grid a {
-      text-align: center;
-      padding: 5px 12px;
-      text-decoration: none;
-      display: block; }
-      .drawer__content--grid a i {
-        height: 48px;
-        width: 48px;
-        font-size: 48px;
-        display: block;
-        margin-bottom: 6px; }
-
-.drawer--top {
-  top: 0;
-  right: 0;
-  left: 0;
-  -webkit-transform: translateY(-100%);
-          transform: translateY(-100%);
-  width: var(--px-drawer-width, 100%); }
-  .drawer--top.is-open {
-    -webkit-transform: translateY(0);
-            transform: translateY(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-    .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
-  @media (min-width: 767px) {
-    .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
-  @media (min-width: 1200px) {
-    .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
-
-.drawer--bottom {
-  bottom: 0;
-  right: 0;
-  left: 0;
-  width: var(--px-drawer-width, 100%);
-  width: var(--px-drawer-width, 100%);
-  -webkit-transform: translateY(100%);
-          transform: translateY(100%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  height: 45%; }
-  .drawer--bottom.is-open {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    z-index: 500; }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-    .drawer--bottom {
-      right: 0;
-      left: 0;
-      width: 100%;
-      height: 35%;
-      height: var(--px-drawer-height, 35%); } }
-  @media (min-width: 767px) {
-    .drawer--bottom {
-      right: 15%;
-      left: 15%;
-      width: auto;
-      height: 35%;
-      height: var(--px-drawer-height, 35%); } }
-  @media (min-width: 1200px) {
-    .drawer--bottom {
-      width: auto;
-      height: 25%;
-      height: var(--px-drawer-height, 25%);
-      right: 25%;
-      left: 25%; } }
-  .drawer--bottom--full-width {
-    width: 100% !important;
-    left: 0;
-    right: 0; }
-
-.drawer--left {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
-  width: 30%;
-  height: 100vh;
-  width: var(--px-drawer-width, 30%);
-  height: var(--px-drawer-height, 100vh); }
-  .drawer--left.is-open {
-    -webkit-transform: translateX(0);
-            transform: translateX(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-    .drawer--left {
-      width: 80%;
-      width: var(--px-drawer-width, 80%); } }
-  @media (min-width: 767px) {
-    .drawer--left {
-      width: 35%;
-      width: var(--px-drawer-width, 35%); } }
-  @media (min-width: 1200px) {
-    .drawer--left {
-      max-width: 330px;
-      width: 25%;
-      width: var(--px-drawer-width, 25%); } }
-
-.drawer--right {
-  top: 0;
-  bottom: 0;
-  right: 0;
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  height: var(--px-drawer-height, 100vh); }
-  .drawer--right.is-open {
-    -webkit-transform: translateX(0);
-            transform: translateX(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-    .drawer--right {
-      width: 80%;
-      width: var(--px-drawer-width, 80%); } }
-  @media (min-width: 767px) {
-    .drawer--right {
-      width: 35%;
-      width: var(--px-drawer-width, 35%); } }
-  @media (min-width: 1200px) {
-    .drawer--right {
-      max-width: 330px;
-      width: 25%;
-      width: var(--px-drawer-width, 25%); } }
-
-.drawer--mini {
-  transition: all 0.4s ease-in-out;
-  position: absolute;
-  visibility: visible;
-  float: left;
-  width: 44px;
-  overflow: hidden;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
-  text-align: left;
-  min-height: 100vh; }
-  .drawer--mini .hidden-mini-closed,
-  .drawer--mini .table-row__content {
-    transition: all 0.4s ease-in-out; }
-  .drawer--mini .viewport:parent {
-    margin-left: -20px; }
-  .drawer--mini.is-open {
-    width: 25%; }
-    @media (min-width: 1200px) {
-      .drawer--mini.is-open {
-        width: 25% !important; } }
-    @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-      .drawer--mini.is-open {
-        width: 80% !important; } }
-    @media (min-width: 767px) {
-      .drawer--mini.is-open {
-        width: 40% !important; } }
-    .drawer--mini.is-open .hidden-mini-closed,
-    .drawer--mini.is-open .table-row__content {
-      opacity: 1; }
-  .drawer--mini:not(.is-open) {
-    transition: all 0.4s ease-in-out; }
-    .drawer--mini:not(.is-open):before {
-      content: ''; }
-    .drawer--mini:not(.is-open) .hidden-mini-closed,
-    .drawer--mini:not(.is-open) .table-row__content {
-      opacity: 0;
-      overflow: hidden; }
-
-.drawer {
-  background-color: var(--px-drawer-background-color, transparent); }
-  .drawer hr {
-    height: 1px;
-    width: 100%;
-    margin: 8px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.01); }
-  .drawer--dark {
-    background-color: #242326;
-    background-color: var(--px-drawer-background-color, #242326);
-    color: #FFFFFF; }
-    .drawer--dark .drawer__button {
-      color: #FFFFFF; }

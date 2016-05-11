@@ -1,7 +1,7 @@
 'use strict';
 
 var pkg = require('./package.json');
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   var importOnce = require('node-sass-import-once');
   // Project configuration.
@@ -23,8 +23,8 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'css/<%= pkg.name %>.css': 'sass/<%= pkg.name %>-sketch.scss',
-          'css/noprefix/<%= pkg.name %>-sketch.css': 'sass/<%= pkg.name %>-sketch.scss'
+          'css/noprefix/px-drawer-sketch.css': 'sass/px-drawer-sketch.scss',
+          'css/noprefix/px-drawer.css': 'sass/px-drawer-predix.scss'
         }
       }
     },
@@ -123,7 +123,7 @@ module.exports = function (grunt) {
   ]);
 
   // First run task.
-  grunt.registerTask('firstrun', 'Basic first run', function () {
+  grunt.registerTask('firstrun', 'Basic first run', function() {
     grunt.config.set('depserveOpenUrl', '/index.html');
     grunt.task.run('default');
     grunt.task.run('depserve');
@@ -135,7 +135,8 @@ module.exports = function (grunt) {
     'webdriver'
   ]);
   grunt.registerTask('watch-styles', [
-    'watch']);
+    'watch'
+  ]);
 
   grunt.registerTask('release', 'Release', [
     'clean',

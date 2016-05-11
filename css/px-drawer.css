@@ -1,91 +1,115 @@
-.drawer {
-  display: block;
-  position: absolute;
-  z-index: 350;
-  transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-  will-change: translate;
-  visibility: hidden; }
-  .drawer--fixed {
-    position: fixed !important; }
-  .drawer * {
-    user-select: none; }
-  .drawer.is-open {
-    visibility: visible; }
-    .drawer.is-open .drawer__mask {
-      opacity: 1;
-      visibility: visible; }
-    .drawer.is-open .drawer__content {
-      z-index: 360;
-      opacity: 1;
-      visibility: visible;
-      overflow: hidden; }
-  .drawer--temporary {
-    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-    position: absolute;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
-  .drawer--persistent {
-    transition: allf 0.5s ease-in-out;
-    position: static;
-    visibility: visible;
-    float: left;
-    width: 20%;
-    transform: translateX(0) !important;
-    min-height: 100%; }
-    @media (min-width: 1200px) {
-      .drawer--persistent {
-        margin-top: 0; } }
-    @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
-      .drawer--persistent {
-        margin-left: 0; } }
-    @media (min-width: 767px) {
-      .drawer--persistent {
-        margin-top: 0;
-        margin-left: 0; } }
-    .drawer--persistent.drawer--right {
-      float: right !important;
-      position: static !important; }
-  .drawer__content {
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    overflow: hidden;
-    position: relative;
-    user-select: none; }
-    .drawer__content--grid .grid__item {
-      padding-left: 24px;
-      padding-right: 24px; }
-      .drawer__content--grid .grid__item:hover {
-        background: rgba(0, 0, 0, 0.2); }
-    .drawer__content--grid a {
-      text-align: center;
-      padding: 5px 12px;
-      text-decoration: none;
-      display: block; }
-      .drawer__content--grid a i {
-        height: 48px;
-        width: 48px;
-        font-size: 48px;
-        display: block;
-        margin-bottom: 6px; }
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+/**
+ * Margin and padding helper classes. Use these to tweak layout on a micro
+ * level.
+ *
+ * `.u-(m|p)(t|r|b|l|h|v)(-|+|0) {}` = utility - margin/padding top/right/bottom/left/horizontal/vertical less/more/none
+ */
+/**
+     * Margin helper classes.
+     *
+     * Add margins.
+     */
+.u-m {
+  margin: 1rem !important; }
 
+.u-mt {
+  margin-top: 1rem !important; }
+
+.u-mr {
+  margin-right: 1rem !important; }
+
+.u-mb {
+  margin-bottom: 1rem !important; }
+
+.u-ml {
+  margin-left: 1rem !important; }
+
+.u-mh {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important; }
+
+.u-mv {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important; }
+
+/*------------------------------------*    #PX-COLORS-DESIGN
+\*------------------------------------*/
+/**
+ * Brand Colors
+ */
+/**
+     * Primary
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
+/**
+ * Monochromatic (gray10 is darkest, gray1 is lightest)
+ */
+/**
+ * Define grey = gray to avoid dev typos
+ */
+/**
+ * Buttons
+ */
+/**
+ * Selection
+ */
+/**
+ * Alerts
+ */
+/**
+ * Data Visualization
+ */
+/**
+     * Basic
+     */
+/**
+     * Light
+     */
+/**
+     * Dark
+     */
 .drawer--top {
   top: 0;
   right: 0;
   left: 0;
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
   width: var(--px-drawer-width, 100%); }
   .drawer--top.is-open {
-    transform: translateY(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+    -webkit-transform: translateY(0);
+            transform: translateY(0); }
+  @media (max-width: 47.9em) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
-  @media (min-width: 767px) {
+  @media (max-width: 61.9em) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
-  @media (min-width: 1200px) {
+  @media (max-width: 75em) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
@@ -96,27 +120,29 @@
   left: 0;
   width: var(--px-drawer-width, 100%);
   width: var(--px-drawer-width, 100%);
-  transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   height: 45%; }
   .drawer--bottom.is-open {
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
     z-index: 500; }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+  @media (max-width: 47.9em) {
     .drawer--bottom {
       right: 0;
       left: 0;
       width: 100%;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media (min-width: 767px) {
+  @media (max-width: 61.9em) {
     .drawer--bottom {
       right: 15%;
       left: 15%;
       width: auto;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media (min-width: 1200px) {
+  @media (max-width: 75em) {
     .drawer--bottom {
       width: auto;
       height: 25%;
@@ -132,22 +158,24 @@
   left: 0;
   top: 0;
   bottom: 0;
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
   width: 30%;
   height: 100vh;
   width: var(--px-drawer-width, 30%);
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
-    transform: translateX(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  @media (max-width: 47.9em) {
     .drawer--left {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media (min-width: 767px) {
+  @media (max-width: 61.9em) {
     .drawer--left {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media (min-width: 1200px) {
+  @media (max-width: 75em) {
     .drawer--left {
       max-width: 330px;
       width: 25%;
@@ -157,19 +185,21 @@
   top: 0;
   bottom: 0;
   right: 0;
-  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
   height: var(--px-drawer-height, 100vh); }
   .drawer--right.is-open {
-    transform: translateX(0); }
-  @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+    -webkit-transform: translateX(0);
+            transform: translateX(0); }
+  @media (max-width: 47.9em) {
     .drawer--right {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media (min-width: 767px) {
+  @media (max-width: 61.9em) {
     .drawer--right {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media (min-width: 1200px) {
+  @media (max-width: 75em) {
     .drawer--right {
       max-width: 330px;
       width: 25%;
@@ -182,7 +212,8 @@
   float: left;
   width: 44px;
   overflow: hidden;
-  transform: translateX(0);
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
   text-align: left;
   min-height: 100vh; }
   .drawer--mini .hidden-mini-closed,
@@ -192,13 +223,13 @@
     margin-left: -20px; }
   .drawer--mini.is-open {
     width: 25%; }
-    @media (min-width: 1200px) {
+    @media (max-width: 75em) {
       .drawer--mini.is-open {
         width: 25% !important; } }
-    @media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) {
+    @media (max-width: 47.9em) {
       .drawer--mini.is-open {
         width: 80% !important; } }
-    @media (min-width: 767px) {
+    @media (max-width: 61.9em) {
       .drawer--mini.is-open {
         width: 40% !important; } }
     .drawer--mini.is-open .hidden-mini-closed,
@@ -214,15 +245,72 @@
       overflow: hidden; }
 
 .drawer {
-  background-color: var(--px-drawer-background-color, transparent); }
-  .drawer hr {
-    height: 1px;
+  display: block;
+  position: absolute;
+  z-index: 350;
+  transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+  will-change: translate;
+  visibility: hidden; }
+  .drawer--fixed {
+    position: fixed !important; }
+  .drawer * {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+  .drawer.is-open {
+    visibility: visible; }
+    .drawer.is-open .drawer__mask {
+      opacity: 1;
+      visibility: visible; }
+    .drawer.is-open .drawer__content {
+      z-index: 360;
+      opacity: 1;
+      visibility: visible;
+      overflow: hidden; }
+  .drawer--temporary {
+    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+    position: absolute;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
+  .drawer--persistent {
+    transition: all 0.5s ease-in-out;
+    position: static;
+    visibility: visible;
+    float: left;
+    width: 20%;
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+    min-height: 100%; }
+    @media (max-width: 75em) {
+      .drawer--persistent {
+        margin-top: 0; } }
+    @media (max-width: 47.9em) {
+      .drawer--persistent {
+        margin-left: 0; } }
+    @media (max-width: 61.9em) {
+      .drawer--persistent {
+        margin-top: 0;
+        margin-left: 0; } }
+    .drawer--persistent.drawer--right {
+      float: right !important;
+      position: static !important; }
+  .drawer__content {
+    padding: 0;
     width: 100%;
-    margin: 8px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.01); }
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; }
+
+.drawer {
+  background-color: var(--px-drawer-background-color, transparent); }
   .drawer--dark {
     background-color: #242326;
     background-color: var(--px-drawer-background-color, #242326);
-    color: #FFFFFF; }
+    color: white; }
     .drawer--dark .drawer__button {
-      color: #FFFFFF; }
+      color: white; }

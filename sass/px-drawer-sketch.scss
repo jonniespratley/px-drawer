@@ -1,5 +1,31 @@
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+// Generic
+//@import "px-normalize-design/_generic.normalize.scss";
+//@import "px-box-sizing-design/_generic.box-sizing.scss";
+//@import "px-helpers-design/_generic.helpers.scss";
+
+// Base
+//@import "px-flexbox-design/_base.flexbox.scss";
+//@import "px-viewport-design/_base.viewport.scss";
+
+// Component
+
+// Trumps
+//@import "inuit-clearfix/_trumps.clearfix.scss";
+//@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
+//@import "px-widths-responsive-design/_trumps.widths-responsive.scss";
+$inuit-enable-margins: true;
+@import 'px-spacing-design/_trumps.spacing.scss';
 @import "variables";
-@import "px-drawer-predix";
 @import "_drawer--top";
 @import "_drawer--bottom";
 @import "_drawer--left";
@@ -7,21 +33,85 @@
 @import "_drawer--mini";
 
 .drawer {
-  background-color: var(--px-drawer-background-color, transparent);
-  hr {
-    height: 1px;
-    width: 100%;
-    margin: 8px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.01);
-  }
+  display    : block;
+  position   : absolute;
+  z-index    : 350;
+  transition : $drawer-transition;
+  will-change: translate;
+  visibility : hidden;
   ///
-  @include modifier ('dark') {
-    background-color: $drawer-dark-background-color;
-    background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
-    color: $drawer-dark-font-color;
+  @include modifier ('fixed') {
+    position: fixed !important;
+  }
 
-    @include element ('button') {
-      color: $drawer-dark-font-color;
+  * {
+    user-select: none;
+  }
+
+  &.is-open {
+    visibility: visible;
+
+    .drawer__mask {
+      opacity   : 1;
+      visibility: visible;
+    }
+
+    .drawer__content {
+      z-index   : 360;
+      opacity   : 1;
+      visibility: visible;
+      overflow  : hidden;
     }
   }
+
+  ///------------------------------------------------------
+  /// .drawer--temporary
+  @include modifier ('temporary') {
+    transition: $drawer-transition;
+    position  : absolute;
+    box-shadow: $drawer-box-shadow;
+  }
+  ///------------------------------------------------------
+  /// .drawer--persistent
+  @include modifier ('persistent') {
+    transition: $drawer-persistent-transition;
+    position  : static;
+    visibility: visible;
+    float     : left;
+    width     : $drawer-persistent-width;
+
+    transform : translateX(0) !important;
+    min-height: $drawer-persistent-height;
+
+    @include respond ('large') {
+      margin-top: 0;
+    }
+
+    @include respond ('small') {
+      margin-left: 0;
+    }
+
+    @include respond ('medium') {
+      margin-top : 0;
+      margin-left: 0;
+    }
+
+    &.drawer--right {
+      float   : right !important;
+      position: static !important;
+    }
+  }
+
+  ///------------------------------------------------------
+  /// .drawer__content
+  @include element ('content') {
+    padding    : 0;
+    width      : 100%;
+    height     : 100%;
+    display    : block;
+    overflow   : hidden;
+    position   : relative;
+    user-select: none;
+  }
+
 }

@@ -23,17 +23,22 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "latest"
+    "polymer": "~1.4.0",
+    "iron-dropdown": "PolymerElements/iron-dropdown#~1.3.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.5",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.3",
+    "px-spacing-design": "https://github.com/PredixDev/px-spacing-design.git",
     "px-navbar": "https://github.com/PredixDev/px-navbar.git",
     "px-table-view": "https://github.com/PredixDev/px-table-view.git",
     "px-mobile-design": "https://github.com/PredixDev/px-mobile-design.git",
-    "px-mobile-mixin-design": "https://github.com/PredixDev/px-mobile-mixin-design.git"
+    "px-mobile-mixin-design": "https://github.com/PredixDev/px-mobile-mixin-design.git",
+    "px-colors-design": "^0.2.16",
+    "px-spacing-responsive-design": "^0.3.7"
   },
   "resolutions": {
-    "polymer": "^1.2.0"
+    "polymer": "^1.4.0",
+    "px-theme": "^0.7.0"
   }
 }

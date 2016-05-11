@@ -1,127 +1,35 @@
+/*
+ * Copyright (c) 2016 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
 ////
 /// px-drawer styles
 /// @author Jonnie Spratley
 /// @since 0.0.1
-/// @todo Need to finalize all documentation.
 ////
+@import "px-drawer-sketch.scss";
 @import "variables";
 @import "px-mobile-mixin-design/mixins";
 
 ///---------------------------------------
 /// Drawer
 ///---------------------------------------
+
 .drawer {
-  display    : block;
-  position   : absolute;
-  z-index    : 350;
-  transition : $drawer-transition;
-  will-change: translate;
-  visibility : hidden;
-  ///
-  @include modifier ('fixed') {
-    position: fixed !important;
-  }
-  * {
-    user-select: none;
-  }
+  background-color: var(--px-drawer-background-color, transparent);
 
-  &.is-open {
-    visibility: visible;
+  @include modifier ('dark') {
+    background-color: $drawer-dark-background-color;
+    background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
+    color           : $drawer-dark-font-color;
 
-    .drawer__mask {
-      opacity   : 1;
-      visibility: visible;
-    }
-
-    .drawer__content {
-      z-index   : 360;
-      opacity   : 1;
-      visibility: visible;
-      overflow  : hidden;
-    }
-  }
-
-
-
-
-
-
-
-  ///------------------------------------------------------
-  /// .drawer--temporary
-  @include modifier ('temporary') {
-    transition: $drawer-transition;
-    position  : absolute;
-    box-shadow: $drawer-box-shadow;
-  }
-  ///------------------------------------------------------
-  /// .drawer--persistent
-  @include modifier ('persistent') {
-    transition: $drawer-persistent-transition;
-    position  : static;
-    visibility: visible;
-    float     : left;
-    width     : $drawer-persistent-width;
-
-    transform : translateX(0) !important;
-    min-height: $drawer-persistent-height;
-
-    @include respond ('large') {
-      margin-top: 0;
-    }
-
-    @include respond ('small') {
-      margin-left: 0;
-    }
-
-    @include respond ('medium') {
-      margin-top : 0;
-      margin-left: 0;
-    }
-
-    &.drawer--right {
-      float   : right !important;
-      position: static !important;
-    }
-  }
-
-
-
-  ///------------------------------------------------------
-  /// .drawer__content
-  @include element ('content') {
-    padding    : 0;
-    width      : 100%;
-    height     : 100%;
-    display    : block;
-    overflow   : hidden;
-    position   : relative;
-    user-select: none;
-    ///
-    @include modifier ('grid') {
-      .grid__item {
-        padding-left : 24px;
-        padding-right: 24px;
-
-        &:hover {
-          background: rgba(0, 0, 0, .2);
-        }
-      }
-
-      a {
-        text-align     : center;
-        padding        : 5px 12px;
-        text-decoration: none;
-        display        : block;
-
-        i {
-          height       : 48px;
-          width        : 48px;
-          font-size    : 48px;
-          display      : block;
-          margin-bottom: 6px;
-        }
-      }
+    @include element ('button') {
+      color: $drawer-dark-font-color;
     }
   }
 }
