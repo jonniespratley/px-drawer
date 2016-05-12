@@ -102,10 +102,10 @@
   </head>
 
   <body unresolved>
+    <px-navbar title="px-drawer"></px-navbar>
+    <article class="position-relative viewport">
 
-    <article class="position-relative viewport--full-height">
-
-      <div class="box u-m">
+      <div class="box">
         <h1>px-drawer</h1>
         <p>The px-drawer component lets you store content outside the viewport.</p>
 
@@ -151,10 +151,10 @@
 
             <div class="flex flex--row">
               <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
-                Toggle Left
+                Left
               </button>
               <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
-                Toggle Right
+                Right
               </button>
               <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
                 Toggle Top
@@ -202,281 +202,217 @@
             document.getElementById(id).type = type;
           }
         </script>
+      </div>
 
-        <div class="viewport examples">
-          <section class="">
-            <hr>
-            <h1>Examples</h1>
+      <div class="viewport examples">
+        <section class="">
+          <hr>
+          <h1>Examples</h1>
 
-            <h2>Drawer - Temporary - Left</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer1 {
-                      --px-drawer-background-color: lime;
-                    }
+          <h2>Drawer - Temporary - Left</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer1 {
+                    --px-drawer-background-color: lime;
+                  }
 
-                  </style>
-                  <px-drawer id="drawer1" side="left">
+                </style>
+                <px-drawer id="drawer1" side="left">
+                  <p class="u-m">
+                    This is content inside of the drawer
+                  </p>
+                </px-drawer>
+                <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
+                  Toggle
+                </button>
+              </div>
+            </template>
+          </demo-snippet>
+
+          <h2>Drawer - Temporary - Right</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer1-right {
+                    --px-drawer-background-color: lime;
+                  }
+
+                </style>
+                <px-drawer id="drawer1-right" side="right">
+                  <p class="u-m">
+                    This is content inside of the drawer
+                  </p>
+                </px-drawer>
+                <button class="btn btn--full" onclick="document.getElementById('drawer1-right').toggle()">
+                  Toggle
+                </button>
+              </div>
+            </template>
+          </demo-snippet>
+
+          <h2>Drawer - Temporary - Top</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer1-top {
+                    --px-drawer-background-color: slategray;
+                  }
+
+                </style>
+                <px-drawer id="drawer1-top" side="top">
+                  <p class="u-m">
+                    <strong>Heads Up!</strong>
+                    This is content inside of the drawer
+                  </p>
+
+                </px-drawer>
+                <button class="btn btn--full" onclick="document.getElementById('drawer1-top').toggle()">
+                  Toggle
+                </button>
+              </div>
+            </template>
+          </demo-snippet>
+
+          <h2>Drawer - Temporary - Bottom</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer1-bottom {
+                    --px-drawer-background-color: lime;
+                  }
+
+                </style>
+                <px-drawer id="drawer1-bottom" side="bottom">
+                  <p class="u-m">
+                    This is content inside of the drawer
+                  </p>
+                </px-drawer>
+                <button class="btn btn--full" onclick="document.getElementById('drawer1-bottom').toggle()">
+                  Toggle
+                </button>
+              </div>
+            </template>
+          </demo-snippet>
+
+          <h2>Drawer - Mini - Left</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer2 {
+                    --px-drawer-background-color: crimson;
+                  }
+
+                  .list-ui li a {
+                    color: #fff;
+                    text-decoration: none;
+                  }
+
+                  .list-ui li {
+                    padding: 0;
+                    margin: 0;
+                    border-bottom: none !important;
+                  }
+
+                </style>
+                <div class="">
+                  <px-drawer id="drawer2" side="left" type="mini" class="u-mr+">
+                    <ul class="nav-menu list-ui list-ui--tiny">
+                      <li>
+                        <a href="#page1">
+                          <i class="fa fa-home fa-lg"></i>
+                          <span class="hidden-mini-closed u-ml">Home</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#page2">
+                          <i class="fa fa-edit fa-lg"></i>
+                          <span class="hidden-mini-closed u-ml">Pages</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#page3">
+                          <i class="fa fa-gear fa-lg"></i>
+                          <span class="hidden-mini-closed u-ml">Settings</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </px-drawer>
+                  <section>
+                    <div class="flex flex--row">
+                      <div class="flex__item">1</div>
+                      <div class="flex__item">2</div>
+                      <div class="flex__item">3</div>
+                    </div>
+                  </section>
+
+                </div>
+              </div>
+            </template>
+          </demo-snippet>
+
+          <h2>Drawer - Persistent - Left</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer3 {
+                    --px-drawer-background-color: pink;
+                  }
+
+                </style>
+                <section>
+                  <px-drawer id="drawer3" side="left" type="persistent" class="u-mr+">
                     <p class="u-m">
                       This is content inside of the drawer
                     </p>
                   </px-drawer>
-                  <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
-                    Toggle
-                  </button>
-                </div>
-              </template>
-            </demo-snippet>
-
-            <h2>Drawer - Temporary - Right</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer1-right {
-                      --px-drawer-background-color: lime;
-                    }
-
-                  </style>
-                  <px-drawer id="drawer1-right" side="right">
-                    <p class="u-m">
-                      This is content inside of the drawer
-                    </p>
-                  </px-drawer>
-                  <button class="btn btn--full" onclick="document.getElementById('drawer1-right').toggle()">
-                    Toggle
-                  </button>
-                </div>
-              </template>
-            </demo-snippet>
-
-            <h2>Drawer - Temporary - Top</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer1-top {
-                      --px-drawer-background-color: slategray;
-                    }
-
-                  </style>
-                  <px-drawer id="drawer1-top" side="top">
-                    <p class="u-m">
-                      <strong>Heads Up!</strong>
-                      This is content inside of the drawer
-                    </p>
-
-                  </px-drawer>
-                  <button class="btn btn--full" onclick="document.getElementById('drawer1-top').toggle()">
-                    Toggle
-                  </button>
-                </div>
-              </template>
-            </demo-snippet>
-
-            <h2>Drawer - Temporary - Bottom</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer1-bottom {
-                      --px-drawer-background-color: lime;
-                    }
-
-                  </style>
-                  <px-drawer id="drawer1-bottom" side="bottom">
-                    <p class="u-m">
-                      This is content inside of the drawer
-                    </p>
-                  </px-drawer>
-                  <button class="btn btn--full" onclick="document.getElementById('drawer1-bottom').toggle()">
-                    Toggle
-                  </button>
-                </div>
-              </template>
-            </demo-snippet>
-
-            <h2>Drawer - Mini - Left</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer2 {
-                      --px-drawer-background-color: crimson;
-                    }
-
-                    .list-ui li a {
-                      color: #fff;
-                      text-decoration: none;
-                    }
-
-                    .list-ui li {
-                      padding: 0;
-                      margin: 0;
-                      border-bottom: none !important;
-                    }
-
-                  </style>
-                  <div class="">
-                    <px-drawer id="drawer2" side="left" type="mini" class="u-mr+">
-                      <ul class="nav-menu list-ui list-ui--tiny">
-                        <li>
-                          <a href="#page1">
-                            <i class="fa fa-home fa-lg"></i>
-                            <span class="hidden-mini-closed u-ml">Home</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#page2">
-                            <i class="fa fa-edit fa-lg"></i>
-                            <span class="hidden-mini-closed u-ml">Pages</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#page3">
-                            <i class="fa fa-gear fa-lg"></i>
-                            <span class="hidden-mini-closed u-ml">Settings</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </px-drawer>
-                    <section>
-                      <div class="flex flex--row">
-                        <div class="flex__item">1</div>
-                        <div class="flex__item">2</div>
-                        <div class="flex__item">3</div>
-                      </div>
-                    </section>
-
+                  <div class="flex flex--row">
+                    <div class="flex__item">1</div>
+                    <div class="flex__item">2</div>
+                    <div class="flex__item">3</div>
                   </div>
-                </div>
-              </template>
-            </demo-snippet>
+                </section>
+              </div>
+            </template>
+          </demo-snippet>
 
-            <h2>Drawer - Persistent - Left</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer3 {
-                      --px-drawer-background-color: pink;
-                    }
+          <h2>Drawer - Persistent - Right</h2>
+          <demo-snippet>
+            <template>
+              <div class="box">
+                <style>
+                  #drawer4 {
+                    --px-drawer-background-color: crimson;
+                  }
 
-                  </style>
-                  <section>
-                    <px-drawer id="drawer3" side="left" type="persistent" class="u-mr+">
-                      <p class="u-m">
-                        This is content inside of the drawer
-                      </p>
-                    </px-drawer>
-                    <div class="flex flex--row">
-                      <div class="flex__item">1</div>
-                      <div class="flex__item">2</div>
-                      <div class="flex__item">3</div>
-                    </div>
-                  </section>
-                </div>
-              </template>
-            </demo-snippet>
+                </style>
+                <section>
+                  <px-drawer id="drawer4" side="right" type="persistent" class="u-ml+">
+                    <p class="u-m">
+                      This is content inside of the drawer
+                    </p>
+                  </px-drawer>
+                  <div class="flex flex--row">
+                    <div class="flex__item">1</div>
+                    <div class="flex__item">2</div>
+                    <div class="flex__item">3</div>
+                  </div>
+                </section>
+              </div>
+            </template>
+          </demo-snippet>
 
-            <h2>Drawer - Persistent - Right</h2>
-            <demo-snippet>
-              <template>
-                <div class="box">
-                  <style>
-                    #drawer4 {
-                      --px-drawer-background-color: crimson;
-                    }
+        </section>
+      </div>
 
-                  </style>
-                  <section>
-                    <px-drawer id="drawer4" side="right" type="persistent" class="u-ml+">
-                      <p class="u-m">
-                        This is content inside of the drawer
-                      </p>
-                    </px-drawer>
-                    <div class="flex flex--row">
-                      <div class="flex__item">1</div>
-                      <div class="flex__item">2</div>
-                      <div class="flex__item">3</div>
-                    </div>
-                  </section>
-                </div>
-              </template>
-            </demo-snippet>
+    </article>
 
-          </section>
-        </div>
-
-      </article>
-
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-      <script type="text/javascript">
-        if ('addEventListener' in document) {
-          document.addEventListener('DOMContentLoaded', function () {
-            FastClick.attach(document.body);
-          }, false);
-        }
-      </script>
-
-    </body>
-
-  </html>
-  tent inside of the drawer
-</p>
-</px-drawer>
-<div class="flex flex--row">
-<div class="flex__item">1</div>
-<div class="flex__item">2</div>
-<div class="flex__item">3</div>
-</div>
-</section>
-</div>
-</template>
-</demo-snippet>
-
-<h2>Drawer - Persistent - Right</h2>
-<demo-snippet>
-<template>
-<div class="box">
-<style>
-#drawer4 {
---px-drawer-background-color: crimson;
-}
-
-</style>
-<section>
-<px-drawer id="drawer4" side="right" type="persistent" class="u-ml+">
-<p class="u-m">
-  This is content inside of the drawer
-</p>
-</px-drawer>
-<div class="flex flex--row">
-<div class="flex__item">1</div>
-<div class="flex__item">2</div>
-<div class="flex__item">3</div>
-</div>
-</section>
-</div>
-</template>
-</demo-snippet>
-
-</section>
-</div>
-
-</article>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
-<script type="text/javascript">
-if ('addEventListener' in document) {
-  document.addEventListener('DOMContentLoaded', function () {
-    FastClick.attach(document.body);
-  }, false);
-}
-</script>
-
-</body>
+  </body>
 
 </html>

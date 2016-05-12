@@ -12,7 +12,6 @@
     <link rel="import" href="../px-table-view/px-table-view.html">
     <link rel="import" href="../px-card/px-card.html">
 
-    <link rel="import" href="../px-mobile-design/px-mobile-design.html">
     <link rel="import" href="../px-navbar/px-navbar.html">
     <link rel="import" href="px-drawer.html">
     <style media="screen">
@@ -84,22 +83,13 @@
       }
 
     </style>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 
-    <script src="../fastclick/lib/fastclick.js"></script>
-    <script type="text/javascript">
-      if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded', function () {
-          FastClick.attach(document.body);
-        }, false);
-      }
-    </script>
   </head>
 
   <body unresolved>
     <template id="tmpl" is="dom-bind">
       <main class="position-relative has-navbar">
-        <px-navbar id="navbar1" title="{{title}}" subtitle="{{subtitle}}" theme="">
+        <px-navbar id="navbar1" title="px-drawer" subtitle="{{subtitle}}">
           <div class="navbar__left">
             <button class="navbar__button" onclick="toggleDrawer('myLeftDrawer')">
               <i class="fa fa-lg fa-bars"></i>
