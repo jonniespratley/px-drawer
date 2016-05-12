@@ -1,8 +1,8 @@
 @import "variables";
-@import "px-mobile-mixin-design/mixins";
+@import "px-mobile-design/sass/_mixins.scss";
 /// Drawer -
 ///
-.drawer{
+.drawer {
   ///------------------------------------------------------
   /// .drawer--right
   @include modifier ('right') {
@@ -11,7 +11,6 @@
     right    : 0;
     transform: translateX(100%);
     height   : var(--px-drawer-height, $drawer-height);
-
 
     &.is-open {
       transform: translateX(0);
@@ -23,8 +22,8 @@
     }
 
     @include respond ('medium') {
-      width    :$drawer-width-medium;
-      width    : var(--px-drawer-width, $drawer-width-medium);
+      width: $drawer-width-medium;
+      width: var(--px-drawer-width, $drawer-width-medium);
     }
 
     @include respond ('large') {

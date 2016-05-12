@@ -26,11 +26,7 @@
 $inuit-enable-margins: true;
 @import 'px-spacing-design/_trumps.spacing.scss';
 @import "variables";
-@import "_drawer--top";
-@import "_drawer--bottom";
-@import "_drawer--left";
-@import "_drawer--right";
-@import "_drawer--mini";
+@import "px-mobile-design/sass/_mixins.scss";
 
 .drawer {
   display    : block;
@@ -115,3 +111,8 @@ $inuit-enable-margins: true;
   }
 
 }
+@import "_drawer--top";
+@import "_drawer--bottom";
+@import "_drawer--left";
+@import "_drawer--right";
+@import "_drawer--mini";

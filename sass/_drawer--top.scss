@@ -1,8 +1,8 @@
 @import "variables";
-@import "px-mobile-mixin-design/mixins";
+@import "px-mobile-design/sass/_mixins.scss";
 /// Drawer - Top modifier
 ///
-.drawer{
+.drawer {
 
   ///------------------------------------------------------
   /// .drawer--top
@@ -17,7 +17,6 @@
       transform: translateY(0);
     }
 
-
     @include respond ('small') {
       height: $drawer-height-top-small;
       height: var(--px-drawer-height, $drawer-height-top-small);
@@ -27,11 +26,11 @@
       height: $drawer-height-top-medium;
       height: var(--px-drawer-height, $drawer-height-top-medium);
     }
+
     @include respond ('large') {
       height: $drawer-height-top-large;
       height: var(--px-drawer-height, $drawer-height-top-large);
     }
-
 
   }
 }

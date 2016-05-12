@@ -8,78 +8,80 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="touch-icon-iphone.png">
     <script src="../webcomponentsjs/webcomponents.min.js"></script>
-    <link rel='stylesheet prefetch' href='//predixdev.github.io/px-library-design/css/style.css'>
+
     <link rel="import" href="../px-table-view/px-table-view.html">
     <link rel="import" href="../px-card/px-card.html">
+
+    <link rel="import" href="../px-mobile-design/px-mobile-design.html">
     <link rel="import" href="../px-navbar/px-navbar.html">
     <link rel="import" href="px-drawer.html">
     <style media="screen">
-    body {
-      background: #efeff4;
-      margin: 0;
-      height: 100vh;
-      overflow: auto;
-    }
+      body {
+        background: #efeff4;
+        margin: 0;
+        height: 100vh;
+        overflow: auto;
+      }
 
-    .box {
-      background: #fff;
-    }
+      .box {
+        background: #fff;
+      }
 
-    .demo {
-      overflow: hidden;
-      height: 500px;
-      position: relative;
-    }
+      .demo {
+        overflow: hidden;
+        height: 500px;
+        position: relative;
+      }
 
-    .table-view--avatars {}
+      .table-view--avatars {}
 
-    .table-view--avatars .table-row__media--image {
-      padding-right: .5rem;
-    }
+      .table-view--avatars .table-row__media--image {
+        padding-right: 0.5rem;
+      }
 
-    .viewport {}
-    /* TODO: Fixes for static drawer */
+      .viewport {}
+      /* TODO: Fixes for static drawer */
 
-    .navbar {
-      position: relative;
-    }
+      .navbar {
+        position: relative;
+      }
 
-    .layout__item p {
-      background: transparent;
-      text-align: left;
-    }
+      .layout__item p {
+        background: transparent;
+        text-align: left;
+      }
 
-    px-navbar {
-      position: static;
-    }
+      px-navbar {
+        position: static;
+      }
 
-    .table-view--bottom {
-      position: absolute;
-      bottom: 0;
-    }
+      .table-view--bottom {
+        position: absolute;
+        bottom: 0;
+      }
 
-    .actions {
-      margin: 0 auto;
-      max-width: 75%;
-      background: #fff;
-      padding: 25px 0;
-    }
+      .actions {
+        margin: 0 auto;
+        max-width: 75%;
+        background: #fff;
+        padding: 25px 0;
+      }
 
-    .actions a {
-      text-decoration: none;
-    }
+      .actions a {
+        text-decoration: none;
+      }
 
-    .actions div {
-      flex: 1 0 100px;
-      text-align: center;
-      padding: 1rem;
-      max-height: 75px;
-    }
+      .actions div {
+        flex: 1 0 100px;
+        text-align: center;
+        padding: 1rem;
+        max-height: 75px;
+      }
 
-    .actions span {
-      display: block;
-      margin-top: .2rem;
-    }
+      .actions span {
+        display: block;
+        margin-top: 0.2rem;
+      }
 
     </style>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
@@ -87,7 +89,7 @@
     <script src="../fastclick/lib/fastclick.js"></script>
     <script type="text/javascript">
       if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
           FastClick.attach(document.body);
         }, false);
       }
@@ -96,14 +98,20 @@
 
   <body unresolved>
     <template id="tmpl" is="dom-bind">
-      <main class="position-relative">
+      <main class="position-relative has-navbar">
         <px-navbar id="navbar1" title="{{title}}" subtitle="{{subtitle}}" theme="">
-          <div>
-            <button class="navbar__button" onclick="toggleDrawer('myLeftDrawer')"> <i class="fa fa-lg fa-bars"></i> </button>
+          <div class="navbar__left">
+            <button class="navbar__button" onclick="toggleDrawer('myLeftDrawer')">
+              <i class="fa fa-lg fa-bars"></i>
+            </button>
           </div>
-          <div class="flex">
-            <button class="navbar__button" onclick="toggleDrawer('myBottomDrawer')"> <i class="fa fa-lg fa-share"></i> </button>
-            <button class="navbar__button" onclick="toggleDrawer('myRightDrawer')"> <i class="fa fa-lg fa-ellipsis-v"></i> </button>
+          <div class="navbar__right flex">
+            <button class="navbar__button" onclick="toggleDrawer('myBottomDrawer')">
+              <i class="fa fa-lg fa-share"></i>
+            </button>
+            <button class="navbar__button" onclick="toggleDrawer('myRightDrawer')">
+              <i class="fa fa-lg fa-ellipsis-v"></i>
+            </button>
           </div>
         </px-navbar>
         <div class="viewport viewport--full-height">
@@ -125,20 +133,28 @@
                 <px-card header-text="Temporary Drawer" class="u-mb">
                   <p>Temporary navigation drawers can toggle open or closed. Closed by default, the drawer opens temporarily above all other content until a section is selected.</p>
                   <ul>
-                    <li>Recommended for: <strong>Tablet</strong></li>
-                    <li>Required for: <strong>Mobile</strong></li>
+                    <li>Recommended for:
+                      <strong>Tablet</strong>
+                    </li>
+                    <li>Required for:
+                      <strong>Mobile</strong>
+                    </li>
                   </ul>
                   <button type="button" onclick="myLeftDrawer.type = 'temporary'" class="btn btn--full">Temporary</button>
                 </px-card>
                 <px-card header-text="Persistent Drawer" class="u-mb">
                   <p>Persistent drawers can toggle open or closed. The drawer sits on the same surface elevation as the content. It is closed by default and opens by selecting the menu icon, and stays open until closed by the user.</p>
-                  <p> Sitting outside of the page grid, when opened the drawer forces other content to change size and adapt to the smaller viewport. </p>
-                  <p> Persistent navigation drawers are acceptable for all sizes larger than mobile </p>
+                  <p>
+                    Sitting outside of the page grid, when opened the drawer forces other content to change size and adapt to the smaller viewport.
+                  </p>
+                  <p>
+                    Persistent navigation drawers are acceptable for all sizes larger than mobile
+                  </p>
                   <button type="button" onclick="myLeftDrawer.type = 'persistent'" class="btn btn--full">Persistent</button>
                 </px-card>
                 <px-card header-text="Mini Drawer" class="u-mb">
-                  <p>In this variation, the persistent navigation drawer changes its width. Its resting state is as a mini-drawer at the same elevation as the content, clipped by the app bar. When expanded, it appears as the standard persistent navigation
-                    drawer. </p>
+                  <p>In this variation, the persistent navigation drawer changes its width. Its resting state is as a mini-drawer at the same elevation as the content, clipped by the app bar. When expanded, it appears as the standard persistent navigation drawer.
+                  </p>
                   <ul>
                     <li>Recommended for: Apps sections that need quick selection access alongside content</li>
                   </ul>
@@ -150,7 +166,9 @@
         </div>
         <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
           <div class="u-pm">
-            <p> This is content inside of the drawer </p>
+            <p>
+              This is content inside of the drawer
+            </p>
             <p class="flex flex--col">
               <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'default'">Default</button>
               <button class="btn btn--full" type="button" onclick="document.getElementById('navbar1').theme = 'transparent'">Transparent</button>
@@ -166,24 +184,42 @@
             <div class="actions">
               <div class="flex flex--row flex--wrap flex--spaced">
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-cut"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-cut"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-copy"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-copy"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-paste"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-paste"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
               </div>
               <div class="flex flex--row flex--wrap flex--spaced">
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-cut"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-cut"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-copy"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-copy"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
                 <div>
-                  <a href=""> <i class="fa fa-2x fa-paste"></i> <span>Action 1</span> </a>
+                  <a href="">
+                    <i class="fa fa-2x fa-paste"></i>
+                    <span>Action 1</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -192,19 +228,20 @@
       </main>
     </template>
     <script type="text/javascript">
-    var tmpl = document.getElementById('tmpl');
-    tmpl.title = 'px-drawer';
-    //	tmpl.subtitle = "View Context";
-    var toggleDrawer = function(id) {
-      document.getElementById(id).toggle();
-    };
-    var toggleLeftDrawer = function() {
-      document.getElementById('myLeftDrawer').toggle();
-    };
-    var toggleRightDrawer = function() {
-      document.getElementById('myRightDrawer').toggle();
-    };
-
+      var tmpl = document.getElementById('tmpl');
+      tmpl.title = 'px-drawer';
+      //	tmpl.subtitle = "View Context";
+      var toggleDrawer = function (id) {
+        console.warn('toggleDrawer', id);
+        document.getElementById(id).toggle();
+      };
+      var toggleLeftDrawer = function () {
+        console.warn('toggleLeftDrawer');
+        document.getElementById('myLeftDrawer').toggle();
+      };
+      var toggleRightDrawer = function () {
+        document.getElementById('myRightDrawer').toggle();
+      };
     </script>
   </body>
 

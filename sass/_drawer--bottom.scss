@@ -1,8 +1,8 @@
 @import "variables";
-@import "px-mobile-mixin-design/mixins";
+@import "px-mobile-design/sass/_mixins.scss";
 /// Drawer - Top modifier
 ///
-.drawer{
+.drawer {
   ///------------------------------------------------------
   /// .drawer--bottom
   @include modifier ('bottom') {

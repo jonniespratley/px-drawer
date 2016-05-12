@@ -1,5 +1,5 @@
 @import "variables";
-@import "px-mobile-mixin-design/mixins";
+@import "px-mobile-design/sass/_mixins.scss";
 /// Drawer - Mini modifier
 ///
 .drawer {
@@ -8,12 +8,12 @@
   /// .drawer--mini
   @include modifier ('mini') {
     transition: $drawer-mini-transition;
-    position: absolute;
+    position  : absolute;
     visibility: visible;
-    float: left;
-    width: $drawer-mini-width;
-    overflow: hidden;
-    transform: translateX(0);
+    float     : left;
+    width     : $drawer-mini-width;
+    overflow  : hidden;
+    transform : translateX(0);
     text-align: left;
     min-height: 100vh;
 
@@ -34,17 +34,16 @@
     &.is-open {
       width: $drawer-mini-open-width;
 
-      @include respond ('large') {
-        width: $drawer-mini-open-width-large !important;
+      @include respond ('retina') {
+        width: $drawer-mini-open-width-small !important;
       }
 
       @include respond ('small') {
         width: $drawer-mini-open-width-small !important;
       }
 
-      @include respond ('xsmall') {
-        //  width    : 90%;
-        //  transform: translateX(0);
+      @include respond ('large') {
+        width: $drawer-mini-open-width-large !important;
       }
 
       @include respond ('medium') {
@@ -68,7 +67,7 @@
       .hidden-mini-closed,
       .table-row__content {
 
-        opacity: 0;
+        opacity : 0;
         overflow: hidden;
       }
     }
