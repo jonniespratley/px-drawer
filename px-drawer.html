@@ -89,6 +89,7 @@
       ready: function () {
         this.toggleClass('drawer', true);
         this.toggleClass('drawer--' + this.side, true);
+        this.toggleClass('is-open', this.open);
         if (this.theme) {
           this.toggleClass('drawer--' + this.theme, true);
         }
