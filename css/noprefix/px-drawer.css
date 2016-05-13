@@ -97,8 +97,7 @@
   z-index: 350;
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   will-change: translate;
-  visibility: hidden;
-  max-width: 330px; }
+  visibility: hidden; }
   .drawer--fixed {
     position: fixed !important; }
   .drawer * {
@@ -146,6 +145,9 @@
     overflow: hidden;
     position: relative;
     user-select: none; }
+  @media screen and (min-width: 1024px) and (max-width: 1200px) {
+    .drawer .drawer--left, .drawer .drawer--right {
+      max-width: 330px; } }
 
 .drawer--top {
   top: 0;

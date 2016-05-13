@@ -35,7 +35,7 @@ $inuit-enable-margins: true;
   transition : $drawer-transition;
   will-change: translate;
   visibility : hidden;
-  max-width: 330px;
+  //max-width: 330px;
   ///
   @include modifier ('fixed') {
     position: fixed !important;
@@ -109,6 +109,12 @@ $inuit-enable-margins: true;
     overflow   : hidden;
     position   : relative;
     user-select: none;
+  }
+
+  .drawer--left, .drawer--right{
+    @include media-breakpoint ('lg') {
+      max-width: 330px;
+    }
   }
 
 }
