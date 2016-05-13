@@ -7,52 +7,51 @@
   ///------------------------------------------------------
   /// .drawer--mini
   @include modifier ('mini') {
-    transition: $drawer-mini-transition;
-    position  : absolute;
-    visibility: visible;
-    float     : left;
-    width     : $drawer-mini-width;
-    overflow  : hidden;
-    transform : translateX(0);
-    text-align: left;
-    min-height: 100vh;
+    @include transform(translate3d(0, 0, 0));
+
+    transition  : $drawer-mini-transition;
+    position    : static;
+    visibility  : visible;
+    float       : left;
+    width       : $drawer-mini-width;
+    overflow    : hidden;
+    text-align  : left;
+    min-height  : 100vh;
+    margin-right: $drawer-mini-margin-right;
 
     .hidden-mini-closed,
     .table-row__content {
       transition: $drawer-mini-transition;
     }
 
-    .viewport:parent {
-      margin-left: -20px;
-    }
-
     @include media-breakpoint ('xs') {
-      //  width    : 90%;
-      transform: translateX(-90%);
+      @include transform(translate3d(-100%, 0, 0));
     }
 
     &.is-open {
-      width: $drawer-mini-open-width;
+      width    : $drawer-mini-open-width;
+      max-width: $drawer-max-width;
 
-      @include media-breakpoint('retina') {
-        width: $drawer-mini-open-width-small !important;
+      @include media-breakpoint ('retina') {
+        //  width: $drawer-mini-open-width-small;
       }
 
       @include media-breakpoint-down ('sm') {
-        width: $drawer-mini-open-width-small !important;
+        width: $drawer-mini-open-width-small;
       }
 
       @include media-breakpoint ('lg') {
-        width: $drawer-mini-open-width-large !important;
+        width: $drawer-mini-open-width-large;
       }
 
       @include media-breakpoint ('md') {
-        width: $drawer-mini-open-width-medium !important;
+        width: $drawer-mini-open-width-medium;
       }
 
       .hidden-mini-closed,
       .table-row__content {
-        opacity: 1;
+        visibility: visible;
+        opacity   : 1;
       }
     }
 
@@ -66,9 +65,9 @@
 
       .hidden-mini-closed,
       .table-row__content {
-
-        opacity : 0;
-        overflow: hidden;
+        opacity   : 0;
+        visibility: hidden;
+        overflow  : hidden;
       }
     }
   }

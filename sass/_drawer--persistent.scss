@@ -1,0 +1,40 @@
+@import "variables";
+@import "px-mobile-design/sass/_mixins.scss";
+/// Drawer - Top modifier
+///
+.drawer {
+
+  ///------------------------------------------------------
+  /// .drawer--persistent
+  @include modifier ('persistent') {
+    @include transform(translate3d(0, 0, 0));
+    transition  : $drawer-persistent-transition;
+    position    : static;
+    visibility  : visible;
+    float       : left;
+    min-height  : $drawer-persistent-height;
+    max-width   : $drawer-max-width;
+    margin-right: $drawer-mini-margin-right;
+
+    @include media-breakpoint ('lg') {
+      margin-top: 0;
+    }
+
+    @include media-breakpoint-down ('sm') {}
+
+    @include media-breakpoint-down ('md') {
+      @include transform(translate3d(-100%, 0, 0));
+      position: absolute !important;
+
+      &.is-open {
+        @include transform(translate3d(0, 0, 0));
+      }
+    }
+
+    &.drawer--right {
+      float   : right !important;
+      position: static !important;
+    }
+  }
+
+}

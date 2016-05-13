@@ -92,11 +92,13 @@
      * Dark
      */
 .drawer {
+  z-index: 210;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   display: block;
   position: absolute;
-  z-index: 350;
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-  will-change: translate;
   visibility: hidden; }
   .drawer--fixed {
     position: fixed !important; }
@@ -108,79 +110,65 @@
       opacity: 1;
       visibility: visible; }
     .drawer.is-open .drawer__content {
-      z-index: 360;
-      opacity: 1;
-      visibility: visible;
-      overflow: hidden; }
+      z-index: 350; }
   .drawer--temporary {
-    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
     position: absolute;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
-  .drawer--persistent {
-    transition: all 0.5s ease-in-out;
-    position: static;
-    visibility: visible;
-    float: left;
-    width: 20%;
-    transform: translateX(0) !important;
-    min-height: 100%; }
-    @media screen and (min-width: 1024px) and (max-width: 1200px) {
-      .drawer--persistent {
-        margin-top: 0; } }
-    @media screen and (min-width: 375px) and (max-width: 425px) {
-      .drawer--persistent {
-        margin-left: 0; } }
-    @media screen and (min-width: 768px) and (max-width: 979px) {
-      .drawer--persistent {
-        margin-top: 0;
-        margin-left: 0; } }
-    .drawer--persistent.drawer--right {
-      float: right !important;
-      position: static !important; }
   .drawer__content {
     padding: 0;
     width: 100%;
     height: 100%;
     display: block;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
     user-select: none; }
-  @media screen and (min-width: 1024px) and (max-width: 1200px) {
-    .drawer .drawer--left, .drawer .drawer--right {
+  @media (min-width: 992px) {
+    .drawer .drawer--left,
+    .drawer .drawer--right {
       max-width: 330px; } }
 
 .drawer--top {
+  -webkit-transform: translate3d(0, -100%, 0);
+  -ms-transform: translate3d(0, -100%, 0);
+  transform: translate3d(0, -100%, 0);
   top: 0;
   right: 0;
   left: 0;
-  transform: translateY(-100%);
+  height: auto;
+  width: 100%;
   width: var(--px-drawer-width, 100%); }
   .drawer--top.is-open {
-    transform: translateY(0); }
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
   @media (max-width: 767px) {
     .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
-  @media screen and (min-width: 768px) and (max-width: 979px) {
+      max-height: 25%;
+      max-height: var(--px-drawer-height, 25%); } }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1200px) {
+      max-height: 25%;
+      max-height: var(--px-drawer-height, 25%); } }
+  @media screen and (min-width: 1080px) and (max-width: 1200px) {
     .drawer--top {
-      height: 25%;
-      height: var(--px-drawer-height, 25%); } }
+      max-height: 25%;
+      max-height: var(--px-drawer-height, 25%); } }
 
 .drawer--bottom {
+  -webkit-transform: translate3d(0, 100%, 0);
+  -ms-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
   bottom: 0;
   right: 0;
   left: 0;
+  width: 100%;
   width: var(--px-drawer-width, 100%);
-  width: var(--px-drawer-width, 100%);
-  transform: translateY(100%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   height: 45%; }
   .drawer--bottom.is-open {
-    transform: translateY(0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     z-index: 500; }
   @media (max-width: 767px) {
     .drawer--bottom {
@@ -189,14 +177,14 @@
       width: 100%;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media screen and (min-width: 768px) and (max-width: 979px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     .drawer--bottom {
       right: 15%;
       left: 15%;
       width: auto;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1200px) {
+  @media (min-width: 992px) {
     .drawer--bottom {
       width: auto;
       height: 25%;
@@ -209,95 +197,135 @@
     right: 0; }
 
 .drawer--left {
+  -webkit-transform: translate3d(-100%, 0, 0);
+  -ms-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
   left: 0;
   top: 0;
   bottom: 0;
-  transform: translateX(-100%);
-  width: 30%;
+  width: auto;
   height: 100vh;
-  width: var(--px-drawer-width, 30%);
+  width: var(--px-drawer-width, auto);
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
-    transform: translateX(0); }
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
   @media (max-width: 767px) {
     .drawer--left {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media screen and (min-width: 768px) and (max-width: 979px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     .drawer--left {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1200px) {
+  @media screen and (min-width: 1080px) and (max-width: 1200px) {
     .drawer--left {
       max-width: 330px;
       width: 25%;
       width: var(--px-drawer-width, 25%); } }
 
 .drawer--right {
+  -webkit-transform: translate3d(100%, 0, 0);
+  -ms-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
   top: 0;
   bottom: 0;
   right: 0;
-  transform: translateX(100%);
+  height: 100vh;
   height: var(--px-drawer-height, 100vh); }
   .drawer--right.is-open {
-    transform: translateX(0); }
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
   @media (max-width: 767px) {
     .drawer--right {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media screen and (min-width: 768px) and (max-width: 979px) {
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
     .drawer--right {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1200px) {
+  @media screen and (min-width: 1080px) and (max-width: 1200px) {
     .drawer--right {
       max-width: 330px;
       width: 25%;
       width: var(--px-drawer-width, 25%); } }
 
 .drawer--mini {
-  transition: all 0.4s ease-in-out;
-  position: absolute;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+  position: static;
   visibility: visible;
   float: left;
   width: 44px;
   overflow: hidden;
-  transform: translateX(0);
   text-align: left;
-  min-height: 100vh; }
+  min-height: 100vh;
+  margin-right: 1rem; }
   .drawer--mini .hidden-mini-closed,
   .drawer--mini .table-row__content {
-    transition: all 0.4s ease-in-out; }
-  .drawer--mini .viewport:parent {
-    margin-left: -20px; }
-  @media screen and (max-width: 320px) {
+    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1); }
+  @media screen and (max-width: 360px) {
     .drawer--mini {
-      transform: translateX(-90%); } }
+      -webkit-transform: translate3d(-100%, 0, 0);
+      -ms-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0); } }
   .drawer--mini.is-open {
-    width: 25%; }
-    @media screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-      .drawer--mini.is-open {
-        width: 80% !important; } }
+    width: auto;
+    max-width: 330px; }
     @media (max-width: 767px) {
       .drawer--mini.is-open {
-        width: 80% !important; } }
-    @media screen and (min-width: 1024px) and (max-width: 1200px) {
+        width: 80%; } }
+    @media screen and (min-width: 1080px) and (max-width: 1200px) {
       .drawer--mini.is-open {
-        width: 25% !important; } }
-    @media screen and (min-width: 768px) and (max-width: 979px) {
+        width: 25%; } }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
       .drawer--mini.is-open {
-        width: 40% !important; } }
+        width: 40%; } }
     .drawer--mini.is-open .hidden-mini-closed,
     .drawer--mini.is-open .table-row__content {
+      visibility: visible;
       opacity: 1; }
   .drawer--mini:not(.is-open) {
-    transition: all 0.4s ease-in-out; }
+    transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1); }
     .drawer--mini:not(.is-open):before {
       content: ''; }
     .drawer--mini:not(.is-open) .hidden-mini-closed,
     .drawer--mini:not(.is-open) .table-row__content {
       opacity: 0;
+      visibility: hidden;
       overflow: hidden; }
+
+.drawer--persistent {
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+  position: static;
+  visibility: visible;
+  float: left;
+  min-height: 100%;
+  max-width: 330px;
+  margin-right: 1rem; }
+  @media screen and (min-width: 1080px) and (max-width: 1200px) {
+    .drawer--persistent {
+      margin-top: 0; } }
+  @media (max-width: 991px) {
+    .drawer--persistent {
+      -webkit-transform: translate3d(-100%, 0, 0);
+      -ms-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+      position: absolute !important; }
+      .drawer--persistent.is-open {
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0); } }
+  .drawer--persistent.drawer--right {
+    float: right !important;
+    position: static !important; }
 
 .drawer {
   background-color: var(--px-drawer-background-color, transparent); }

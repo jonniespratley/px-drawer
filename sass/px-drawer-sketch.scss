@@ -16,7 +16,6 @@
 // Base
 //@import "px-flexbox-design/_base.flexbox.scss";
 //@import "px-viewport-design/_base.viewport.scss";
-
 // Component
 
 // Trumps
@@ -29,14 +28,15 @@ $inuit-enable-margins: true;
 @import "px-mobile-design/sass/_mixins.scss";
 
 .drawer {
-  display    : block;
-  position   : absolute;
-  z-index    : 350;
-  transition : $drawer-transition;
-  will-change: translate;
-  visibility : hidden;
-  //max-width: 330px;
-  ///
+  z-index   : 210;
+  @include transform(translate3d(0, 0, 0));
+  display   : block;
+  position  : absolute;
+
+  transition: $drawer-transition;
+  //will-change: translate;
+  visibility: hidden;
+
   @include modifier ('fixed') {
     position: fixed !important;
   }
@@ -54,49 +54,15 @@ $inuit-enable-margins: true;
     }
 
     .drawer__content {
-      z-index   : 360;
-      opacity   : 1;
-      visibility: visible;
-      overflow  : hidden;
+      z-index: 350;
     }
   }
 
   ///------------------------------------------------------
   /// .drawer--temporary
   @include modifier ('temporary') {
-    transition: $drawer-transition;
     position  : absolute;
     box-shadow: $drawer-box-shadow;
-  }
-  ///------------------------------------------------------
-  /// .drawer--persistent
-  @include modifier ('persistent') {
-    transition: $drawer-persistent-transition;
-    position  : static;
-    visibility: visible;
-    float     : left;
-    width     : $drawer-persistent-width;
-
-    transform : translateX(0) !important;
-    min-height: $drawer-persistent-height;
-
-    @include media-breakpoint ('lg') {
-      margin-top: 0;
-    }
-
-    @include media-breakpoint ('sm') {
-      margin-left: 0;
-    }
-
-    @include media-breakpoint ('md') {
-      margin-top : 0;
-      margin-left: 0;
-    }
-
-    &.drawer--right {
-      float   : right !important;
-      position: static !important;
-    }
   }
 
   ///------------------------------------------------------
@@ -106,14 +72,15 @@ $inuit-enable-margins: true;
     width      : 100%;
     height     : 100%;
     display    : block;
-    overflow   : hidden;
+    overflow   : auto;
     position   : relative;
     user-select: none;
   }
 
-  .drawer--left, .drawer--right{
-    @include media-breakpoint ('lg') {
-      max-width: 330px;
+  .drawer--left,
+  .drawer--right {
+    @include media-breakpoint-up ('lg') {
+      max-width: $drawer-max-width;
     }
   }
 
@@ -123,3 +90,4 @@ $inuit-enable-margins: true;
 @import "_drawer--left";
 @import "_drawer--right";
 @import "_drawer--mini";
+@import "_drawer--persistent";

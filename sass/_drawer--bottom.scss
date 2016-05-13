@@ -6,21 +6,22 @@
   ///------------------------------------------------------
   /// .drawer--bottom
   @include modifier ('bottom') {
+    @include transform(translate3d(0, 100%, 0));
     bottom    : 0;
     right     : 0;
     left      : 0;
+    width     : 100%;
     width     : var(--px-drawer-width, 100%);
-    width     : var(--px-drawer-width, 100%);
-    transform : translateY(100%);
+
     box-shadow: $drawer-box-shadow;
     height    : $drawer-bottom-height;
 
     &.is-open {
-      transform: translateY(0);
-      z-index  : 500;
+      @include transform(translate3d(0, 0, 0));
+      z-index: 500;
     }
 
-    @include media-breakpoint-down('sm') {
+    @include media-breakpoint-down ('sm') {
       right : 0;
       left  : 0;
       width : 100%;
@@ -36,7 +37,7 @@
       height: var(--px-drawer-height, $drawer-bottom-height-medium);
     }
 
-    @include media-breakpoint ('lg') {
+    @include media-breakpoint-up ('lg') {
       width : auto;
       height: $drawer-bottom-height-large;
       height: var(--px-drawer-height, $drawer-bottom-height-large);
