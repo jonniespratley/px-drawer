@@ -35,6 +35,7 @@ $inuit-enable-margins: true;
   transition : $drawer-transition;
   will-change: translate;
   visibility : hidden;
+  max-width: 330px;
   ///
   @include modifier ('fixed') {
     position: fixed !important;
@@ -79,15 +80,15 @@ $inuit-enable-margins: true;
     transform : translateX(0) !important;
     min-height: $drawer-persistent-height;
 
-    @include respond ('large') {
+    @include media-breakpoint ('lg') {
       margin-top: 0;
     }
 
-    @include respond ('small') {
+    @include media-breakpoint ('sm') {
       margin-left: 0;
     }
 
-    @include respond ('medium') {
+    @include media-breakpoint ('md') {
       margin-top : 0;
       margin-left: 0;
     }

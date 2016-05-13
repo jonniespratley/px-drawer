@@ -20,7 +20,7 @@
       z-index  : 500;
     }
 
-    @include respond ('small') {
+    @include media-breakpoint-down('sm') {
       right : 0;
       left  : 0;
       width : 100%;
@@ -28,7 +28,7 @@
       height: var(--px-drawer-height, $drawer-bottom-height-small);
     }
 
-    @include respond ('medium') {
+    @include media-breakpoint ('md') {
       right : 15%;
       left  : 15%;
       width : auto;
@@ -36,7 +36,7 @@
       height: var(--px-drawer-height, $drawer-bottom-height-medium);
     }
 
-    @include respond ('large') {
+    @include media-breakpoint ('lg') {
       width : auto;
       height: $drawer-bottom-height-large;
       height: var(--px-drawer-height, $drawer-bottom-height-large);

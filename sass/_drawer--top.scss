@@ -17,17 +17,17 @@
       transform: translateY(0);
     }
 
-    @include respond ('small') {
+    @include media-breakpoint-down('sm') {
       height: $drawer-height-top-small;
       height: var(--px-drawer-height, $drawer-height-top-small);
     }
 
-    @include respond ('medium') {
+    @include media-breakpoint ('md') {
       height: $drawer-height-top-medium;
       height: var(--px-drawer-height, $drawer-height-top-medium);
     }
 
-    @include respond ('large') {
+    @include media-breakpoint ('lg') {
       height: $drawer-height-top-large;
       height: var(--px-drawer-height, $drawer-height-top-large);
     }

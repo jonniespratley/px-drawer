@@ -16,17 +16,18 @@
       transform: translateX(0);
     }
 
-    @include respond ('small') {
+
+    @include media-breakpoint-down('sm') {
       width: $drawer-width-small;
       width: var(--px-drawer-width, $drawer-width-small);
     }
 
-    @include respond ('medium') {
+    @include media-breakpoint ('md') {
       width: $drawer-width-medium;
       width: var(--px-drawer-width, $drawer-width-medium);
     }
 
-    @include respond ('large') {
+    @include media-breakpoint ('lg') {
       max-width: 330px;
       width    : $drawer-width-large;
       width    : var(--px-drawer-width, $drawer-width-large);

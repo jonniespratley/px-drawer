@@ -82,20 +82,14 @@
 /**
      * Dark
      */
-/*
-"palm" "screen and (max-width: 44.9375em)",
-"lap" "screen and (min-width: 45em) and (max-width: 63.9375em)",
-"lap-and-up" "screen and (min-width: 45em)",
-"portable" "screen and (max-width: 63.9375em)",
-"desk" "screen and (min-width: 64em)",
-*/
 .drawer {
   display: block;
   position: absolute;
   z-index: 350;
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   will-change: translate;
-  visibility: hidden; }
+  visibility: hidden;
+  max-width: 330px; }
   .drawer--fixed {
     position: fixed !important; }
   .drawer * {
@@ -122,13 +116,13 @@
     width: 20%;
     transform: translateX(0) !important;
     min-height: 100%; }
-    @media screen and (min-width: 1024px) and (max-width: 1600px) {
+    @media screen and (min-width: 1024px) and (max-width: 1200px) {
       .drawer--persistent {
         margin-top: 0; } }
-    @media screen and (min-width: 374px) and (max-width: 425px) {
+    @media screen and (min-width: 375px) and (max-width: 425px) {
       .drawer--persistent {
         margin-left: 0; } }
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @media screen and (min-width: 768px) and (max-width: 979px) {
       .drawer--persistent {
         margin-top: 0;
         margin-left: 0; } }
@@ -152,15 +146,15 @@
   width: var(--px-drawer-width, 100%); }
   .drawer--top.is-open {
     transform: translateY(0); }
-  @media screen and (min-width: 374px) and (max-width: 425px) {
+  @media (max-width: 767px) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  @media screen and (min-width: 768px) and (max-width: 979px) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1600px) {
+  @media screen and (min-width: 1024px) and (max-width: 1200px) {
     .drawer--top {
       height: 25%;
       height: var(--px-drawer-height, 25%); } }
@@ -177,21 +171,21 @@
   .drawer--bottom.is-open {
     transform: translateY(0);
     z-index: 500; }
-  @media screen and (min-width: 374px) and (max-width: 425px) {
+  @media (max-width: 767px) {
     .drawer--bottom {
       right: 0;
       left: 0;
       width: 100%;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  @media screen and (min-width: 768px) and (max-width: 979px) {
     .drawer--bottom {
       right: 15%;
       left: 15%;
       width: auto;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1600px) {
+  @media screen and (min-width: 1024px) and (max-width: 1200px) {
     .drawer--bottom {
       width: auto;
       height: 25%;
@@ -214,15 +208,15 @@
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
     transform: translateX(0); }
-  @media screen and (min-width: 374px) and (max-width: 425px) {
+  @media (max-width: 767px) {
     .drawer--left {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  @media screen and (min-width: 768px) and (max-width: 979px) {
     .drawer--left {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1600px) {
+  @media screen and (min-width: 1024px) and (max-width: 1200px) {
     .drawer--left {
       max-width: 330px;
       width: 25%;
@@ -236,15 +230,15 @@
   height: var(--px-drawer-height, 100vh); }
   .drawer--right.is-open {
     transform: translateX(0); }
-  @media screen and (min-width: 374px) and (max-width: 425px) {
+  @media (max-width: 767px) {
     .drawer--right {
       width: 80%;
       width: var(--px-drawer-width, 80%); } }
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
+  @media screen and (min-width: 768px) and (max-width: 979px) {
     .drawer--right {
       width: 35%;
       width: var(--px-drawer-width, 35%); } }
-  @media screen and (min-width: 1024px) and (max-width: 1600px) {
+  @media screen and (min-width: 1024px) and (max-width: 1200px) {
     .drawer--right {
       max-width: 330px;
       width: 25%;
@@ -265,18 +259,21 @@
     transition: all 0.4s ease-in-out; }
   .drawer--mini .viewport:parent {
     margin-left: -20px; }
+  @media screen and (max-width: 320px) {
+    .drawer--mini {
+      transform: translateX(-90%); } }
   .drawer--mini.is-open {
     width: 25%; }
-    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    @media screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
       .drawer--mini.is-open {
         width: 80% !important; } }
-    @media screen and (min-width: 374px) and (max-width: 425px) {
+    @media (max-width: 767px) {
       .drawer--mini.is-open {
         width: 80% !important; } }
-    @media screen and (min-width: 1024px) and (max-width: 1600px) {
+    @media screen and (min-width: 1024px) and (max-width: 1200px) {
       .drawer--mini.is-open {
         width: 25% !important; } }
-    @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @media screen and (min-width: 768px) and (max-width: 979px) {
       .drawer--mini.is-open {
         width: 40% !important; } }
     .drawer--mini.is-open .hidden-mini-closed,
