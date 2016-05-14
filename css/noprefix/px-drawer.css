@@ -203,9 +203,9 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: auto;
+  width: 25%;
   height: 100vh;
-  width: var(--px-drawer-width, auto);
+  width: var(--px-drawer-width, 25%);
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
     -webkit-transform: translate3d(0, 0, 0);
@@ -328,10 +328,14 @@
     position: static !important; }
 
 .drawer {
-  background-color: var(--px-drawer-background-color, transparent); }
+  background-color: #242326;
+  background-color: var(--px-drawer-background-color, #242326);
+  color: #efeff4;
+  color: var(--px-drawer-font-color, #efeff4); }
   .drawer--dark {
     background-color: #242326;
-    background-color: var(--px-drawer-background-color, #242326);
-    color: white; }
+    color: white;
+    color: var(--px-drawer-dark-font-color, white);
+    background-color: var(--px-drawer-dark-background-color, #242326); }
     .drawer--dark .drawer__button {
       color: white; }

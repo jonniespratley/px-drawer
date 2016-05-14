@@ -194,9 +194,9 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: auto;
+  width: 25%;
   height: 100vh;
-  width: var(--px-drawer-width, auto);
+  width: var(--px-drawer-width, 25%);
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
     -webkit-transform: translate3d(0, 0, 0);

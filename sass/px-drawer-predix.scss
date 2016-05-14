@@ -20,12 +20,15 @@
 /// Drawer
 ///---------------------------------------
 .drawer {
-  background-color: var(--px-drawer-background-color, transparent);
-
+  background-color: $drawer-background-color;
+  background-color: var(--px-drawer-background-color, $drawer-background-color);
+  color           : $drawer-font-color;
+  color: var(--px-drawer-font-color, $drawer-font-color);
   @include modifier ('dark') {
     background-color: $drawer-dark-background-color;
-    background-color: var(--px-drawer-background-color, $drawer-dark-background-color);
     color           : $drawer-dark-font-color;
+    color: var(--px-drawer-dark-font-color, $drawer-dark-font-color);
+    background-color: var(--px-drawer-dark-background-color, $drawer-dark-background-color);
 
     @include element ('button') {
       color: $drawer-dark-font-color;

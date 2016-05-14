@@ -6,6 +6,9 @@
 $drawer-transition            : all .5s cubic-bezier(0.1, 0.7, 0.1, 1);
 
 $drawer-mask-background-color : $gray10;
+$drawer-background-color : $gray10;
+$drawer-font-color : $gray2;
+$drawer-dark-font-color : $white;
 $drawer-dark-background-color : $gray10;
 
 $drawer-dark-font-color       : $white;
@@ -28,7 +31,7 @@ $drawer-mini-margin-right     : $inuit-base-spacing-unit;
 $drawer-persistent-transition : $drawer-transition;
 
 $drawer-height                : 100vh;
-$drawer-width                 : auto;
+$drawer-width                 : 25%;
 $drawer-max-width             : 330px;
 $drawer-width-xsmall          : 80%;
 $drawer-width-small           : 80%;
