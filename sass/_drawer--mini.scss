@@ -9,15 +9,15 @@
   @include modifier ('mini') {
     @include transform(translate3d(0, 0, 0));
 
-    transition  : $drawer-mini-transition;
-    position    : static;
-    visibility  : visible;
-    float       : left;
-    width       : $drawer-mini-width;
-    overflow    : hidden;
-    text-align  : left;
-    min-height  : 100vh;
-    margin-right: $drawer-mini-margin-right;
+    transition: $drawer-mini-transition;
+    position  : static;
+    visibility: visible;
+    float     : left;
+    width     : $drawer-mini-width;
+    overflow  : hidden;
+    text-align: left;
+    min-height: 100vh;
+    //  margin-right: $drawer-mini-margin-right;
 
     .hidden-mini-closed,
     .table-row__content {
@@ -29,7 +29,8 @@
     }
 
     &.is-open {
-      width    : $drawer-mini-open-width;
+      width    : 22%;
+      min-width: $drawer-mini-open-width;
       max-width: $drawer-max-width;
 
       @include media-breakpoint ('retina') {
