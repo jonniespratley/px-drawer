@@ -1,6 +1,8 @@
 
 <link rel="import" href="../polymer/polymer.html">
+
 <!--
+<link href="../iron-overlay-behavior/iron-overlay-behavior.html" rel="import">
 <p>
   For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
 </p>
@@ -41,6 +43,9 @@
     <div id="drawer__content" class="drawer__content" on-click="toggle">
       <content select="*"></content>
     </div>
+    <div class="drawer__overlay" class="drawer__overlay" on-click="toggle">
+
+    </div>
   </template>
   <script>
     var tapEvent = ('ontouchstart' in window)
@@ -48,6 +53,7 @@
       : 'click';
     Polymer({
       is: 'px-drawer',
+    //  behaviors: [IronOverlayBehavior],
       properties: {
         /**
          * The state of the drawer
