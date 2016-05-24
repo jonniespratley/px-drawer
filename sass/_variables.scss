@@ -13,7 +13,7 @@ $drawer-dark-background-color : $gray10;
 
 $drawer-dark-font-color       : $white;
 $drawer-box-shadow            : 0 0 10px rgba(0, 0, 0, 0.4);
-$drawer-max-width             : 320px;
+$drawer-max-width             : 256px;
 $drawer-top-width             : 100%;
 $drawer-bottom-height         : 45%;
 $drawer-bottom-height-small   : 35%;
@@ -31,17 +31,17 @@ $drawer-mini-margin-right     : $inuit-base-spacing-unit;
 $drawer-persistent-transition : $drawer-transition;
 
 $drawer-height                : 100vh;
-$drawer-width                 : 25%;
-$drawer-max-width             : 330px;
-$drawer-width-xsmall          : 80%;
-$drawer-width-small           : 80%;
-$drawer-width-medium          : 35%;
-$drawer-width-large           : 25%;
+$drawer-width                 : 256px;
+$drawer-max-width             : 256px;
+$drawer-width-xsmall          : 256px;
+$drawer-width-small           : 256px;
+$drawer-width-medium          : 256px;
+$drawer-width-large           : 256px;
 
 $drawer-height-top-xsmall     : 25%;
 $drawer-height-top-small      : 25%;
 $drawer-height-top-medium     : 25%;
 $drawer-height-top-large      : 25%;
 
-$drawer-persistent-width      : 20%;
+$drawer-persistent-width      : 256px;
 $drawer-persistent-height     : 100%;

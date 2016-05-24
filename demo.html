@@ -13,6 +13,7 @@
     <style media="screen">
       .box {
         background: #fff;
+        border: 1px solid #ccc;
       }
       body,
       html {
@@ -30,7 +31,6 @@
       .table-row {
         border-bottom: none !important;
       }
-
       .demo .box {
         min-height: 200px;
         max-height: 350px;
@@ -43,12 +43,8 @@
     <article class="has-navbar">
       <px-navbar title="px-drawer"></px-navbar>
       <div class="examples">
-
-
         <!-- TODO: Left Drawer -->
-        <px-drawer id="myLeftDrawer" side="left" theme="dark">
-
-
+        <px-drawer id="myLeftDrawer" align="left" theme="dark">
           <ul class="list-ui">
             <li>
               <i class="fa fa-home fa-lg"></i>
@@ -59,7 +55,6 @@
               <span class="hidden-mini-closed u-ml">Settings</span>
             </li>
           </ul>
-
           <div class="hidden-mini-closed">
             <p>
               This is content inside the left drawer
@@ -68,47 +63,36 @@
             <button onclick="toggleDrawerType('myLeftDrawer', 'persistent')" class="btn">Persistent</button>
             <button onclick="toggleDrawerType('myLeftDrawer', 'mini')" class="btn">Mini</button>
           </div>
-
         </px-drawer>
-
-
-
-
         <section class="viewport">
           <div class="box u-mb+">
             <h1>px-drawer</h1>
             <p>The px-drawer component lets you store content outside the viewport.</p>
-
-                <p>
-                  There are 3 types of drawer.
-                </p>
-                <ol>
-                  <li>temporary: Recommended for:
-                    <strong>Tablet</strong>
-                    Required for:<strong>Mobile</strong>
-                  </li>
-                  <li>persistent: Persistent navigation drawers are acceptable for all sizes larger than mobile</li>
-                  <li>mini: Recommended for Apps that need quick selection access alongside content</li>
-                </ol>
-
-
-
-
-                <div class="flex flex--col">
-                  <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
-                    Left
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
-                    Right
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
-                    Toggle Top
-                  </button>
-                  <button class="btn btn--full" onclick="toggleDrawer('myBottomDrawer')">
-                    Toggle Bottom
-                  </button>
-                </div>
-
+            <p>
+              There are 3 types of drawer.
+            </p>
+            <ol>
+              <li>temporary: Recommended for:
+                <strong>Tablet</strong>
+                Required for:<strong>Mobile</strong>
+              </li>
+              <li>persistent: Persistent navigation drawers are acceptable for all sizes larger than mobile</li>
+              <li>mini: Recommended for Apps that need quick selection access alongside content</li>
+            </ol>
+            <div class="flex flex--col">
+              <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
+                Left
+              </button>
+              <button class="btn btn--full" onclick="toggleDrawer('myRightDrawer')">
+                Right
+              </button>
+              <button class="btn btn--full" onclick="toggleDrawer('myTopDrawer')">
+                Toggle Top
+              </button>
+              <button class="btn btn--full" onclick="toggleDrawer('myBottomDrawer')">
+                Toggle Bottom
+              </button>
+            </div>
             <script type="text/javascript">
               //	tmpl.subtitle = "View Context";
               function toggleDrawer(id, type) {
@@ -129,7 +113,7 @@
                       --px-drawer-background-color: lime;
                     }
                   </style>
-                  <px-drawer id="drawer1" side="left">
+                  <px-drawer id="drawer1" align="left">
                     <p class="u-m">
                       This is content inside of the drawer
                     </p>
@@ -151,7 +135,7 @@
                       --px-drawer-background-color: lime;
                     }
                   </style>
-                  <px-drawer id="drawer1-right" side="right">
+                  <px-drawer id="drawer1-right" align="right">
                     <p class="u-m">
                       This is content inside of the drawer
                     </p>
@@ -163,6 +147,7 @@
               </template>
             </demo-snippet>
           </div>
+          <!-- TODO: Temporary - Top -->
           <h2>Drawer - Temporary - Top</h2>
           <div class="box u-mb+">
             <demo-snippet>
@@ -173,7 +158,7 @@
                       --px-drawer-background-color: slategray;
                     }
                   </style>
-                  <px-drawer id="drawer1-top" side="top">
+                  <px-drawer id="drawer1-top" align="top">
                     <p class="u-m">
                       <strong>Heads Up!</strong>
                       This is content inside of the drawer
@@ -186,6 +171,7 @@
               </template>
             </demo-snippet>
           </div>
+          <!-- TODO: Temporary - Bottom -->
           <h2>Drawer - Temporary - Bottom</h2>
           <div class="box u-mb+">
             <demo-snippet>
@@ -193,10 +179,10 @@
                 <div class="box">
                   <style>
                     #drawer1-bottom {
-                      --px-drawer-background-color: lime;
+                      --px-drawer-background-color: #333;
                     }
                   </style>
-                  <px-drawer id="drawer1-bottom" side="bottom">
+                  <px-drawer id="drawer1-bottom" align="bottom">
                     <p class="u-m">
                       This is content inside of the drawer
                     </p>
@@ -208,6 +194,8 @@
               </template>
             </demo-snippet>
           </div>
+
+          <!-- TODO: Temporary - Mini Left -->
           <h2>Drawer - Mini - Left</h2>
           <div class="box u-mb+">
             <demo-snippet>
@@ -215,7 +203,7 @@
                 <div class="box">
                   <style>
                     #drawer2 {
-                      --px-drawer-background-color: crimson;
+                      --px-drawer-background-color: #111;
                     }
                     .list-ui li a {
                       color: #fff;
@@ -228,7 +216,7 @@
                     }
                   </style>
                   <div class="">
-                    <px-drawer id="drawer2" side="left" type="mini" class="u-mr+">
+                    <px-drawer id="drawer2" align="left" type="mini" class="u-mr+">
                       <ul class="nav-menu list-ui list-ui--tiny">
                         <li>
                           <a href="#page1">
@@ -262,6 +250,8 @@
               </template>
             </demo-snippet>
           </div>
+
+          <!-- TODO: Temporary - Persistent Left -->
           <h2>Drawer - Persistent - Left</h2>
           <div class="box u-mb+">
             <demo-snippet>
@@ -269,11 +259,11 @@
                 <div class="box">
                   <style>
                     #drawer3 {
-                      --px-drawer-background-color: pink;
+                      --px-drawer-background-color: #232323;
                     }
                   </style>
                   <section>
-                    <px-drawer id="drawer3" side="left" type="persistent" class="u-mr+">
+                    <px-drawer id="drawer3" align="left"  persistent>
                       <p class="u-m">
                         This is content inside of the drawer
                       </p>
@@ -288,18 +278,14 @@
               </template>
             </demo-snippet>
           </div>
+          <!-- TODO: Temporary - Persistent Right -->
           <h2>Drawer - Persistent - Right</h2>
           <div class="box u-mb+">
             <demo-snippet>
               <template>
                 <div class="box">
-                  <style>
-                    #drawer4 {
-                      --px-drawer-background-color: crimson;
-                    }
-                  </style>
                   <section>
-                    <px-drawer id="drawer4" side="right" type="persistent" class="u-ml+">
+                    <px-drawer id="drawer4" align="right" persistent>
                       <p class="u-m">
                         This is content inside of the drawer
                       </p>
@@ -318,25 +304,24 @@
       </div>
     </article>
     <!-- TODO: Right Drawer -->
-    <px-drawer id="myRightDrawer" side="right" theme="dark" fixed>
+    <px-drawer id="myRightDrawer" align="right" theme="dark" fixed>
       <div class="u-m">
         <p>
           This is content inside the right drawer
         </p>
       </div>
     </px-drawer>
-
     <!-- TODO: Top Drawer -->
-    <px-drawer id="myTopDrawer" side="top" theme="dark" fixed>
+    <px-drawer id="myTopDrawer" align="top" theme="dark" fixed>
       <div class="u-m">
         <p>
-          This is content inside the top drawer. The default height is set to <code>auto</code>
+          This is content inside the top drawer. The default height is set to
+          <code>auto</code>
         </p>
       </div>
     </px-drawer>
-
     <!-- TODO: Bottom Drawer -->
-    <px-drawer id="myBottomDrawer" side="bottom" theme="dark" fixed>
+    <px-drawer id="myBottomDrawer" align="bottom" theme="dark" fixed>
       <div class="u-m">
         <p>
           This is content inside the bottom drawer.

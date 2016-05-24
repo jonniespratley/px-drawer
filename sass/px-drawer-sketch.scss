@@ -61,7 +61,7 @@ $inuit-enable-margins: true;
   ///------------------------------------------------------
   /// .drawer--temporary
   @include modifier ('temporary') {
-    position  : absolute;
+
     box-shadow: $drawer-box-shadow;
   }
 

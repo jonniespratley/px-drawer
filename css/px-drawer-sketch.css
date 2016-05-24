@@ -105,7 +105,6 @@
     .drawer.is-open .drawer__content {
       z-index: 350; }
   .drawer--temporary {
-    position: absolute;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
   .drawer__content {
     padding: 0;
@@ -118,10 +117,10 @@
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none; }
-  @media (min-width: 66.1333333333rem) {
+  @media (min-width: 68.2666666667rem) {
     .drawer .drawer--left,
     .drawer .drawer--right {
-      max-width: 330px; } }
+      max-width: 256px; } }
 
 .drawer--top {
   -webkit-transform: translate3d(0, -100%, 0);
@@ -176,7 +175,7 @@
       width: auto;
       height: 35%;
       height: var(--px-drawer-height, 35%); } }
-  @media (min-width: 66.1333333333rem) {
+  @media (min-width: 68.2666666667rem) {
     .drawer--bottom {
       width: auto;
       height: 25%;
@@ -194,26 +193,26 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 25%;
+  width: 256px;
   height: 100vh;
-  width: var(--px-drawer-width, 25%);
+  width: var(--px-drawer-width, 256px);
   height: var(--px-drawer-height, 100vh); }
   .drawer--left.is-open {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
   @media (max-width: 51.1333333333rem) {
     .drawer--left {
-      width: 80%;
-      width: var(--px-drawer-width, 80%); } }
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
   @media screen and (min-width: 51.2rem) and (max-width: 68.2rem) {
     .drawer--left {
-      width: 35%;
-      width: var(--px-drawer-width, 35%); } }
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
     .drawer--left {
-      max-width: 330px;
-      width: 25%;
-      width: var(--px-drawer-width, 25%); } }
+      max-width: 256px;
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
 
 .drawer--right {
   -webkit-transform: translate3d(100%, 0, 0);
@@ -222,23 +221,24 @@
   bottom: 0;
   right: 0;
   height: 100vh;
-  height: var(--px-drawer-height, 100vh); }
+  height: var(--px-drawer-height, 100vh);
+  margin-right: 0; }
   .drawer--right.is-open {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); }
   @media (max-width: 51.1333333333rem) {
     .drawer--right {
-      width: 80%;
-      width: var(--px-drawer-width, 80%); } }
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
   @media screen and (min-width: 51.2rem) and (max-width: 68.2rem) {
     .drawer--right {
-      width: 35%;
-      width: var(--px-drawer-width, 35%); } }
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
     .drawer--right {
-      max-width: 330px;
-      width: 25%;
-      width: var(--px-drawer-width, 25%); } }
+      max-width: 256px;
+      width: 256px;
+      width: var(--px-drawer-width, 256px); } }
 
 .drawer--mini {
   -webkit-transform: translate3d(0, 0, 0);
@@ -254,14 +254,14 @@
   .drawer--mini .hidden-mini-closed,
   .drawer--mini .table-row__content {
     transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1); }
-  @media screen and (max-width: 24rem) {
+  @media screen and (max-width: 21.3333333333rem) {
     .drawer--mini {
       -webkit-transform: translate3d(-100%, 0, 0);
       transform: translate3d(-100%, 0, 0); } }
   .drawer--mini.is-open {
     width: 22%;
     min-width: auto;
-    max-width: 330px; }
+    max-width: 256px; }
     @media (max-width: 51.1333333333rem) {
       .drawer--mini.is-open {
         width: 80%; } }
@@ -287,25 +287,27 @@
 
 .drawer--persistent {
   -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   position: static;
   visibility: visible;
   float: left;
   min-height: 100%;
-  max-width: 330px;
-  margin-right: 1rem; }
+  max-width: 256px;
+  margin-right: 1rem;
+  box-shadow: none !important; }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
     .drawer--persistent {
       margin-top: 0; } }
-  @media (max-width: 66.0666666667rem) {
+  @media (max-width: 68.2rem) {
     .drawer--persistent {
-      -webkit-transform: translate3d(-100%, 0, 0);
-      transform: translate3d(-100%, 0, 0);
-      position: absolute !important; }
+      -webkit-transform: translate3d(-100%, 0, 0) !important;
+              transform: translate3d(-100%, 0, 0) !important;
+      position: absolute; }
       .drawer--persistent.is-open {
         -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0); } }
+                transform: translate3d(0, 0, 0); } }
   .drawer--persistent.drawer--right {
-    float: right !important;
-    position: static !important; }
+    float: right;
+    position: static;
+    margin-right: 0 !important; }

@@ -1,21 +1,22 @@
-
 <link rel="import" href="../polymer/polymer.html">
-
 <!--
+`px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
+
 <link href="../iron-overlay-behavior/iron-overlay-behavior.html" rel="import">
 <p>
   For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
 </p>
 
-## Usage
+### Example
+
 ```
 <div class="box">
   <style>
     body {
-      --px-drawer-background-color: #242326 /*gray10*/;
+      --px-drawer-background-color: #555;
     }
   </style>
-  <px-drawer id="drawer1" side="left">
+  <px-drawer id="drawer1" align="left">
     <p class="u-m">
       This is content inside of the drawer
     </p>
@@ -25,6 +26,14 @@
   </button>
 </div>
 ```
+
+### Styling
+
+Custom property | Description | Default
+------------ | ------------- | ------------
+`--px-drawer-background-color` | The background-color of the drawer  |  `#242326` *(gray10)*
+`--px-drawer-width` | The width of the drawer | `256px`
+
 @element px-drawer.html
 @blurb px-drawer A responsive drawer.
 @demo demo.html
@@ -33,34 +42,67 @@
 -->
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
+
   <style>
     :host {
       display: none;
+      background-color: (--px-drawer-background-color, #242326);
+      width: (--px-drawer-width, 256px);
     }
 
+    #scrim {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transition: opacity 0.2s ease;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      opacity: 0;
+      background: var(--app-drawer-scrim-background, rgba(0, 0, 0, 0.5));
+    }
+
+    :host([opened]) > #scrim {
+      opacity: 1;
+    }
+
+    :host([opened][persistent]) > #scrim {
+      visibility: hidden;
+      /**
+       * NOTE(keanulee): Keep both opacity: 0 and visibility: hidden to prevent the
+       * scrim from showing when toggling between closed and opened/persistent.
+       */
+      opacity: 0;
+    }
   </style>
   <template>
-    <div id="drawer__content" class="drawer__content" on-click="toggle">
-      <content select="*"></content>
-    </div>
-    <div class="drawer__overlay" class="drawer__overlay" on-click="toggle">
-
+  <!--  <div id="scrim" on-tap="toggle"></div>-->
+    <div id="drawer__content" class="drawer__content">
+      <content id="contentContainer" select="*"></content>
     </div>
   </template>
   <script>
-    var tapEvent = ('ontouchstart' in window)
-      ? 'tap'
-      : 'click';
     Polymer({
       is: 'px-drawer',
-    //  behaviors: [IronOverlayBehavior],
       properties: {
         /**
          * The state of the drawer
          */
-        open: {
+        opened: {
           type: Boolean,
-          value: false
+          value: false,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_openHandler'
+        },
+      /**
+       * The drawer is a fixed width and cannot be closed.
+       */
+        persistent: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true
         },
         /**
          * To position the drawer in fixed mode
@@ -70,65 +112,84 @@
           value: false
         },
         /**
-         * The theme to apply to the drawer (dark)
+         * The theme to apply to the drawer (`dark`)
          * @default transparent
          */
         theme: {
-          type: String
+          type: String,
+          reflectToAttribute: true
         },
         /**
-         * The side to dock the drawer to
+         * The alignment of the drawer on the screen (`left`, `right`)
          */
-        side: {
+        align: {
           type: String,
+          reflectToAttribute: true,
           value: 'left'
         },
         /**
-         * The type of drawer (temporary, persistent, mini)
+         * The type of drawer (`temporary`, `persistent`, `mini`)
          */
         type: {
           type: String,
           value: 'temporary',
+          reflectToAttribute: true,
           observer: '_typeHandler'
         }
       },
+      listeners: {
+        'drawer__content.tap': 'close'
+      },
+      _boundEscKeydownHandler: null,
       ready: function () {
+        // Set the scroll direction so you can vertically scroll inside the drawer.
+        this.setScrollDirection('y');
+
+      },
+      attached: function () {
+        // capture all clicks so that we can close the dropdown if the user clicks anywhere outside the dropdown Enable document-wide tap recognizer. Polymer.Gestures.add(document, 'tap', null); We should be using only 'tap', but this would be a breaking
+        // change. document.addEventListener(tapEvent, this._handleOffClick.bind(this), true);
+        Polymer.RenderStatus.afterNextRender(this, function () {
+
+        });
+        //this._boundEscKeydownHandler = this._escKeydownHandler.bind(this);
+        document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         this.toggleClass('drawer', true);
-        this.toggleClass('drawer--' + this.side, true);
-        this.toggleClass('is-open', this.open);
+        this.toggleClass('drawer--' + this.align, true);
+
         if (this.theme) {
           this.toggleClass('drawer--' + this.theme, true);
         }
         if (this.fixed) {
           this.toggleClass('drawer--fixed', true);
         }
-        if (this.type === 'temporary') {
-          this.listen(this.$.drawer__content, 'click', 'toggle');
+        if (this.persistent) {
+          this.toggleClass('drawer--temporary');
+          this.toggleClass('drawer--persistent', true);
         }
-      },
-      attached: function () {
-        // capture all clicks so that we can close the dropdown if the user clicks anywhere outside the dropdown Enable document-wide tap recognizer. Polymer.Gestures.add(document, 'tap', null); We should be using only 'tap', but this would be a breaking
-        // change. document.addEventListener(tapEvent, this._handleOffClick.bind(this), true);
 
       },
       detached: function () {
-        //  document.removeEventListener(tapEvent, this._handleOffClick.bind(this));
+        document.removeEventListener('keydown', this._boundEscKeydownHandler);
       },
       /**
-        * Handle toggling the display of the drawer.
+        * Handle toggling the drawer open or close.
         */
-      toggle: function (e) {
-        this.open = !this.open;
-        this.toggleClass('is-open', this.open);
-
-        this.fire('toggle', this);
+      toggle: function () {
+        this.opened = !this.opened;
       },
       /**
        * Handle when a click is outside the drawer.
        */
       _handleOffClick: function (e) {
         this.toggle();
-        //  document.removeEventListener(tapEvent, this._handleOffClick.bind(this));
+      },
+      /**
+       * Handle when the drawer opened state is changed.
+       */
+      _openHandler: function (newVal, oldVal) {
+        this.toggleClass('is-open', newVal);
+        this.fire('toggle', this);
       },
       /**
        * Handle when the drawer type is changed.
@@ -136,6 +197,36 @@
       _typeHandler: function (newVal, oldVal) {
         this.toggleClass('drawer--' + oldVal, false);
         this.toggleClass('drawer--' + newVal, true);
+        if (this.persistent) {
+          this.toggleClass('drawer--temporary');
+        }
+      },
+      /**
+     * Gets the width of the drawer.
+     *
+     * @return {Number} The width of the drawer in pixels.
+     */
+      getWidth: function () {
+        return this.$.contentContainer.offsetWidth;
+      },
+      /**
+       * Opens the drawer.
+       */
+      open: function () {
+        this.opened = true;
+      },
+      /**
+       * Closes the drawer.
+       */
+      close: function () {
+        this.opened = false;
+      },
+      _escKeydownHandler: function (event) {
+        var ESC_KEYCODE = 27;
+        if (event.keyCode === ESC_KEYCODE) {
+          event.preventDefault();
+          this.close();
+        }
       }
     });
   </script>
