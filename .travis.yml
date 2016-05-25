@@ -1,16 +1,11 @@
+language: node_js
+node_js:
+- stable
+branches:
+  except:
+  - gh-pages
 before_script:
-  - export http_proxy=http://sjc1intproxy01.crd.ge.com:8080/
-  - export https_proxy=http://sjc1intproxy01.crd.ge.com:8080/
-  - export no_proxy="localhost, 127.0.0.1, *.ge.com"
-  - git config --global http.sslVerify "false"
-  - git config --global http.proxy http://sjc1intproxy01.crd.ge.com:8080
-  - git config --global https.proxy http://sjc1intproxy01.crd.ge.com:8080
-  - npm config set proxy http://sjc1intproxy01.crd.ge.com:8080/
-  - npm config set https-proxy http://sjc1intproxy01.crd.ge.com:8080/
-script:
-  - npm -v
-  - node -v
-  - npm install
-  - bower install
-  - grunt
-#  - npm run-script build
+- npm install web-component-tester
+- npm install bower
+- export PATH=$PWD/node_modules/.bin:$PATH
+- bower install
