@@ -16,6 +16,8 @@
     max-width   : $drawer-max-width;
     margin-right: $drawer-mini-margin-right;
     box-shadow: none !important;
+    flex: 1 0 $drawer-max-width;
+
     @include media-breakpoint ('lg') {
       margin-top: 0;
     }

@@ -308,7 +308,8 @@
   min-height: 100%;
   max-width: 256px;
   margin-right: 1rem;
-  box-shadow: none !important; }
+  box-shadow: none !important;
+  flex: 1 0 256px; }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
     .drawer--persistent {
       margin-top: 0; } }
@@ -333,5 +334,5 @@
     color: white;
     color: var(--px-drawer-dark-font-color, white);
     background-color: var(--px-drawer-dark-background-color, #242326); }
-    .drawer--dark .drawer__button {
+    .drawer--dark {
       color: white; }

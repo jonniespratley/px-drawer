@@ -295,7 +295,10 @@
   min-height: 100%;
   max-width: 256px;
   margin-right: 1rem;
-  box-shadow: none !important; }
+  box-shadow: none !important;
+  -webkit-flex: 1 0 256px;
+      -ms-flex: 1 0 256px;
+          flex: 1 0 256px; }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
     .drawer--persistent {
       margin-top: 0; } }
