@@ -77,7 +77,7 @@ Custom property | Description | Default
     }
   </style>
   <template>
-  <!--  <div id="scrim" on-tap="toggle"></div>-->
+  <div id="scrim" on-tap="toggle"></div>
     <div id="drawer__content" class="drawer__content">
       <content id="contentContainer" select="*"></content>
     </div>
@@ -207,7 +207,7 @@ Custom property | Description | Default
      * @return {Number} The width of the drawer in pixels.
      */
       getWidth: function () {
-        return this.$.contentContainer.offsetWidth;
+        return this.offsetWidth;
       },
       /**
        * Opens the drawer.

@@ -60,7 +60,7 @@ $inuit-enable-margins: true;
 
   ///------------------------------------------------------
   /// .drawer--temporary
-  @include modifier ('temporary') {
+  @include modifier ('shadow') {
 
     box-shadow: $drawer-box-shadow;
   }

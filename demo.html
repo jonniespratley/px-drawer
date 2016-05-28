@@ -15,6 +15,10 @@
         background: #fff;
         border: 1px solid #ccc;
       }
+      .has-navbar{
+
+        padding-top: 56px;
+      }
       body,
       html {
         background: #eee;
@@ -40,31 +44,29 @@
     </style>
   </head>
   <body unresolved>
-    <article class="has-navbar">
-      <px-navbar title="px-drawer"></px-navbar>
+    <article class="">
+
       <div class="examples">
         <!-- TODO: Left Drawer -->
-        <px-drawer id="myLeftDrawer" align="left" theme="dark">
+        <px-drawer id="myLeftDrawer" align="left" theme="dark" fixed>
           <ul class="list-ui">
             <li>
-              <i class="fa fa-home fa-lg"></i>
-              <span class="hidden-mini-closed u-ml">Home</span>
+              <a href="#"><i class="fa fa-home fa-lg"></i>
+              <span class="hidden-mini-closed u-ml">Home</span></a>
             </li>
             <li>
-              <i class="fa fa-gear fa-lg"></i>
-              <span class="hidden-mini-closed u-ml">Settings</span>
+              <a href="#"><i class="fa fa-gear fa-lg"></i>
+              <span class="hidden-mini-closed u-ml">Settings</span></a>
             </li>
           </ul>
           <div class="hidden-mini-closed">
             <p>
               This is content inside the left drawer
             </p>
-            <button onclick="toggleDrawerType('myLeftDrawer', 'temporary')" class="btn">Temporary</button>
-            <button onclick="toggleDrawerType('myLeftDrawer', 'persistent')" class="btn">Persistent</button>
-            <button onclick="toggleDrawerType('myLeftDrawer', 'mini')" class="btn">Mini</button>
-          </div>
+        </div>
         </px-drawer>
-        <section class="viewport">
+        <section class="viewport has-navbar">
+          <px-navbar title="px-drawer"  shadow></px-navbar>
           <div class="box u-mb+">
             <h1>px-drawer</h1>
             <p>The px-drawer component lets you store content outside the viewport.</p>
@@ -80,6 +82,10 @@
               <li>mini: Recommended for Apps that need quick selection access alongside content</li>
             </ol>
             <div class="flex flex--col">
+              <button onclick="toggleDrawerType('myLeftDrawer', 'temporary')" class="btn">Temporary</button>
+              <button onclick="toggleDrawerType('myLeftDrawer', 'persistent')" class="btn">Persistent</button>
+              <button onclick="toggleDrawerType('myLeftDrawer', 'mini')" class="btn">Mini</button>
+
               <button class="btn btn--full" onclick="toggleDrawer('myLeftDrawer')">
                 Left
               </button>
