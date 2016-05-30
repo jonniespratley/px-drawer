@@ -175,7 +175,10 @@ Custom property | Description | Default
       /**
         * Handle toggling the drawer open or close.
         */
-      toggle: function () {
+      toggle: function (type) {
+        if(type){
+          this.type = type;
+        }
         this.opened = !this.opened;
       },
       /**
@@ -198,7 +201,7 @@ Custom property | Description | Default
         this.toggleClass('drawer--' + oldVal, false);
         this.toggleClass('drawer--' + newVal, true);
         if (this.persistent) {
-          this.toggleClass('drawer--temporary');
+        //  this.toggleClass('drawer--temporary');
         }
       },
       /**
