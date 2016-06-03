@@ -140,7 +140,7 @@ Custom property | Description | Default
         }
       },
       listeners: {
-        'drawer__content.tap': 'close',
+        //'drawer__content.tap': 'toggle',
         'iron-resize': '_resizeHandler'
       },
       observers: [
@@ -185,7 +185,12 @@ Custom property | Description | Default
         if(type){
           this.type = type;
         }
-        this.opened = !this.opened;
+        if(this.persistent){
+          return;
+        } else {
+          this.opened = !this.opened;
+        }
+
       },
       /**
        * Handle when a click is outside the drawer.
