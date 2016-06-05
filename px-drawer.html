@@ -46,13 +46,15 @@ Custom property | Description | Default
 
   <style>
     :host {
-      display: none;
+      }
+    :host .drawer {
       background-color: (--px-drawer-background-color, #242326);
       width: (--px-drawer-width, 256px);
+      @apply(--px-drawer);
     }
 
-    #scrim {
-      position: absolute;
+    :host .drawer__overlay {
+      position: fixed;
       top: 0;
       right: 0;
       bottom: 0;
@@ -61,14 +63,16 @@ Custom property | Description | Default
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
       opacity: 0;
-      background: var(--app-drawer-scrim-background, rgba(0, 0, 0, 0.5));
+      background: var(--px-drawer-overlay-background, rgba(0, 0, 0, 0.5));
+      z-index: -1;
     }
 
-    :host([opened]) > #scrim {
+    :host([opened]) > .drawer__overlay {
       opacity: 1;
+      z-index: 201;
     }
 
-    :host([opened][persistent]) > #scrim {
+    :host([opened][persistent]) > .drawer__overlay {
       visibility: hidden;
       /**
        * NOTE(keanulee): Keep both opacity: 0 and visibility: hidden to prevent the
@@ -76,17 +80,20 @@ Custom property | Description | Default
        */
       opacity: 0;
     }
+
   </style>
   <template>
-  <!-- <div id="scrim" on-tap="toggle"></div> -->
-    <div id="drawer__content" class="drawer__content">
-      <content id="contentContainer" select="*"></content>
+    <div id="overlay" class="drawer__overlay" on-tap="toggle"></div>
+    <div id="drawer" class="drawer">
+      <div id="drawerContent" class="drawer__content">
+        <content id="contentContainer" select="*"></content>
+      </div>
     </div>
   </template>
   <script>
     Polymer({
       is: 'px-drawer',
-      behaviors: [ Polymer.IronResizableBehavior],
+      behaviors: [Polymer.IronResizableBehavior],
       properties: {
         /**
          * The state of the drawer
@@ -98,7 +105,7 @@ Custom property | Description | Default
           reflectToAttribute: true,
           observer: '_openHandler'
         },
-      /**
+        /**
        * The drawer is a fixed width and cannot be closed.
        */
         persistent: {
@@ -140,39 +147,37 @@ Custom property | Description | Default
         }
       },
       listeners: {
-        //'drawer__content.tap': 'toggle',
+        'overlay.tap': 'toggle',
         'iron-resize': '_resizeHandler'
       },
-      observers: [
-        'resetLayout(isAttached, condenses, fixed)'
-      ],
+      observers: ['resetLayout(isAttached, condenses, fixed)'],
       _boundEscKeydownHandler: null,
       ready: function () {
         // Set the scroll direction so you can vertically scroll inside the drawer.
         this.setScrollDirection('y');
-
-      },
-      attached: function () {
-        // capture all clicks so that we can close the dropdown if the user clicks anywhere outside the dropdown Enable document-wide tap recognizer. Polymer.Gestures.add(document, 'tap', null); We should be using only 'tap', but this would be a breaking
-        // change. document.addEventListener(tapEvent, this._handleOffClick.bind(this), true);
-        Polymer.RenderStatus.afterNextRender(this, function () {
-
-        });
-        //this._boundEscKeydownHandler = this._escKeydownHandler.bind(this);
-        document.addEventListener('keydown', this._escKeydownHandler.bind(this));
-        this.toggleClass('drawer', true);
-        this.toggleClass('drawer--' + this.align, true);
+        this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
         if (this.theme) {
-          this.toggleClass('drawer--' + this.theme, true);
+          this.toggleClass('drawer--' + this.theme, true, this.$.drawer);
         }
+
         if (this.fixed) {
-          this.toggleClass('drawer--fixed', true);
+          this.toggleClass('drawer--fixed', true, this.$.drawer);
         }
+
         if (this.persistent) {
-          this.toggleClass('drawer--temporary');
-          this.toggleClass('drawer--persistent', true);
+          this.toggleClass('drawer--temporary', true, this.$.drawer);
+          this.toggleClass('drawer--persistent', true, this.$.drawer);
         }
+      },
+      attached: function () {
+        // capture all clicks so that we can close the dropdown if the user clicks anywhere outside the dropdown Enable document-wide tap recognizer.
+        //
+        //We should be using only 'tap', but this would be a breaking change.
+        Polymer.RenderStatus.afterNextRender(this, function () {});
+      //  Polymer.Gestures.add(document, 'tap', this._handleOffClick.bind(this));
+        //document.addEventListener('tap', this._handleOffClick.bind(this), true); this._boundEscKeydownHandler = this._escKeydownHandler.bind(this);
+        document.addEventListener('keydown', this._escKeydownHandler.bind(this));
 
       },
       detached: function () {
@@ -182,37 +187,34 @@ Custom property | Description | Default
         * Handle toggling the drawer open or close.
         */
       toggle: function (type) {
-        if(type){
-          this.type = type;
-        }
-        if(this.persistent){
-          return;
-        } else {
-          this.opened = !this.opened;
-        }
-
+        this.opened = !this.opened;
       },
       /**
        * Handle when a click is outside the drawer.
        */
       _handleOffClick: function (e) {
-        this.toggle();
+        if(this.opened){
+          this.close();
+        }
       },
       /**
        * Handle when the drawer opened state is changed.
        */
       _openHandler: function (newVal, oldVal) {
-        this.toggleClass('is-open', newVal);
+        console.log('_openHandler', newVal);
+        this.toggleClass('is-open', newVal, this.$.drawer);
         this.fire('toggle', this);
       },
       /**
        * Handle when the drawer type is changed.
        */
       _typeHandler: function (newVal, oldVal) {
-        this.toggleClass('drawer--' + oldVal, false);
-        this.toggleClass('drawer--' + newVal, true);
+        console.log('_typeHandler');
+        this.toggleClass('drawer--' + oldVal, false, this.$.drawer);
+        this.toggleClass('drawer--' + newVal, true, this.$.drawer);
+
         if (this.persistent) {
-        //  this.toggleClass('drawer--temporary');
+          //  this.toggleClass('drawer--temporary');
         }
       },
       /**
@@ -242,11 +244,11 @@ Custom property | Description | Default
           this.close();
         }
       },
-      resetLayout: function(){
+      resetLayout: function () {
         console.warn(this.tagName, 'resetLayout');
       },
 
-      _resizeHandler: function() {
+      _resizeHandler: function () {
         this.resetLayout();
       }
     });
