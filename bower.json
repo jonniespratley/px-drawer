@@ -38,6 +38,7 @@
   },
   "resolutions": {
     "polymer": "^1.4.0",
-    "px-theme": "^0.7.0"
+    "px-theme": "^0.7.0",
+    "polymer-font-awesome": "~0.1.5"
   }
 }
