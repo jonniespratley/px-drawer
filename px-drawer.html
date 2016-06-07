@@ -153,7 +153,6 @@ Custom property | Description | Default
       observers: ['resetLayout(isAttached, condenses, fixed)'],
       _boundEscKeydownHandler: null,
       ready: function () {
-        // Set the scroll direction so you can vertically scroll inside the drawer.
         this.setScrollDirection('y');
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
@@ -171,23 +170,20 @@ Custom property | Description | Default
         }
       },
       attached: function () {
-        // capture all clicks so that we can close the dropdown if the user clicks anywhere outside the dropdown Enable document-wide tap recognizer.
-        //
-        //We should be using only 'tap', but this would be a breaking change.
-        Polymer.RenderStatus.afterNextRender(this, function () {});
+          Polymer.RenderStatus.afterNextRender(this, function () {});
       //  Polymer.Gestures.add(document, 'tap', this._handleOffClick.bind(this));
-        //document.addEventListener('tap', this._handleOffClick.bind(this), true); this._boundEscKeydownHandler = this._escKeydownHandler.bind(this);
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
-
       },
       detached: function () {
         document.removeEventListener('keydown', this._boundEscKeydownHandler);
       },
       /**
         * Handle toggling the drawer open or close.
+        * @event px-drawer-toggle
         */
       toggle: function (type) {
         this.opened = !this.opened;
+        //this.fire('px-drawer-toggle', this);
       },
       /**
        * Handle when a click is outside the drawer.
@@ -201,7 +197,6 @@ Custom property | Description | Default
        * Handle when the drawer opened state is changed.
        */
       _openHandler: function (newVal, oldVal) {
-        console.log('_openHandler', newVal);
         this.toggleClass('is-open', newVal, this.$.drawer);
         this.fire('toggle', this);
       },
@@ -209,7 +204,6 @@ Custom property | Description | Default
        * Handle when the drawer type is changed.
        */
       _typeHandler: function (newVal, oldVal) {
-        console.log('_typeHandler');
         this.toggleClass('drawer--' + oldVal, false, this.$.drawer);
         this.toggleClass('drawer--' + newVal, true, this.$.drawer);
 
@@ -223,20 +217,25 @@ Custom property | Description | Default
      * @return {Number} The width of the drawer in pixels.
      */
       getWidth: function () {
-        return this.offsetWidth;
+        return this.$.drawerContent.offsetWidth;
       },
       /**
        * Opens the drawer.
        */
       open: function () {
         this.opened = true;
+        this.fire('px-drawer-open', this);
       },
       /**
        * Closes the drawer.
        */
       close: function () {
         this.opened = false;
+        this.fire('px-drawer-close', this);
       },
+      /**
+       * Handle when the esc key is pressed.
+       */
       _escKeydownHandler: function (event) {
         var ESC_KEYCODE = 27;
         if (event.keyCode === ESC_KEYCODE) {
@@ -244,10 +243,17 @@ Custom property | Description | Default
           this.close();
         }
       },
+      /**
+       * Handle re-calculating the layout and position.
+       * @event px-reset-layout
+       */
       resetLayout: function () {
-        console.warn(this.tagName, 'resetLayout');
+        //this.fire('px-drawer-reset-layout');
+      //  console.warn(this.tagName, 'resetLayout');
       },
-
+      /**
+       * Handle when iron-resize event fires.
+       */
       _resizeHandler: function () {
         this.resetLayout();
       }
