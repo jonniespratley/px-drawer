@@ -238,7 +238,7 @@ Custom property | Description | Default
        */
       _escKeydownHandler: function (event) {
         var ESC_KEYCODE = 27;
-        if (event.keyCode === ESC_KEYCODE) {
+        if (event.keyCode === ESC_KEYCODE && !this.persistent) {
           event.preventDefault();
           this.close();
         }
