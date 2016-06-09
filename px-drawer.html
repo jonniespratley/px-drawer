@@ -65,11 +65,13 @@ Custom property | Description | Default
       opacity: 0;
       background: var(--px-drawer-overlay-background, rgba(0, 0, 0, 0.5));
       z-index: -1;
+      visibility: hidden;
     }
 
     :host([opened]) > .drawer__overlay {
       opacity: 1;
       z-index: 201;
+      visibility: visible;
     }
 
     :host([opened][persistent]) > .drawer__overlay {
@@ -183,7 +185,7 @@ Custom property | Description | Default
         */
       toggle: function (type) {
         this.opened = !this.opened;
-        //this.fire('px-drawer-toggle', this);
+        this.fire('px-drawer-toggle', this.opened);
       },
       /**
        * Handle when a click is outside the drawer.
@@ -198,7 +200,7 @@ Custom property | Description | Default
        */
       _openHandler: function (newVal, oldVal) {
         this.toggleClass('is-open', newVal, this.$.drawer);
-        this.fire('toggle', this);
+        this.toggleClass('is-open', newVal, this.$.overlay);
       },
       /**
        * Handle when the drawer type is changed.
