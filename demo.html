@@ -48,7 +48,7 @@
 
       <div class="examples">
         <!-- TODO: Left Drawer -->
-        <px-drawer id="myLeftDrawer" align="left" theme="dark" fixed>
+        <px-drawer id="myLeftDrawer" align="left" theme="dark" fixed overlay swipe-open>
           <ul class="list-ui">
             <li>
               <a href="#"><i class="fa fa-home fa-lg"></i>
@@ -116,13 +116,18 @@
                 <div class="box">
                   <style>
                     #drawer1 {
-                      --px-drawer-background-color: lime;
+                      --px-drawer-background-color: #000;
                     }
                   </style>
                   <px-drawer id="drawer1" align="left">
-                    <p class="u-m">
-                      This is content inside of the drawer
-                    </p>
+                    <div class="u-m">
+                      <p>
+                        This is content inside of the drawer.
+                      </p>
+                      <p>
+                        You can close me by pressing the <code>ESC</code> key or invoking the <code>toggle</code> method.
+                      </p>
+                    </div>
                   </px-drawer>
                   <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
                     Toggle
@@ -138,13 +143,18 @@
                 <div class="box">
                   <style>
                     #drawer1-right {
-                      --px-drawer-background-color: lime;
+                      --px-drawer-background-color: #000;
                     }
                   </style>
                   <px-drawer id="drawer1-right" align="right">
-                    <p class="u-m">
-                      This is content inside of the drawer
-                    </p>
+                    <div class="u-m">
+                      <p>
+                        This is content inside of the drawer.
+                      </p>
+                      <p>
+                        You can close me by pressing the <code>ESC</code> key or invoking the <code>toggle</code> method.
+                      </p>
+                    </div>
                   </px-drawer>
                   <button class="btn btn--full" onclick="document.getElementById('drawer1-right').toggle()">
                     Toggle
@@ -189,9 +199,14 @@
                     }
                   </style>
                   <px-drawer id="drawer1-bottom" align="bottom">
-                    <p class="u-m">
-                      This is content inside of the drawer
-                    </p>
+                    <div class="u-m">
+                      <p>
+                        This is content inside of the drawer.
+                      </p>
+                      <p>
+                        You can close me by pressing the <code>ESC</code> key or invoking the <code>toggle</code> method.
+                      </p>
+                    </div>
                   </px-drawer>
                   <button class="btn btn--full" onclick="document.getElementById('drawer1-bottom').toggle()">
                     Toggle

@@ -19,6 +19,7 @@
       @include transform(translate3d(0, 0, 0));
     }
 
+/*
     @include media-breakpoint-down ('sm') {
       width: $drawer-width-small;
       width: var(--px-drawer-width, $drawer-width-small);
@@ -34,5 +35,6 @@
       width    : $drawer-width-large;
       width    : var(--px-drawer-width, $drawer-width-large);
     }
+    */
   }
 }

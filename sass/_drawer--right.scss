@@ -14,7 +14,7 @@
     height: $drawer-height;
     height: var(--px-drawer-height, $drawer-height);
     margin-right: 0;
-
+    max-width: var(--px-drawer-max-width, $drawer-max-width);
     &.is-open {
       @include transform(translate3d(0, 0, 0));
     }

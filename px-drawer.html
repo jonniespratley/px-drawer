@@ -32,8 +32,12 @@
 
 Custom property | Description | Default
 ------------ | ------------- | ------------
+`--px-drawer`   | Style mixin to be applied to the element | {}
+`--px-drawer-content`   | Style mixin to be applied to the content | {}
 `--px-drawer-background-color` | The background-color of the drawer  |  `#242326` *(gray10)*
 `--px-drawer-width` | The width of the drawer | `256px`
+`--px-drawer-height` | The height of the drawer | `100vh`
+`--px-drawer-overlay-background` | The background color of the overlay | `rgba(0, 0, 0, 0.5))`
 
 @element px-drawer.html
 @blurb px-drawer A responsive drawer.
@@ -43,14 +47,35 @@ Custom property | Description | Default
 -->
 <dom-module id="px-drawer">
   <link rel="stylesheet" href="css/px-drawer.css">
-
   <style>
     :host {
-      }
+
+
+    }
+
+    :host([opened]) {
+
+     }
+
+
     :host .drawer {
       background-color: (--px-drawer-background-color, #242326);
       width: (--px-drawer-width, 256px);
       @apply(--px-drawer);
+    }
+
+    :host .drawer__content{
+      @apply(--px-drawer-content);
+    }
+
+    :host([swipe-open]) > .drawer::after {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 100%;
+      visibility: visible;
+      width: 20px;
+      content: '';
     }
 
     :host .drawer__overlay {
@@ -68,24 +93,18 @@ Custom property | Description | Default
       visibility: hidden;
     }
 
-    :host([opened]) > .drawer__overlay {
+    :host([opened][overlay]) > .drawer__overlay {
       opacity: 1;
       z-index: 201;
       visibility: visible;
     }
-
     :host([opened][persistent]) > .drawer__overlay {
       visibility: hidden;
-      /**
-       * NOTE(keanulee): Keep both opacity: 0 and visibility: hidden to prevent the
-       * scrim from showing when toggling between closed and opened/persistent.
-       */
       opacity: 0;
     }
-
   </style>
   <template>
-    <div id="overlay" class="drawer__overlay" on-tap="toggle"></div>
+    <div id="overlay" class="drawer__overlay" on-tap="toggle" hidden="{{!overlay}}"></div>
     <div id="drawer" class="drawer">
       <div id="drawerContent" class="drawer__content">
         <content id="contentContainer" select="*"></content>
@@ -108,7 +127,7 @@ Custom property | Description | Default
           observer: '_openHandler'
         },
         /**
-       * The drawer is a fixed width and cannot be closed.
+       * The drawer is persistent and cannot be closed.
        */
         persistent: {
           type: Boolean,
@@ -116,11 +135,17 @@ Custom property | Description | Default
           reflectToAttribute: true
         },
         /**
-         * To position the drawer in fixed mode
+         * To position the drawer in fixed mode.
          */
         fixed: {
           type: Boolean,
           value: false
+        },
+        /**
+         * Enable overlay when drawer is opened.
+         */
+        overlay: {
+          type: Boolean
         },
         /**
          * The theme to apply to the drawer (`dark`)
@@ -131,7 +156,7 @@ Custom property | Description | Default
           reflectToAttribute: true
         },
         /**
-         * The alignment of the drawer on the screen (`left`, `right`)
+         * The alignment of the drawer on the screen (`left`, `right`, `top`, `bottom`)
          */
         align: {
           type: String,
@@ -146,7 +171,15 @@ Custom property | Description | Default
           value: 'temporary',
           reflectToAttribute: true,
           observer: '_typeHandler'
-        }
+        },
+        /**
+        * Create an area at the edge of the screen to swipe open the drawer.
+        */
+       swipeOpen: {
+         type: Boolean,
+         value: false,
+         reflectToAttribute: true
+       }
       },
       listeners: {
         'overlay.tap': 'toggle',
@@ -156,25 +189,27 @@ Custom property | Description | Default
       _boundEscKeydownHandler: null,
       ready: function () {
         this.setScrollDirection('y');
+
+
+      },
+      attached: function () {
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          document.addEventListener('keydown', this._escKeydownHandler.bind(this));
+
+        });
+
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
         if (this.theme) {
           this.toggleClass('drawer--' + this.theme, true, this.$.drawer);
         }
-
         if (this.fixed) {
           this.toggleClass('drawer--fixed', true, this.$.drawer);
         }
-
         if (this.persistent) {
           this.toggleClass('drawer--temporary', true, this.$.drawer);
           this.toggleClass('drawer--persistent', true, this.$.drawer);
         }
-      },
-      attached: function () {
-          Polymer.RenderStatus.afterNextRender(this, function () {});
-      //  Polymer.Gestures.add(document, 'tap', this._handleOffClick.bind(this));
-        document.addEventListener('keydown', this._escKeydownHandler.bind(this));
       },
       detached: function () {
         document.removeEventListener('keydown', this._boundEscKeydownHandler);
@@ -191,7 +226,7 @@ Custom property | Description | Default
        * Handle when a click is outside the drawer.
        */
       _handleOffClick: function (e) {
-        if(this.opened){
+        if (this.opened) {
           this.close();
         }
       },
@@ -208,7 +243,6 @@ Custom property | Description | Default
       _typeHandler: function (newVal, oldVal) {
         this.toggleClass('drawer--' + oldVal, false, this.$.drawer);
         this.toggleClass('drawer--' + newVal, true, this.$.drawer);
-
         if (this.persistent) {
           //  this.toggleClass('drawer--temporary');
         }
@@ -223,6 +257,7 @@ Custom property | Description | Default
       },
       /**
        * Opens the drawer.
+       * @event px-drawer-open
        */
       open: function () {
         this.opened = true;
@@ -230,6 +265,7 @@ Custom property | Description | Default
       },
       /**
        * Closes the drawer.
+       * @event px-drawer-close
        */
       close: function () {
         this.opened = false;
@@ -247,11 +283,11 @@ Custom property | Description | Default
       },
       /**
        * Handle re-calculating the layout and position.
-       * @event px-reset-layout
+       * @event px-drawer-reset-layout
        */
       resetLayout: function () {
-        //this.fire('px-drawer-reset-layout');
-      //  console.warn(this.tagName, 'resetLayout');
+        this.fire('px-drawer-reset-layout');
+        //  console.warn(this.tagName, 'resetLayout');
       },
       /**
        * Handle when iron-resize event fires.
