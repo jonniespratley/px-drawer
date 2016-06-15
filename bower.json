@@ -24,11 +24,12 @@
   ],
   "dependencies": {
     "polymer": "~1.4.0",
+    "hammerjs": "~2.0.8",
     "iron-dropdown": "PolymerElements/iron-dropdown#~1.3.0",
-    "px-navbar": "https://github.com/PredixDev/px-navbar.git",
-    "px-mobile-design": "https://github.com/PredixDev/px-mobile-design.git"
+    "px-navbar": "https://github.com/PredixDev/px-navbar.git"
   },
   "devDependencies": {
+    "px-mobile-design": "https://github.com/PredixDev/px-mobile-design.git",
     "iron-component-page": "PolymerElements/iron-component-page#~1.0.5",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.3",
     "px-spacing-design": "https://github.com/PredixDev/px-spacing-design.git",
