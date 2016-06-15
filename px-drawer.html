@@ -1,5 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
+
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
+<script src="../hammerjs/hammer.min.js"></script>
+
 <!--
 `px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
 
@@ -50,14 +53,10 @@ Custom property | Description | Default
   <!-- <link rel="stylesheet" href="css/px-drawer.css"> -->
   <style>
     :host {
-
-
-    }
+      }
 
     :host([opened]) {
-
-     }
-
+      }
 
     :host .drawer {
       background-color: (--px-drawer-background-color, #242326);
@@ -65,7 +64,7 @@ Custom property | Description | Default
       @apply(--px-drawer);
     }
 
-    :host .drawer__content{
+    :host .drawer__content {
       @apply(--px-drawer-content);
     }
 
@@ -103,6 +102,7 @@ Custom property | Description | Default
       visibility: hidden;
       opacity: 0;
     }
+
   </style>
   <template>
     <div id="overlay" class="drawer__overlay" on-tap="toggle" hidden="{{!overlay}}"></div>
@@ -162,7 +162,8 @@ Custom property | Description | Default
         align: {
           type: String,
           reflectToAttribute: true,
-          value: 'left'
+          value: 'left',
+          observer: '_typeHandler'
         },
         /**
          * The type of drawer (`temporary`, `persistent`, `mini`)
@@ -176,11 +177,16 @@ Custom property | Description | Default
         /**
         * Create an area at the edge of the screen to swipe open the drawer.
         */
-       swipeOpen: {
-         type: Boolean,
-         value: false,
-         reflectToAttribute: true
-       }
+        swipeOpen: {
+          type: Boolean,
+          value: true,
+          reflectToAttribute: true
+        },
+        swipeClose: {
+          type: Boolean,
+          value: true,
+          reflectToAttribute: true
+        }
       },
       listeners: {
         'overlay.tap': 'toggle',
@@ -192,6 +198,35 @@ Custom property | Description | Default
         this.setScrollDirection('y');
 
 
+        var mc = new Hammer(this.$.drawer);
+
+        // listen to events...
+        mc.on("panleft panup panright pandown", this._handlePan.bind(this));
+      },
+      _handlePan: function(e){
+        switch (e.type) {
+          case 'panup':
+            if(this.align === 'bottom'){
+              this.open();
+            }
+            break;
+          case 'pandown':
+            if(this.align === 'bottom'){
+              this.close();
+            }
+            break;
+          case 'panleft':
+            if(this.align === 'left'){
+              this.close();
+            }
+            break;
+          case 'panright':
+            this.open();
+            break;
+          default:
+
+        }
+        console.log(e,  e.type +" gesture detected.");
       },
       attached: function () {
         Polymer.RenderStatus.afterNextRender(this, function () {
@@ -261,16 +296,22 @@ Custom property | Description | Default
        * @event px-drawer-open
        */
       open: function () {
-        this.opened = true;
-        this.fire('px-drawer-open', this);
+        if(!this.persistent){
+          this.opened = true;
+          this.fire('px-drawer-open', this);  
+        }
+
       },
       /**
        * Closes the drawer.
        * @event px-drawer-close
        */
       close: function () {
-        this.opened = false;
-        this.fire('px-drawer-close', this);
+        if(!this.persistent){
+          this.opened = false;
+          this.fire('px-drawer-close', this);
+        }
+
       },
       /**
        * Handle when the esc key is pressed.
