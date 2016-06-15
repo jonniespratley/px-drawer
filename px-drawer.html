@@ -204,6 +204,7 @@ Custom property | Description | Default
         mc.on("panleft panup panright pandown", this._handlePan.bind(this));
       },
       _handlePan: function(e){
+        this._moveDrawer(e.deltaX);
         switch (e.type) {
           case 'panup':
             if(this.align === 'bottom'){
@@ -226,7 +227,7 @@ Custom property | Description | Default
           default:
 
         }
-        console.log(e,  e.type +" gesture detected.");
+      //  console.log(e,  e.type +" gesture detected.");
       },
       attached: function () {
         Polymer.RenderStatus.afterNextRender(this, function () {
@@ -298,7 +299,7 @@ Custom property | Description | Default
       open: function () {
         if(!this.persistent){
           this.opened = true;
-          this.fire('px-drawer-open', this);  
+          this.fire('px-drawer-open', this);
         }
 
       },
@@ -336,6 +337,31 @@ Custom property | Description | Default
        */
       _resizeHandler: function () {
         this.resetLayout();
+      },
+      /**
+       * Handle moving the drawer
+       * @param translateX
+       * @private
+       */
+      _moveDrawer: function(translateX) {
+        var _content = this.$.drawer;
+      //  this.transform(this._transformForTranslateX(translateX), _content);
+      //  this.toggleClass('is-open', this.underlayOpened, _content);
+        this.toggleClass('transition', this._transition, _content);
+        this.toggleClass('dragging', this._dragging, _content);
+
+      },
+      /**
+       * Handle transforming the element.
+       * @param translateX
+       * @returns {*}
+       * @private
+       */
+      _transformForTranslateX: function(translateX) {
+        if (translateX === null) {
+          return 'translate3d(0, 0, 0)';
+        }
+        return 'translate3d(' + translateX + 'px, 0, 0)';
       }
     });
   </script>
