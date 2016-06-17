@@ -192,6 +192,9 @@ Custom property | Description | Default
           value: true,
           reflectToAttribute: true
         },
+        /**
+        * Create an area the screen to swipe close the drawer.
+        */
         swipeClose: {
           type: Boolean,
           value: true,
@@ -206,12 +209,6 @@ Custom property | Description | Default
       _boundEscKeydownHandler: null,
       ready: function () {
         this.setScrollDirection('y');
-
-
-        var mc = new Hammer(this.$.drawer);
-
-        // listen to events...
-        mc.on("panleft panup panright pandown", this._handlePan.bind(this));
       },
       _handlePan: function(e){
         this._moveDrawer(e.deltaX);
@@ -240,8 +237,10 @@ Custom property | Description | Default
       //  console.log(e,  e.type +" gesture detected.");
       },
       attached: function () {
+        var mc = new Hammer(this.$.drawer);
+        mc.on("panleft panup panright pandown", this._handlePan.bind(this));
+document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         Polymer.RenderStatus.afterNextRender(this, function () {
-          document.addEventListener('keydown', this._escKeydownHandler.bind(this));
 
         });
 
@@ -259,7 +258,9 @@ Custom property | Description | Default
         }
       },
       detached: function () {
-        document.removeEventListener('keydown', this._boundEscKeydownHandler);
+        if(this._boundEscKeydownHandler){
+          document.removeEventListener('keydown', this._boundEscKeydownHandler);
+        }
       },
       /**
         * Handle toggling the drawer open or close.
