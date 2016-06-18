@@ -62,11 +62,9 @@ Custom property | Description | Default
   <link rel="import" type="css" href="css/px-drawer.css">
   <!-- <link rel="stylesheet" href="css/px-drawer.css"> -->
   <style>
-    :host {
-      }
+    :host {}
 
-    :host([opened]) {
-      }
+    :host([opened]) {}
 
     :host .drawer {
       background-color: (--px-drawer-background-color, #242326);
@@ -210,21 +208,21 @@ Custom property | Description | Default
       ready: function () {
         this.setScrollDirection('y');
       },
-      _handlePan: function(e){
+      _handlePan: function (e) {
         this._moveDrawer(e.deltaX);
         switch (e.type) {
           case 'panup':
-            if(this.align === 'bottom'){
+            if (this.align === 'bottom') {
               this.open();
             }
             break;
           case 'pandown':
-            if(this.align === 'bottom'){
+            if (this.align === 'bottom') {
               this.close();
             }
             break;
           case 'panleft':
-            if(this.align === 'left'){
+            if (this.align === 'left') {
               this.close();
             }
             break;
@@ -234,15 +232,13 @@ Custom property | Description | Default
           default:
 
         }
-      //  console.log(e,  e.type +" gesture detected.");
+        //  console.log(e,  e.type +" gesture detected.");
       },
       attached: function () {
         var mc = new Hammer(this.$.drawer);
         mc.on("panleft panup panright pandown", this._handlePan.bind(this));
-document.addEventListener('keydown', this._escKeydownHandler.bind(this));
-        Polymer.RenderStatus.afterNextRender(this, function () {
-
-        });
+        document.addEventListener('keydown', this._escKeydownHandler.bind(this));
+        Polymer.RenderStatus.afterNextRender(this, function () {});
 
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
@@ -258,7 +254,7 @@ document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         }
       },
       detached: function () {
-        if(this._boundEscKeydownHandler){
+        if (this._boundEscKeydownHandler) {
           document.removeEventListener('keydown', this._boundEscKeydownHandler);
         }
       },
@@ -308,7 +304,7 @@ document.addEventListener('keydown', this._escKeydownHandler.bind(this));
        * @event px-drawer-open
        */
       open: function () {
-        if(!this.persistent){
+        if (!this.persistent) {
           this.opened = true;
           this.fire('px-drawer-open', this);
         }
@@ -319,7 +315,7 @@ document.addEventListener('keydown', this._escKeydownHandler.bind(this));
        * @event px-drawer-close
        */
       close: function () {
-        if(!this.persistent){
+        if (!this.persistent) {
           this.opened = false;
           this.fire('px-drawer-close', this);
         }
@@ -354,10 +350,9 @@ document.addEventListener('keydown', this._escKeydownHandler.bind(this));
        * @param translateX
        * @private
        */
-      _moveDrawer: function(translateX) {
+      _moveDrawer: function (translateX) {
         var _content = this.$.drawer;
-      //  this.transform(this._transformForTranslateX(translateX), _content);
-      //  this.toggleClass('is-open', this.underlayOpened, _content);
+        //  this.transform(this._transformForTranslateX(translateX), _content);  this.toggleClass('is-open', this.underlayOpened, _content);
         this.toggleClass('transition', this._transition, _content);
         this.toggleClass('dragging', this._dragging, _content);
 
@@ -368,7 +363,7 @@ document.addEventListener('keydown', this._escKeydownHandler.bind(this));
        * @returns {*}
        * @private
        */
-      _transformForTranslateX: function(translateX) {
+      _transformForTranslateX: function (translateX) {
         if (translateX === null) {
           return 'translate3d(0, 0, 0)';
         }
