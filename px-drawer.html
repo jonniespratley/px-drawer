@@ -123,7 +123,9 @@ Custom property | Description | Default
   <script>
     Polymer({
       is: 'px-drawer',
-      behaviors: [Polymer.IronResizableBehavior],
+      behaviors: [
+        Polymer.IronResizableBehavior
+      ],
       properties: {
         /**
          * The state of the drawer
@@ -186,14 +188,6 @@ Custom property | Description | Default
         * Create an area at the edge of the screen to swipe open the drawer.
         */
         swipeOpen: {
-          type: Boolean,
-          value: true,
-          reflectToAttribute: true
-        },
-        /**
-        * Create an area the screen to swipe close the drawer.
-        */
-        swipeClose: {
           type: Boolean,
           value: true,
           reflectToAttribute: true
@@ -332,18 +326,26 @@ Custom property | Description | Default
         }
       },
       /**
-       * Handle re-calculating the layout and position.
-       * @event px-drawer-reset-layout
+       * Resets the layout. If you changed the size of app-header via CSS
+       * you can notify the changes by either firing the `iron-resize` event
+       * or calling `resetLayout` directly.
+       *
+       * @method resetLayout
        */
+      /**
+        * Fired when drawer is reset
+        * @event px-drawer-layout-reset
+        */
       resetLayout: function () {
-        this.fire('px-drawer-reset-layout');
-        //  console.warn(this.tagName, 'resetLayout');
+        this.debounce('_resetLayout', function () {
+          this.fire('px-drawer-reset-layout', this);
+        }, 1);
       },
       /**
        * Handle when iron-resize event fires.
        */
       _resizeHandler: function () {
-        this.resetLayout();
+        //this.resetLayout();
       },
       /**
        * Handle moving the drawer
