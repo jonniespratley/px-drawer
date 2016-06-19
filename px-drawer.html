@@ -78,7 +78,7 @@ Custom property | Description | Default
 
     :host([swipe-open]) > .drawer::after {
       position: fixed;
-      top: 0;
+      top: 56px;
       bottom: 0;
       left: 100%;
       visibility: visible;
@@ -246,6 +246,10 @@ Custom property | Description | Default
           this.toggleClass('drawer--temporary', true, this.$.drawer);
           this.toggleClass('drawer--persistent', true, this.$.drawer);
         }
+        this.debounce('resetLayout', function() {
+          this.fire('px-drawer-layout-reset');
+          console.warn(this.tagName, 'attached');
+        }, 250);
       },
       detached: function () {
         if (this._boundEscKeydownHandler) {
