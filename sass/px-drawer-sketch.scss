@@ -32,6 +32,8 @@ $inuit-enable-margins: true;
   @include transform(translate3d(0, 0, 0));
   display   : block;
   position  : absolute;
+  font-size: $inuit-base-font-size;
+  text-align: left;
 
   transition: $drawer-transition;
   //will-change: translate;

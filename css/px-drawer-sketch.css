@@ -88,6 +88,8 @@
   transform: translate3d(0, 0, 0);
   display: block;
   position: absolute;
+  font-size: 15px;
+  text-align: left;
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
   visibility: hidden; }
   .drawer--fixed {
