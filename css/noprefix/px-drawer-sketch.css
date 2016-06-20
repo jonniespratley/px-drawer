@@ -96,7 +96,8 @@
   .drawer * {
     user-select: none; }
   .drawer.is-open {
-    visibility: visible; }
+    visibility: visible;
+    transform: translate3d(0, 0, 0) !important; }
     .drawer.is-open .drawer__mask {
       opacity: 1;
       visibility: visible; }
@@ -312,8 +313,10 @@
   @media (max-width: 68.2rem) {
     .drawer--persistent {
       transform: translate3d(-100%, 0, 0) !important;
-      position: absolute; }
+      position: absolute;
+      visibility: hidden; }
       .drawer--persistent.is-open {
+        visibility: visible;
         transform: translate3d(0, 0, 0); } }
   .drawer--persistent.drawer--right {
     float: right;

@@ -37,6 +37,11 @@ $inuit-enable-margins: true;
   //will-change: translate;
   visibility: hidden;
 
+  @include modifier ('persistent') {
+    &.is-open{
+
+    }
+  }
   @include modifier ('fixed') {
     position: fixed !important;
   }
@@ -47,6 +52,7 @@ $inuit-enable-margins: true;
 
   &.is-open {
     visibility: visible;
+    transform: translate3d(0, 0, 0) !important;
 
     .drawer__mask {
       opacity   : 1;
