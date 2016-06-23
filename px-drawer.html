@@ -11,7 +11,8 @@
  -->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
-<script src="../hammerjs/hammer.min.js"></script>
+<link rel="import" href="hammer-import.html">
+<link rel="import" href="px-drawer-styles.html">
 
 <!--
 `px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
@@ -59,8 +60,11 @@ Custom property | Description | Default
 @homepage index.html
 -->
 <dom-module id="px-drawer">
-  <link rel="import" type="css" href="css/px-drawer.css">
+  <!-- <link rel="import" type="css" href="css/px-drawer.css"> -->
   <!-- <link rel="stylesheet" href="css/px-drawer.css"> -->
+  <style include="px-drawer-css"></style>
+
+  <template>
   <style>
     :host {}
 
@@ -112,7 +116,6 @@ Custom property | Description | Default
     }
 
   </style>
-  <template>
     <div id="overlay" class="drawer__overlay" on-tap="toggle" hidden$="{{!overlay}}"></div>
     <div id="drawer" class="drawer">
       <div id="drawerContent" class="drawer__content">

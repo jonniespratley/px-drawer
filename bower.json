@@ -26,7 +26,8 @@
     "polymer": "~1.4.0",
     "hammerjs": "~2.0.8",
     "iron-dropdown": "PolymerElements/iron-dropdown#~1.3.0",
-    "px-navbar": "https://github.com/PredixDev/px-navbar.git"
+    "px-navbar": "https://github.com/PredixDev/px-navbar.git",
+    "iron-resizable-behavior": "PolymerElements/iron-resizable-behavior#~1.0.3"
   },
   "devDependencies": {
     "px-mobile-design": "https://github.com/PredixDev/px-mobile-design.git",
