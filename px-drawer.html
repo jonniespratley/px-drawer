@@ -77,6 +77,7 @@ Custom property | Description | Default
     }
 
     :host .drawer__content {
+      overflow-x: hidden;
       @apply(--px-drawer-content);
     }
 
@@ -104,7 +105,9 @@ Custom property | Description | Default
       z-index: -1;
       visibility: hidden;
     }
-
+    :host([opened]) .drawer{
+      background-color: crimson;
+    }
     :host([opened][overlay]) > .drawer__overlay {
       opacity: 1;
       z-index: 201;
@@ -156,6 +159,13 @@ Custom property | Description | Default
           value: false
         },
         /**
+         * To position the drawer in mini mode.
+         */
+        mini: {
+          type: Boolean,
+          value: false
+        },
+        /**
          * Enable overlay when drawer is opened.
          */
         overlay: {
@@ -194,6 +204,15 @@ Custom property | Description | Default
           type: Boolean,
           value: true,
           reflectToAttribute: true
+        },
+        /**
+         * The modifiers to apply to the element (bare, tiny, small, large, huge, etc)
+         */
+        modifier: {
+          type: String,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_handleModifier'
         }
       },
       listeners: {
@@ -289,6 +308,20 @@ Custom property | Description | Default
         this.toggleClass('drawer--' + newVal, true, this.$.drawer);
         if (this.persistent) {
           //  this.toggleClass('drawer--temporary');
+        }
+      },
+      _handleModifier: function (newVal, oldVal) {
+        var _this = this,
+          klass,
+          types;
+        klass = 'drawer--' + oldVal;
+        _this.toggleClass(klass, false, _this.$.drawer);
+        if (_this.modifier) {
+          types = _this.modifier.split(' ');
+          for (var i = 0; i < types.length; i++) {
+            klass = 'drawer--' + types[i];
+            _this.toggleClass(klass, true, _this.$.drawer);
+          }
         }
       },
       /**
