@@ -13,7 +13,7 @@ $drawer-dark-background-color : $gray10;
 
 $drawer-dark-font-color       : $white;
 $drawer-box-shadow            : 0 0 10px rgba(0, 0, 0, 0.4);
-$drawer-max-width             : 256px;
+$drawer-max-width             : 100%;
 $drawer-top-width             : 100%;
 $drawer-bottom-height         : 45%;
 $drawer-bottom-height-small   : 35%;
@@ -30,7 +30,7 @@ $drawer-mini-margin-right     : $inuit-base-spacing-unit;
 
 $drawer-persistent-transition : $drawer-transition;
 
-$drawer-height                : 100vh;
+$drawer-height                : 100%;
 $drawer-width                 : 256px;
 $drawer-max-width             : 256px;
 $drawer-width-xsmall          : 256px;

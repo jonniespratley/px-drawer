@@ -2,7 +2,7 @@
 @import "px-mobile-design/sass/_mixins.scss";
 /// Drawer -
 ///
-.drawer {
+@include b('drawer') {
 
   ///------------------------------------------------------
   /// .drawer--right
@@ -11,10 +11,11 @@
     top   : 0;
     bottom: 0;
     right : 0;
-    height: $drawer-height;
+
     height: var(--px-drawer-height, $drawer-height);
     margin-right: 0;
     max-width: var(--px-drawer-max-width, $drawer-max-width);
+    text-align: left;
     &.is-open {
       @include transform(translate3d(0, 0, 0));
     }

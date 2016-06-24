@@ -2,7 +2,7 @@
 @import "px-mobile-design/sass/_mixins.scss";
 /// Drawer - Mini modifier
 ///
-.drawer {
+@include b('drawer') {
 
   ///------------------------------------------------------
   /// .drawer--mini
@@ -16,7 +16,7 @@
     width     : $drawer-mini-width;
     overflow  : hidden;
     text-align: left;
-    min-height: 100vh;
+
     //  margin-right: $drawer-mini-margin-right;
 
     .hidden-mini-closed,

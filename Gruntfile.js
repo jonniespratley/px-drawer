@@ -70,6 +70,14 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+      css: {
+        files: ['css/*.css'],
+        tasks: ['cssmin', 'polymer-css-compiler'],
+        options: {
+          interrupt: true,
+          livereload: true
+        }
+      },
       htmljs: {
         files: ['*.html', '*.js'],
         options: {

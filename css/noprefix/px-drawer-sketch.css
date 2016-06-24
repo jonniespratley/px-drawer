@@ -193,13 +193,6 @@
   -webkit-transform: translate3d(-100%, 0, 0);
   -ms-transform: translate3d(-100%, 0, 0);
   transform: translate3d(-100%, 0, 0);
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 256px;
-  height: 100vh;
-  width: var(--px-drawer-width, 256px);
-  height: var(--px-drawer-height, 100vh);
   /*
     @include media-breakpoint-down ('sm') {
       width: $drawer-width-small;
@@ -229,10 +222,10 @@
   top: 0;
   bottom: 0;
   right: 0;
-  height: 100vh;
-  height: var(--px-drawer-height, 100vh);
+  height: var(--px-drawer-height, 100%);
   margin-right: 0;
-  max-width: var(--px-drawer-max-width, 256px); }
+  max-width: var(--px-drawer-max-width, 256px);
+  text-align: left; }
   .drawer--right.is-open {
     -webkit-transform: translate3d(0, 0, 0);
     -ms-transform: translate3d(0, 0, 0);
@@ -261,8 +254,7 @@
   float: left;
   width: 44px;
   overflow: hidden;
-  text-align: left;
-  min-height: 100vh; }
+  text-align: left; }
   .drawer--mini .hidden-mini-closed,
   .drawer--mini .table-row__content {
     transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1); }
@@ -298,29 +290,17 @@
       visibility: hidden;
       overflow: hidden; }
 
-.drawer--persistent {
+.drawer--static {
   transform: translate3d(0, 0, 0);
   transition: all 0.5s cubic-bezier(0.1, 0.7, 0.1, 1);
-  position: static;
+  position: inherit;
   visibility: visible;
   float: left;
-  min-height: 100%;
-  max-width: 256px;
-  margin-right: 1rem;
-  box-shadow: none !important;
   flex: 1 0 256px; }
   @media screen and (min-width: 68.2666666667rem) and (max-width: 80rem) {
-    .drawer--persistent {
+    .drawer--static {
       margin-top: 0; } }
-  @media (max-width: 68.2rem) {
-    .drawer--persistent {
-      transform: translate3d(-100%, 0, 0) !important;
-      position: absolute;
-      visibility: hidden; }
-      .drawer--persistent.is-open {
-        visibility: visible;
-        transform: translate3d(0, 0, 0); } }
-  .drawer--persistent.drawer--right {
+  .drawer--static.drawer--right {
     float: right;
     position: static;
     margin-right: 0 !important; }

@@ -11,6 +11,7 @@
  -->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../iron-fit-behavior/iron-fit-behavior.html">
 <link rel="import" href="hammer-import.html">
 <link rel="import" href="px-drawer-styles.html">
 
@@ -66,13 +67,16 @@ Custom property | Description | Default
 
   <template>
   <style>
-    :host {}
+    :host {
+      display: block;
+    }
 
     :host([opened]) {}
 
     :host .drawer {
-      background-color: (--px-drawer-background-color, #242326);
-      width: (--px-drawer-width, 256px);
+      background-color: var(--px-drawer-background-color, #242326);
+      width: var(--px-drawer-width, 256px);
+      height: var(--px-drawer-height, 100%);
       @apply(--px-drawer);
     }
 
@@ -104,17 +108,28 @@ Custom property | Description | Default
       background: var(--px-drawer-overlay-background, rgba(0, 0, 0, 0.5));
       z-index: -1;
       visibility: hidden;
+      display: none;
+      @apply(--px-drawer-overlay);
     }
-    :host([opened]) .drawer{
+
+    :host([type=persistent]){
       background-color: crimson;
     }
+
+    :host([opened]) .drawer{
+      @apply(--px-drawer-open);
+    }
+
     :host([opened][overlay]) > .drawer__overlay {
       opacity: 1;
       z-index: 201;
       visibility: visible;
+      display: block;
     }
-    :host([opened][persistent]) > .drawer__overlay {
+
+    :host([opened][persistent]) > .drawer__overlay{
       visibility: hidden;
+
       opacity: 0;
     }
 
@@ -130,7 +145,8 @@ Custom property | Description | Default
     Polymer({
       is: 'px-drawer',
       behaviors: [
-        Polymer.IronResizableBehavior
+        Polymer.IronResizableBehavior,
+        Polymer.IronFitBehavior
       ],
       properties: {
         /**
@@ -223,39 +239,19 @@ Custom property | Description | Default
       _boundEscKeydownHandler: null,
       ready: function () {
         this.setScrollDirection('y');
+      //  this.autoFitOnAttach = true;
+        //this.horizontalAlign = this.align;
       },
-      _handlePan: function (e) {
-        this._moveDrawer(e.deltaX);
-        switch (e.type) {
-          case 'panup':
-            if (this.align === 'bottom') {
-              this.open();
-            }
-            break;
-          case 'pandown':
-            if (this.align === 'bottom') {
-              this.close();
-            }
-            break;
-          case 'panleft':
-            if (this.align === 'left') {
-              this.close();
-            }
-            break;
-          case 'panright':
-            this.open();
-            break;
-          default:
 
-        }
-        //  console.log(e,  e.type +" gesture detected.");
-      },
       attached: function () {
+
+        Polymer.RenderStatus.afterNextRender(this, function () {});
+        this._init();
+      },
+      _init: function(){
         var mc = new Hammer(this.$.drawer);
         mc.on("panleft panup panright pandown", this._handlePan.bind(this));
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
-        Polymer.RenderStatus.afterNextRender(this, function () {});
-
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
         if (this.theme) {
@@ -284,6 +280,32 @@ Custom property | Description | Default
       toggle: function (type) {
         this.opened = !this.opened;
         this.fire('px-drawer-toggle', this.opened);
+      },
+      _handlePan: function (e) {
+        this._moveDrawer(e.deltaX);
+        switch (e.type) {
+          case 'panup':
+            if (this.align === 'bottom') {
+              this.open();
+            }
+            break;
+          case 'pandown':
+            if (this.align === 'bottom') {
+              this.close();
+            }
+            break;
+          case 'panleft':
+            if (this.align === 'left') {
+              this.close();
+            }
+            break;
+          case 'panright':
+            this.open();
+            break;
+          default:
+
+        }
+        //  console.log(e,  e.type +" gesture detected.");
       },
       /**
        * Handle when a click is outside the drawer.

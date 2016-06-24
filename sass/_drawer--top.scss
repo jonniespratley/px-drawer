@@ -2,7 +2,7 @@
 @import "px-mobile-design/sass/_mixins.scss";
 /// Drawer - Top modifier
 ///
-.drawer {
+@include b('drawer') {
 
   ///------------------------------------------------------
   /// .drawer--top
