@@ -12,7 +12,10 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../iron-fit-behavior/iron-fit-behavior.html">
+<!--
 <link rel="import" href="hammer-import.html">
+-->
+
 <link rel="import" href="px-drawer-styles.html">
 
 <!--
@@ -61,11 +64,9 @@ Custom property | Description | Default
 @homepage index.html
 -->
 <dom-module id="px-drawer">
-  <!-- <link rel="import" type="css" href="css/px-drawer.css"> -->
-  <!-- <link rel="stylesheet" href="css/px-drawer.css"> -->
   <style include="px-drawer-css"></style>
 
-  <template>
+  <template strip-whitespace>
   <style>
     :host {
       display: block;
@@ -232,6 +233,7 @@ Custom property | Description | Default
         }
       },
       listeners: {
+        //'drawer.track': '_handleTrack',
         'overlay.tap': 'toggle',
         'iron-resize': '_resizeHandler'
       },
@@ -249,8 +251,10 @@ Custom property | Description | Default
         this._init();
       },
       _init: function(){
-        var mc = new Hammer(this.$.drawer);
-        mc.on("panleft panup panright pandown", this._handlePan.bind(this));
+        //var mc = new Hammer(this.$.drawer);
+        //mc.on("panleft panup panright pandown", this._handlePan.bind(this));
+
+
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
@@ -280,6 +284,9 @@ Custom property | Description | Default
       toggle: function (type) {
         this.opened = !this.opened;
         this.fire('px-drawer-toggle', this.opened);
+      },
+      _handleTrack: function (e) {
+        console.log('_handleTrack', e);
       },
       _handlePan: function (e) {
         this._moveDrawer(e.deltaX);
