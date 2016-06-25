@@ -80,6 +80,9 @@ Custom property | Description | Default
       height: var(--px-drawer-height, 100%);
       @apply(--px-drawer);
     }
+    :host([mini]) .drawer{
+      width: var(--px-drawer-mini-width, 54px);
+    }
 
     :host .drawer__content {
       overflow-x: hidden;
@@ -235,6 +238,7 @@ Custom property | Description | Default
       listeners: {
         //'drawer.track': '_handleTrack',
         'overlay.tap': 'toggle',
+        'drawerContent.tap': 'toggle',
         'iron-resize': '_resizeHandler'
       },
       observers: ['resetLayout(fixed)'],
@@ -282,8 +286,11 @@ Custom property | Description | Default
         * @event px-drawer-toggle
         */
       toggle: function (type) {
-        this.opened = !this.opened;
-        this.fire('px-drawer-toggle', this.opened);
+        // TODO: temporary drawers open and close
+        if(this.type === 'temporary' || this.type === 'mini'){
+          this.opened = !this.opened;
+          this.fire('px-drawer-toggle', this.opened);
+        }
       },
       _handleTrack: function (e) {
         console.log('_handleTrack', e);

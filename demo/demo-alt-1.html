@@ -6,52 +6,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- TODO: Dependencies -->
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-    <!-- TODO: Theme -->
-    <link rel="import" href="../../px-theme/px-app.html">
-    <link rel="import" href="../../px-theme/px-theme.html">
-    <!-- TODO: Layout + Partials -->
-    <link rel="import" href="../../px-partials/px-partials.html">
-    <link rel="import" href="../px-drawer.html">
-    <link rel="import" href="../../px-navbar/px-navbar.html">
-    <link rel="import" href="../../px-layout/px-layout.html">
-    <link rel="import" href="../../px-table-view/px-table-view.html">
-    <style media="screen">
-      body,
-      html {
-        background-color: #eee !important;
-      }
-      body:not([style-scope]):not(.style-scope) {
-        margin-bottom: 0 !important;
-      }
-      .demo-container {
-        position: relative;
-        overflow: hidden;
-        min-height: 50vh;
-      }
-    </style>
-    <script type="text/javascript">
-      var user = {
-        username: 'jonnie.spratley',
-        name: 'Jonnie Spratley',
-        email: 'jonnie.spratley@ge.com',
-        image: 'https://goo.gl/WKu72K'
-      };
-      var navItems = [
-        {
-          label: 'Dashboards',
-          icon: 'fa:fa-tachometer'
-        }, {
-          label: 'Alerts',
-          icon: 'fa:fa-exclamation-triangle'
-        }, {
-          label: 'Cases',
-          icon: 'fa:fa-briefcase'
-        }, {
-          label: 'Analysis',
-          icon: 'fa:fa-bar-chart'
-        }
-      ];
-    </script>
+    <link rel="import" href="elements.html">
+    <script src="demo.js"></script>
+    <link rel="stylesheet" href="demo.css">
+    
   </head>
   <body>
     <template id="demo-1" is="dom-bind">

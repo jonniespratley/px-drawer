@@ -1,84 +1,62 @@
 <html>
   <head>
-    <title>px-drawer - demo 3</title>
+    <title>px-drawer - demo 5</title>
     <!-- TODO: Meta Tags -->
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- TODO: Dependencies -->
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-<link rel="import" href="elements.html">
-    <style media="screen">
-      body,
-      html {
-        background-color: #eee !important;
-      }
-      body:not([style-scope]):not(.style-scope) {
-        margin-bottom: 0 !important;
-      }
-    </style>
-    <script type="text/javascript">
-      var user = {
-        username: 'jonnie.spratley',
-        name: 'Jonnie Spratley',
-        email: 'jonnie.spratley@ge.com',
-        image: 'https://goo.gl/WKu72K'
-      };
-      var navItems = [
-        {
-          label: 'Dashboards',
-          icon: 'fa:fa-tachometer'
-        }, {
-          label: 'Alerts',
-          icon: 'fa:fa-exclamation-triangle'
-        }, {
-          label: 'Cases',
-          icon: 'fa:fa-briefcase'
-        }, {
-          label: 'Analysis',
-          icon: 'fa:fa-bar-chart'
-        }
-      ];
-    </script>
+    <link rel="import" href="elements.html">
+    <script src="demo.js"></script>
+    <link rel="stylesheet" href="demo.css">
+
   </head>
   <body>
-    <template id="demo-3" is="dom-bind">
+    <template id="demo-1" is="dom-bind">
       <style is="custom-style">
-        .drawer-alt-3 {
+        .drawer-alt-1 {
           --px-drawer: {
             background: #242326;
             color: #fff;
           }
         }
-        .drawer-alt-3__user {
+        .drawer-alt-1__user {
           --px-table-row-media-img: {
             width: 24px;
           }
         }
-        .drawer-alt-3__user-table {
+        .drawer-alt-1__user-table {
+
+          width: 100%;
           --px-table-view: {
             background-color: #323232;
             color: #fff;
           }
         }
-        .drawer-alt-3 .selected {
+        .drawer-alt-1 .selected {
           background-color: #0a9ec1;
           color: #fff;
         }
       </style>
-      <px-drawer-layout>
-        <px-drawer id="drawer-3" class="drawer-alt-3" fixed overlay>
-          <px-table-view class="drawer-alt-3__user-table">
-            <px-table-row image="{{user.image}}" modifier="flush"></px-table-row>
-            <px-table-row title="{{user.name}}" body="{{user.email}}" modifier="tappable nav-right"></px-table-row>
-          </px-table-view>
-          <px-table-view class="drawer-alt-3__table" selected-class="selected" selected="0">
+      <px-drawer-layout id="layout">
+        <px-drawer id="drawer-1" class="drawer-alt-1" fixed overlay mini>
+          <div class="">
+            <px-table-view class="drawer-alt-1__user-table drawer-spacer">
+              <px-table-row class="drawer-alt-1__user" title="{{user.name}}" image="{{user.image}}" modifier="tappable" icon-right="fa:fa-cog"></px-table-row>
+            </px-table-view>
+          </div>
+
+          <px-table-view class="drawer-alt-1__table" selected-class="selected" selected="0">
             <template is="dom-repeat" items="[[navItems]]">
               <px-table-row title="{{item.label}}" icon="{{item.icon}}" icon-size="24" modifier="tappable"></px-table-row>
             </template>
           </px-table-view>
+
         </px-drawer>
-        <px-navbar title="Example Drawer Alt 3">
-          <button drawer-toggle right>Toggle Drawer</button>
+        <px-navbar title="Example Drawer Alt 5">
+          <button class="navbar__button" drawer-toggle left>
+            <i class="fa fa-bars fa-lg"></i>
+          </button>
         </px-navbar>
         <div class="layout">
           <div class="layout__item">
@@ -94,7 +72,7 @@
       </px-drawer-layout>
     </template>
     <script type="text/javascript">
-      var scope = document.getElementById('demo-3');
+      var scope = document.getElementById('demo-1');
       scope.navItems = navItems;
       scope.user = user;
     </script>
