@@ -28,7 +28,7 @@ $inuit-enable-margins: true;
 @import "px-mobile-design/sass/_mixins.scss";
 
 .drawer {
-  z-index   : 210;
+  //z-index   : 210;
   @include transform(translate3d(0, 0, 0));
   display   : block;
   position  : absolute;
@@ -62,7 +62,7 @@ $inuit-enable-margins: true;
     }
 
     .drawer__content {
-      z-index: 350;
+      //z-index: 350;
     }
   }
 
@@ -71,7 +71,7 @@ $inuit-enable-margins: true;
   @include modifier ('shadow') {
     box-shadow: $drawer-box-shadow;
   }
-  
+
 
   ///------------------------------------------------------
   /// .drawer__content

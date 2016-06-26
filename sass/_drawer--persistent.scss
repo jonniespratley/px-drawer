@@ -7,6 +7,7 @@
   ///------------------------------------------------------
   /// .drawer--static
   @include modifier ('static') {
+    z-index: auto;
     transform   : translate3d(0, 0, 0);
     transition  : $drawer-persistent-transition;
     position    : inherit;
