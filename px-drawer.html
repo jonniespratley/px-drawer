@@ -82,8 +82,17 @@ Custom property | Description | Default
         height: var(--px-drawer-height, 100%);
         @apply(--px-drawer);
       }
+
       :host([mini]) .drawer {
-        width: var(--px-drawer-mini-width, 54px);
+        width: var(--px-drawer-mini-width, 50px);
+      }
+
+      :host([mini]) .drawer__content ::content{
+
+      }
+
+      :host ::content .drawer__spacer {
+        min-height: 56px;
       }
 
       :host .drawer__content {

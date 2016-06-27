@@ -39,14 +39,13 @@
         }
       </style>
       <px-drawer-layout id="layout">
-        <px-drawer id="drawer-1" class="drawer-alt-1" fixed overlay mini>
+        <px-drawer id="drawer-1" class="drawer-alt-1" fixed mini overlay>
           <div class="">
-            <px-table-view class="drawer-alt-1__user-table drawer-spacer">
+            <px-table-view class="drawer-alt-1__user-table drawer-spacer" modifier="tiny">
               <px-table-row class="drawer-alt-1__user" title="{{user.name}}" image="{{user.image}}" modifier="tappable" icon-right="fa:fa-cog"></px-table-row>
             </px-table-view>
           </div>
-
-          <px-table-view class="drawer-alt-1__table" selected-class="selected" selected="0">
+          <px-table-view class="drawer-alt-1__table" selected-class="selected" selected="0" modifier="tiny">
             <template is="dom-repeat" items="[[navItems]]">
               <px-table-row title="{{item.label}}" icon="{{item.icon}}" icon-size="24" modifier="tappable"></px-table-row>
             </template>
