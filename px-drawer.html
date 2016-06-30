@@ -83,6 +83,10 @@ Custom property | Description | Default
         @apply(--px-drawer);
       }
 
+      :host .drawer--static{
+        height: 100vh;
+      }
+
       :host([mini]) .drawer {
         width: var(--px-drawer-mini-width, 50px);
       }
