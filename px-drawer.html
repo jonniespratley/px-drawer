@@ -171,11 +171,12 @@ Custom property | Description | Default
           observer: '_openHandler'
         },
         /**
-       * The drawer is persistent and cannot be closed.
-       */
+         * Persistent navigation drawers can toggle open or closed.
+         * Persistent navigation drawers are acceptable for all sizes larger than mobile.
+         */
         persistent: {
           type: Boolean,
-          value: false,
+          notify: true,
           reflectToAttribute: true
         },
         /**
@@ -187,13 +188,15 @@ Custom property | Description | Default
         },
         /**
          * To position the drawer in mini mode.
+         * The persistent navigation drawer changes its width.
+         * Its resting state is as a mini-drawer at the same elevation as the content
+         * When expanded, it appears as the standard persistent navigation drawer.
          */
         mini: {
-          type: Boolean,
-          value: false
+          type: Boolean
         },
         /**
-         * Enable overlay when drawer is opened.
+         * Enable overlay when drawer is opened. (Only when closed)
          */
         overlay: {
           type: Boolean,
