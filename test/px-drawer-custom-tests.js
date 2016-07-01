@@ -4,6 +4,13 @@ function runCustomTests() {
 
   // This is the placeholder suite to place custom tests in
   // Use testCase(options) for a more convenient setup of the test cases
-  suite('Custom Automation Tests for px-drawer', function() {
+  suite('Custom Automation Tests for px-drawer', function () {
+    suite('<px-drawer>', function () {
+      var element = document.getElementById('px_drawer_1');
+      test('renders', function () {
+        assert.ok(element);
+      });
+
+    });
   });
-};
+}
