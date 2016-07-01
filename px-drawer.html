@@ -12,38 +12,35 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../iron-fit-behavior/iron-fit-behavior.html">
-<!--
-<link rel="import" href="hammer-import.html">
--->
-
 <link rel="import" href="px-drawer-styles.html">
-
 <!--
 `px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
 
-<link href="../iron-overlay-behavior/iron-overlay-behavior.html" rel="import">
-<p>
-  For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
-</p>
+[![Build Status](https://travis-ci.org/PredixDev/px-drawer.svg?branch=master)](https://travis-ci.org/PredixDev/px-drawer)
 
-### Example
+
+For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
+
+
+### Usage
 
 ```
-<div class="box">
-  <style>
-    body {
-      --px-drawer-background-color: #555;
+
+  <style is="custom-style">
+    :root{
+      --px-drawer:{
+        background-color: #000;
+      }
     }
   </style>
-  <px-drawer id="drawer1" align="left">
-    <p class="u-m">
+  <px-drawer id="drawer1" fixed overlay>
+    <p>
       This is content inside of the drawer
     </p>
   </px-drawer>
-  <button class="btn btn--full" onclick="document.getElementById('drawer1').toggle()">
+  <button onclick="document.getElementById('drawer1').toggle()">
     Toggle
   </button>
-</div>
 ```
 
 ### Styling
@@ -65,17 +62,13 @@ Custom property | Description | Default
 -->
 <dom-module id="px-drawer">
   <style include="px-drawer-css"></style>
-
   <template strip-whitespace>
     <style>
       :host {
         display: block;
       }
 
-      :host([opened]) {}
-
       :host .drawer {
-
         z-index: 20;
         background-color: var(--px-drawer-background-color, #242326);
         width: var(--px-drawer-width, 256px);
@@ -83,27 +76,28 @@ Custom property | Description | Default
         @apply(--px-drawer);
       }
 
-      :host .drawer--static{
+      :host .drawer--static {
         height: 100vh;
       }
+      :host([mini]) .drawer__content ::content {}
 
-      :host([mini]) .drawer {
+
+      :host([mini]) .drawer,
+      :host([mini][persistent]) .drawer {
         width: var(--px-drawer-mini-width, 50px);
       }
-
-      :host([mini]) .drawer__content ::content{
-
+      :host([mini][opened]) .drawer {
+        width: var(--px-drawer-mini-width-opened, auto);
       }
+
 
       :host ::content .drawer__spacer {
         min-height: 56px;
       }
-
       :host .drawer__content {
         overflow-x: hidden;
         @apply(--px-drawer-content);
       }
-
       :host([swipe-open]) > .drawer::after {
         position: fixed;
         top: 56px;
@@ -145,14 +139,12 @@ Custom property | Description | Default
         visibility: visible;
         display: block;
       }
-
       :host([opened][persistent]) > .drawer__overlay {
         visibility: hidden;
         display: none;
         pointer-events: none;
         opacity: 0;
       }
-
     </style>
     <div id="overlay" class="drawer__overlay" on-tap="toggle" hidden$="{{!overlay}}"></div>
     <div id="drawer" class="drawer">
@@ -204,15 +196,8 @@ Custom property | Description | Default
          * Enable overlay when drawer is opened.
          */
         overlay: {
-          type: Boolean
-        },
-        /**
-         * The theme to apply to the drawer (`dark`)
-         * @default transparent
-         */
-        theme: {
-          type: String,
-          reflectToAttribute: true
+          type: Boolean,
+          value: true
         },
         /**
          * The alignment of the drawer on the screen (`left`, `right`, `top`, `bottom`)
@@ -220,8 +205,8 @@ Custom property | Description | Default
         align: {
           type: String,
           reflectToAttribute: true,
-          value: 'left',
-          observer: '_typeHandler'
+          notify: true,
+          value: 'left'
         },
         /**
          * The type of drawer (`temporary`, `persistent`, `mini`)
@@ -229,6 +214,7 @@ Custom property | Description | Default
         type: {
           type: String,
           value: 'temporary',
+          notify: true,
           reflectToAttribute: true,
           observer: '_typeHandler'
         },
@@ -260,23 +246,18 @@ Custom property | Description | Default
       _boundEscKeydownHandler: null,
       ready: function () {
         this.setScrollDirection('y');
-        //  this.autoFitOnAttach = true; this.horizontalAlign = this.align;
       },
-
       attached: function () {
-
         Polymer.RenderStatus.afterNextRender(this, function () {});
         this._init();
       },
+      /**
+       * Handle setting up the UI with the proper classes.
+       */
       _init: function () {
-        //var mc = new Hammer(this.$.drawer); mc.on("panleft panup panright pandown", this._handlePan.bind(this));
-
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
 
-        if (this.theme) {
-          this.toggleClass('drawer--' + this.theme, true, this.$.drawer);
-        }
         if (this.fixed) {
           this.toggleClass('drawer--fixed', true, this.$.drawer);
         }
@@ -286,82 +267,50 @@ Custom property | Description | Default
         }
         this.debounce('resetLayout', function () {
           this.fire('px-drawer-layout-reset');
-        }, 350);
+        }, 500);
       },
       detached: function () {
         if (this._boundEscKeydownHandler) {
           document.removeEventListener('keydown', this._boundEscKeydownHandler);
         }
       },
-      /**
-        * Handle toggling the drawer open or close.
-        * @event px-drawer-toggle
-        */
-      toggle: function (type) {
-        // TODO: temporary drawers open and close
-        if (this.type === 'temporary' || this.mini) {
 
-        }
-        this.opened = !this.opened;
-        this.fire('px-drawer-toggle', this.opened);
-      },
       _startX: 0,
       _startY: 0,
-      _dist: 0,
-      _threshold: 80, //min distance for swipe
+      _dist: 0, //the distance the swipe
+      _threshold: 40, //min distance for swipe
       _allowedTime: 400, //max time to travel
-      _restraint: 100, // maximum distance allowed at the same time in perpendicular direction
-      _startTime: 0,
-      /*
-      The following are the gesture event types supported, with a short description and list of detail properties available on event.detail for each type:
-
-      down —finger/button went down
-        x—clientX coordinate for event
-        y—clientY coordinate for event
-        sourceEvent—the original DOM event that caused the down action
-      up —finger/button went up
-        x—clientX coordinate for event
-        y—clientY coordinate for event
-        sourceEvent—the original DOM event that caused the up action
-      tap —down & up occurred
-        x—clientX coordinate for event
-        y—clientY coordinate for event
-        sourceEvent—the original DOM event that caused the tap action
-      track —moving while finger/button is down
-        state—a string indicating the tracking state:
-        start—fired when tracking is first detected (finger/button down and moved past a pre-set distance threshold)
-        track—fired while tracking
-      end —fired when tracking ends
-        x—clientX coordinate for event
-        y—clientY coordinate for event
-        dx—change in pixels horizontally since the first track event
-        dy—change in pixels vertically since the first track event
-        ddx—change in pixels horizontally since last track event
-        ddy—change in pixels vertically since last track event
-        hover()—a function that may be called to determine the element currently being hovered
-      */
-
+      _restraint: 80, // maximum distance allowed at the same time in perpendicular direction
+      _startTime: 0, //the start time of the swipe
+      _swipeDir: null, //direction of the swipe
       _handleTrack: function (e) {
-        e.preventDefault();
+          e.preventDefault();
         switch (e.detail.state) {
           case 'start':
             this._handleTrackStart(e);
+            break;
+          case 'move':
+            this._handleTrackMove(e);
             break;
           case 'end':
             this._handleTrackEnd(e);
             break;
           default:
         }
+
       },
-      _swipeDir: null,
+
       _handleTrackStart: function (e) {
         e.preventDefault();
         var touchobj = e.detail;
         this._swipeDir = 'none';
         this._startX = touchobj.sourceEvent.pageX,
         this._startY = touchobj.sourceEvent.pageY;
-        this._startTime = new Date().getTime(); // record time when finger first makes contact with surface
+        this._startTime = new Date().getTime();
         this._dist = 0;
+      },
+      _handleTrackMove: function(e){
+
       },
       /**
        * This method runs when tracking has ended
@@ -394,51 +343,37 @@ Custom property | Description | Default
         this._handleTrackComplete(swipedir);
       },
       _handleTrackComplete: function (swipedir) {
-        console.warn('swipeComplete', swipedir);
         switch (swipedir) {
           case 'up':
             if (this.align === 'bottom') {
-              this.open();
+              this.toggle();
             }
             break;
           case 'down':
             if (this.align === 'bottom') {
-              this.close();
+              this.toggle();
             }
             break;
           case 'left':
             if (this.align === 'left') {
-              this.close();
+              this.toggle();
             }
             break;
           case 'right':
-            this.open();
+            this.toggle();
             break;
         }
       },
-      _handlePan: function (e) {
-        this._moveDrawer(e.deltaX);
-        switch (e.type) {
-          case 'panup':
-            if (this.align === 'bottom') {
-              this.open();
-            }
-            break;
-          case 'pandown':
-            if (this.align === 'bottom') {
-              this.close();
-            }
-            break;
-          case 'panleft':
-            if (this.align === 'left') {
-              this.close();
-            }
-            break;
-          case 'panright':
-            this.open();
-            break;
+      /**
+        * Handle toggling the drawer open or close.
+        * @event px-drawer-toggle
+        */
+      toggle: function (type) {
+        // TODO: temporary drawers open and close
+        if (!this.persistent) {
+          this.opened = !this.opened;
+          this.fire('px-drawer-toggle', this.opened);
         }
-        //  console.log(e,  e.type +" gesture detected.");
       },
       /**
        * Handle when a click is outside the drawer.
@@ -461,10 +396,10 @@ Custom property | Description | Default
       _typeHandler: function (newVal, oldVal) {
         this.toggleClass('drawer--' + oldVal, false, this.$.drawer);
         this.toggleClass('drawer--' + newVal, true, this.$.drawer);
-        if (this.persistent) {
-          //  this.toggleClass('drawer--temporary');
-        }
       },
+      /**
+       * Handle when the modifier changes.
+       */
       _handleModifier: function (newVal, oldVal) {
         var _this = this,
           klass,
@@ -480,10 +415,10 @@ Custom property | Description | Default
         }
       },
       /**
-     * Gets the width of the drawer.
-     *
-     * @return {Number} The width of the drawer in pixels.
-     */
+       * Gets the width of the drawer.
+       *
+       * @return {Number} The width of the drawer in pixels.
+       */
       getWidth: function () {
         return this.$.drawerContent.offsetWidth;
       },
@@ -496,7 +431,6 @@ Custom property | Description | Default
           this.opened = true;
           this.fire('px-drawer-open', this);
         }
-
       },
       /**
        * Closes the drawer.
@@ -507,7 +441,6 @@ Custom property | Description | Default
           this.opened = false;
           this.fire('px-drawer-close', this);
         }
-
       },
       /**
        * Handle when the esc key is pressed.
@@ -548,10 +481,10 @@ Custom property | Description | Default
        */
       _moveDrawer: function (translateX) {
         var _content = this.$.drawer;
-        //  this.transform(this._transformForTranslateX(translateX), _content);  this.toggleClass('is-open', this.underlayOpened, _content);
+        this.transform(this._transformForTranslateX(translateX), _content);
+        this.toggleClass('is-open', this.opened, _content);
         this.toggleClass('transition', this._transition, _content);
         this.toggleClass('dragging', this._dragging, _content);
-
       },
       /**
        * Handle transforming the element.

@@ -2,7 +2,7 @@ var user = {
   username: 'jonnie.spratley',
   name: 'Jonnie Spratley',
   email: 'jonnie.spratley@ge.com',
-  image: '/img/me.jpg'
+  image: 'https://goo.gl/l2K4fh'
     /*image: 'https://goo.gl/WKu72K'*/
 };
 var navItems = [{

@@ -46,18 +46,18 @@
           }
         }
 
-        .drawer-alt-5 {
+        .drawer-alt-4 {
           --px-drawer: {
             background: #242326;
             color: #fff;
           }
         }
-        .drawer-alt-5__user {
+        .drawer-alt-4__user {
           --px-table-row-media-img: {
             width: 24px;
           }
         }
-        .drawer-alt-5__user-table {
+        .drawer-alt-4__user-table {
           position: absolute;
           bottom: 0;
           width: 100%;
@@ -66,7 +66,7 @@
             color: #fff;
           }
         }
-        .drawer-alt-5 .selected {
+        .drawer-alt-4 .selected {
           background-color: #0a9ec1;
           color: #fff;
         }
@@ -74,11 +74,11 @@
       </style>
       <px-header-layout id="layout5" class="demo-container-5" fixed overlay>
         <px-header title="Drawer Layout" subtitle="Demo 4" class="u-p-"></px-header>
-        <px-drawer id="drawer-5" class="drawer-alt-5" type="static">
-          <px-table-view class="drawer-alt-5__user-table">
-            <px-table-row title="{{user.name}}" image="{{user.image}}" modifier="tappable nav-right" class="drawer-alt-5__user"></px-table-row>
+        <px-drawer id="drawer-5" class="drawer-alt-4" type="static">
+          <px-table-view class="drawer-alt-4__user-table">
+            <px-table-row title="{{user.name}}" image="{{user.image}}" modifier="tappable nav-right" class="drawer-alt-4__user"></px-table-row>
           </px-table-view>
-          <px-table-view class="drawer-alt-5__table" selected-class="selected" selected="0">
+          <px-table-view class="drawer-alt-4__table" selected-class="selected" selected="0">
             <template is="dom-repeat" items="[[navItems]]">
               <px-table-row title="{{item.label}}" icon="{{item.icon}}" icon-size="24" modifier="tappable"></px-table-row>
             </template>
