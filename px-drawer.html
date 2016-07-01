@@ -148,7 +148,8 @@ Custom property | Description | Default
 
       :host([opened][persistent]) > .drawer__overlay {
         visibility: hidden;
-
+        display: none;
+        pointer-events: none;
         opacity: 0;
       }
 
@@ -298,10 +299,11 @@ Custom property | Description | Default
         */
       toggle: function (type) {
         // TODO: temporary drawers open and close
-        if (this.type === 'temporary' || this.type === 'mini') {
-          this.opened = !this.opened;
-          this.fire('px-drawer-toggle', this.opened);
+        if (this.type === 'temporary' || this.mini) {
+
         }
+        this.opened = !this.opened;
+        this.fire('px-drawer-toggle', this.opened);
       },
       _startX: 0,
       _startY: 0,
