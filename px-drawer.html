@@ -67,7 +67,6 @@ Custom property | Description | Default
       :host {
         display: block;
       }
-
       :host .drawer {
         z-index: 20;
         background-color: var(--px-drawer-background-color, #242326);
@@ -75,13 +74,14 @@ Custom property | Description | Default
         height: var(--px-drawer-height, 100%);
         @apply(--px-drawer);
       }
-
       :host .drawer--static {
         height: 100vh;
       }
-      :host([mini]) .drawer__content ::content {}
-
-
+      :host([mini]) .drawer__content ::content {
+        --px-table-view-title: {
+          display: none;
+        }
+      }
       :host([mini]) .drawer,
       :host([mini][persistent]) .drawer {
         width: var(--px-drawer-mini-width, 50px);
@@ -89,8 +89,6 @@ Custom property | Description | Default
       :host([mini][opened]) .drawer {
         width: var(--px-drawer-mini-width-opened, auto);
       }
-
-
       :host ::content .drawer__spacer {
         min-height: 56px;
       }
@@ -107,7 +105,6 @@ Custom property | Description | Default
         width: 20px;
         content: '';
       }
-
       :host .drawer__overlay {
         position: fixed;
         top: 0;
@@ -124,15 +121,12 @@ Custom property | Description | Default
         display: none;
         @apply(--px-drawer-overlay);
       }
-
       :host([type=persistent]) {
         background-color: crimson;
       }
-
       :host([opened]) .drawer {
         @apply(--px-drawer-open);
       }
-
       :host([opened][overlay]) > .drawer__overlay {
         opacity: 1;
         z-index: 15;
@@ -260,7 +254,6 @@ Custom property | Description | Default
       _init: function () {
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
-
         if (this.fixed) {
           this.toggleClass('drawer--fixed', true, this.$.drawer);
         }
@@ -277,7 +270,6 @@ Custom property | Description | Default
           document.removeEventListener('keydown', this._boundEscKeydownHandler);
         }
       },
-
       _startX: 0,
       _startY: 0,
       _dist: 0, //the distance the swipe
@@ -287,7 +279,7 @@ Custom property | Description | Default
       _startTime: 0, //the start time of the swipe
       _swipeDir: null, //direction of the swipe
       _handleTrack: function (e) {
-          e.preventDefault();
+        e.preventDefault();
         switch (e.detail.state) {
           case 'start':
             this._handleTrackStart(e);
@@ -300,9 +292,7 @@ Custom property | Description | Default
             break;
           default:
         }
-
       },
-
       _handleTrackStart: function (e) {
         e.preventDefault();
         var touchobj = e.detail;
@@ -312,9 +302,7 @@ Custom property | Description | Default
         this._startTime = new Date().getTime();
         this._dist = 0;
       },
-      _handleTrackMove: function(e){
-
-      },
+      _handleTrackMove: function (e) {},
       /**
        * This method runs when tracking has ended
        * and returns the direction the swipe was.

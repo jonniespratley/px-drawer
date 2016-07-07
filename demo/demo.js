@@ -2,19 +2,19 @@ var user = {
   username: 'jonnie.spratley',
   name: 'Jonnie Spratley',
   email: 'jonnie.spratley@ge.com',
-  image: 'https://goo.gl/l2K4fh'
+
     /*image: 'https://goo.gl/WKu72K'*/
 };
 var navItems = [{
-  label: 'Dashboards',
+  label: 'Dashboard',
   icon: 'fa:fa-tachometer'
 }, {
-  label: 'Alerts',
-  icon: 'fa:fa-exclamation-triangle'
+  label: 'Page 1',
+  icon: 'fa:fa-square'
 }, {
-  label: 'Cases',
-  icon: 'fa:fa-briefcase'
+  label: 'Page 2',
+  icon: 'fa:fa-square'
 }, {
-  label: 'Analysis',
-  icon: 'fa:fa-bar-chart'
+  label: 'Page 3',
+  icon: 'fa:fa-square'
 }];
