@@ -49,6 +49,7 @@ Custom property | Description | Default
 ------------ | ------------- | ------------
 `--px-drawer`   | Style mixin to be applied to the element | {}
 `--px-drawer-content`   | Style mixin to be applied to the content | {}
+`--px-drawer-opened`   | Style mixin to be applied to the element when opened | {}
 `--px-drawer-background-color` | The background-color of the drawer  |  `#242326` *(gray10)*
 `--px-drawer-width` | The width of the drawer | `256px`
 `--px-drawer-height` | The height of the drawer | `100vh`
@@ -67,6 +68,7 @@ Custom property | Description | Default
       :host {
         display: block;
       }
+
       :host .drawer {
         z-index: 20;
         background-color: var(--px-drawer-background-color, #242326);
@@ -82,6 +84,7 @@ Custom property | Description | Default
           display: none;
         }
       }
+
       :host([mini]) .drawer,
       :host([mini][persistent]) .drawer {
         width: var(--px-drawer-mini-width, 50px);
@@ -89,13 +92,16 @@ Custom property | Description | Default
       :host([mini][opened]) .drawer {
         width: var(--px-drawer-mini-width-opened, auto);
       }
+
       :host ::content .drawer__spacer {
         min-height: 56px;
       }
+
       :host .drawer__content {
         overflow-x: hidden;
         @apply(--px-drawer-content);
       }
+
       :host([swipe-open]) > .drawer::after {
         position: fixed;
         top: 56px;
@@ -105,6 +111,7 @@ Custom property | Description | Default
         width: 20px;
         content: '';
       }
+
       :host .drawer__overlay {
         position: fixed;
         top: 0;
@@ -121,11 +128,15 @@ Custom property | Description | Default
         display: none;
         @apply(--px-drawer-overlay);
       }
-      :host([type=persistent]) {
-        background-color: crimson;
+
+      :host([opened][persistent]){
+        min-height: 100vh;
       }
+
       :host([opened]) .drawer {
-        @apply(--px-drawer-open);
+        visibility: visible;
+        transform: translate3d(0,0,0);
+        @apply(--px-drawer-opened);
       }
       :host([opened][overlay]) > .drawer__overlay {
         opacity: 1;
@@ -245,7 +256,9 @@ Custom property | Description | Default
         this.setScrollDirection('y');
       },
       attached: function () {
-        Polymer.RenderStatus.afterNextRender(this, function () {});
+        Polymer.RenderStatus.afterNextRender(this, function () {
+          this._init();
+        });
         this._init();
       },
       /**
@@ -378,8 +391,8 @@ Custom property | Description | Default
        * Handle when the drawer opened state is changed.
        */
       _openHandler: function (newVal, oldVal) {
-        this.toggleClass('is-open', newVal, this.$.drawer);
-        this.toggleClass('is-open', newVal, this.$.overlay);
+        //this.toggleClass('is-open', newVal, this.$.drawer);
+        //this.toggleClass('is-open', newVal, this.$.overlay);
       },
       /**
        * Handle when the drawer type is changed.
