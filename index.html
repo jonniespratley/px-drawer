@@ -1,18 +1,122 @@
 <html>
-<head>
-  <!-- TODO: dependencies -->
-  <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  <!-- TODO: Extra components -->
-  <link rel="import" href="../iron-component-page/iron-component-page.html">
+	<head>
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>px-drawer</title>
+		<script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+		<link rel="import" href="../iron-icon/iron-icon.html">
+		<link rel="import" href="../iron-input/iron-input.html">
+		<link rel="import" href="../px-demo-template/px-demo-template.html">
+		<link rel="import" href="px-drawer.html">
 
-  <title>px-drawer</title>
-</head>
-<body>
+		<style media="screen">
 
-<!-- TODO: docs -->
-<iron-component-page id="px-docs" src="px-drawer.html" view="docs"></iron-component-page>
+			body{
+				margin: 0;
+			}
 
-</body>
+      .bg--dark{
+        background: #333;
+      }
+      .position-relative{
+        overflow: hidden;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        min-height: 300px;
+      }
+
+		</style>
+	</head>
+
+	<body unresolved>
+
+		<template id="scope" is="dom-bind">
+
+			<style is="custom-style" include="px-demo-template-css">
+				ul, li{
+					list-style-type: none;
+					padding: 0;
+					margin: 0;
+				}
+			</style>
+
+			<px-demo-template id="test"
+				repo-name="px-drawer"
+				element-name="px-drawer"
+				heading="px-drawer"
+				description="The px-drawer is a navigation drawer that can slide in from the left, right, top or bottom."
+				element-props="{{props}}">
+
+				<div properties>
+					<ul>
+
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="opened" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.opened::change}}">
+                <label for="opened" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Opened</div>
+              </div>
+            </li>
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="overlay" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.overlay::change}}">
+                <label for="overlay" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Overlay</div>
+              </div>
+            </li>
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="mini" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.mini::change}}">
+                <label for="mini" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Mini</div>
+              </div>
+            </li>
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="persistent" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.persistent::change}}">
+                <label for="persistent" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Persistent</div>
+              </div>
+            </li>
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="fixed" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.fixed::change}}">
+                <label for="fixed" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Fixed</div>
+              </div>
+            </li>
+					</ul>
+				</div>
+
+				<div demo>
+					<div class="position-relative">
+            <px-drawer id="drawer1"
+              overlay="{{props.overlay}}"
+              opened="{{props.opened}}"
+              fixed="{{props.fixed}}">
+              <p>
+                This is content inside of the drawer
+              </p>
+            </px-drawer>
+					</div>
+				</div>
+
+			</px-demo-template>
+		</template>
+		<script type="text/javascript">
+			document.addEventListener('WebComponentsReady', function() {
+				var scope = document.querySelector('#scope');
+				scope.props = {
+					opened: false,
+					mini: false,
+					persistent: false,
+					overlay: false,
+					fixed: false
+				};
+			});
+		</script>
+	</body>
 </html>

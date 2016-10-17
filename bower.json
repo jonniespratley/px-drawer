@@ -36,11 +36,15 @@
     "px-table-view": "https://github.com/PredixDev/px-table-view.git",
     "px-colors-design": "^0.2.16",
     "px-spacing-responsive-design": "^0.3.7",
-    "iron-component-page": "~1.1.7"
+    "iron-component-page": "~1.1.7",
+    "px-demo-template": "https://github.com/jonniespratley/px-demo-template.git",
+    "px-demo-snippet": "^0.6.4",
+    "px-api-viewer": "^0.1.0"
   },
   "resolutions": {
     "polymer": "~v1.5.0",
-    "px-theme": "~0.8.0",
-    "polymer-font-awesome": "master"
+    "px-theme": "1.1.2",
+    "polymer-font-awesome": "master",
+    "px-typography-design": "^1.1.0"
   }
 }

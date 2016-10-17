@@ -14,12 +14,10 @@
 <link rel="import" href="../iron-fit-behavior/iron-fit-behavior.html">
 <link rel="import" href="px-drawer-styles.html">
 <!--
-`px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
-
-[![Build Status](https://travis-ci.org/PredixDev/px-drawer.svg?branch=master)](https://travis-ci.org/PredixDev/px-drawer)
+The `px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
 
 
-For demo visit <a href="demo.html" target="_blank">Full demo here</a> or <a href="mobile-demo.html" target="_blank">Mobile demo here</a>
+For demos visit <a href="demo.html" target="_blank">here</a>
 
 
 ### Usage
@@ -62,9 +60,8 @@ Custom property | Description | Default
 @homepage index.html
 -->
 <dom-module id="px-drawer">
-  <style include="px-drawer-css"></style>
   <template strip-whitespace>
-    <style>
+    <style include="px-drawer-css">
       :host {
         display: block;
       }
@@ -119,13 +116,14 @@ Custom property | Description | Default
         bottom: 0;
         left: 0;
         transition: opacity 0.2s ease;
+        -webkit-transition: opacity 0.2s ease;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         opacity: 0;
-        background: var(--px-drawer-overlay-background, rgba(0, 0, 0, 0.5));
         z-index: -1;
         visibility: hidden;
         display: none;
+        background: var(--px-drawer-overlay-background, rgba(0, 0, 0, 0.5));
         @apply(--px-drawer-overlay);
       }
 
@@ -136,14 +134,18 @@ Custom property | Description | Default
       :host([opened]) .drawer {
         visibility: visible;
         transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0,0,0);
         @apply(--px-drawer-opened);
       }
-      :host([opened][overlay]) > .drawer__overlay {
+
+      :host([opened][overlay]) > .drawer__overlay,
+      :host([opened=true][overlay=true]) > .drawer__overlay {
         opacity: 1;
         z-index: 15;
         visibility: visible;
         display: block;
       }
+
       :host([opened][persistent]) > .drawer__overlay {
         visibility: hidden;
         display: none;
@@ -170,9 +172,11 @@ Custom property | Description | Default
          */
         opened: {
           type: Boolean,
-          value: false,
-          notify: true,
           reflectToAttribute: true,
+          value: function(){
+            return false;
+          },
+          notify: true,
           observer: '_openHandler'
         },
         /**
@@ -189,7 +193,10 @@ Custom property | Description | Default
          */
         fixed: {
           type: Boolean,
-          value: false
+          reflectToAttribute: true,
+          value: function(){
+            return false;
+          }
         },
         /**
          * To position the drawer in mini mode.
@@ -198,14 +205,19 @@ Custom property | Description | Default
          * When expanded, it appears as the standard persistent navigation drawer.
          */
         mini: {
-          type: Boolean
+          type: Boolean,
+          reflectToAttribute: true
         },
         /**
          * Enable overlay when drawer is opened. (Only when closed)
          */
         overlay: {
+
           type: Boolean,
-          value: true
+          reflectToAttribute: true,
+          value: function(){
+            return true;
+          }
         },
         /**
          * The alignment of the drawer on the screen (`left`, `right`, `top`, `bottom`)
@@ -214,14 +226,18 @@ Custom property | Description | Default
           type: String,
           reflectToAttribute: true,
           notify: true,
-          value: 'left'
+          value: function(){
+            return 'left';
+          }
         },
         /**
          * The type of drawer (`temporary`, `persistent`, `mini`)
          */
         type: {
           type: String,
-          value: 'temporary',
+          value: function(){
+            return 'temporary';
+          },
           notify: true,
           reflectToAttribute: true,
           observer: '_typeHandler'
@@ -231,7 +247,9 @@ Custom property | Description | Default
         */
         swipeOpen: {
           type: Boolean,
-          value: true,
+          value: function(){
+            return true;
+          },
           reflectToAttribute: true
         },
         /**
@@ -247,10 +265,12 @@ Custom property | Description | Default
       listeners: {
         'drawer.track': '_handleTrack',
         'overlay.tap': 'toggle',
-        'drawerContent.tap': 'toggle',
-        'iron-resize': '_resizeHandler'
+        'drawerContent.tap': 'toggle'
       },
-      observers: ['resetLayout(fixed)'],
+      observers: [
+        'resetLayout(fixed)',
+        '_updateUi(fixed, overlay, persistent)',
+      ],
       _boundEscKeydownHandler: null,
       ready: function () {
         this.setScrollDirection('y');
@@ -267,13 +287,7 @@ Custom property | Description | Default
       _init: function () {
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
         this.toggleClass('drawer--' + this.align, true, this.$.drawer);
-        if (this.fixed) {
-          this.toggleClass('drawer--fixed', true, this.$.drawer);
-        }
-        if (this.persistent) {
-          this.toggleClass('drawer--temporary', true, this.$.drawer);
-          this.toggleClass('drawer--persistent', true, this.$.drawer);
-        }
+
         this.debounce('resetLayout', function () {
           this.fire('px-drawer-layout-reset');
         }, 500);
@@ -281,6 +295,17 @@ Custom property | Description | Default
       detached: function () {
         if (this._boundEscKeydownHandler) {
           document.removeEventListener('keydown', this._boundEscKeydownHandler);
+        }
+      },
+      _updateUi: function(fixed, overlay, persistent){
+        if (fixed) {
+          this.toggleClass('drawer--fixed', true, this.$.drawer);
+        } else {
+          this.toggleClass('drawer--fixed', false, this.$.drawer);
+        }
+        if (persistent) {
+          this.toggleClass('drawer--temporary', true, this.$.drawer);
+          this.toggleClass('drawer--persistent', true, this.$.drawer);
         }
       },
       _startX: 0,
@@ -306,6 +331,13 @@ Custom property | Description | Default
           default:
         }
       },
+
+      /**
+       * anonymous function - description
+       *
+       * @param  {type} e description
+       * @return {type}   description
+       */
       _handleTrackStart: function (e) {
         e.preventDefault();
         var touchobj = e.detail;
@@ -315,7 +347,9 @@ Custom property | Description | Default
         this._startTime = new Date().getTime();
         this._dist = 0;
       },
-      _handleTrackMove: function (e) {},
+      _handleTrackMove: function (e) {
+        console.log('_handleTrackMove', e);
+      },
       /**
        * This method runs when tracking has ended
        * and returns the direction the swipe was.
@@ -346,6 +380,9 @@ Custom property | Description | Default
         }
         this._handleTrackComplete(swipedir);
       },
+      /**
+       * Handle when tracking is complete.
+       */
       _handleTrackComplete: function (swipedir) {
         switch (swipedir) {
           case 'up':
@@ -373,7 +410,6 @@ Custom property | Description | Default
         * @event px-drawer-toggle
         */
       toggle: function (type) {
-        // TODO: temporary drawers open and close
         if (!this.persistent) {
           this.opened = !this.opened;
           this.fire('px-drawer-toggle', this.opened);
@@ -391,8 +427,8 @@ Custom property | Description | Default
        * Handle when the drawer opened state is changed.
        */
       _openHandler: function (newVal, oldVal) {
-        //this.toggleClass('is-open', newVal, this.$.drawer);
-        //this.toggleClass('is-open', newVal, this.$.overlay);
+        this.toggleClass('is-open', newVal, this.$.drawer);
+        this.toggleClass('is-open', newVal, this.$.overlay);
       },
       /**
        * Handle when the drawer type is changed.
@@ -472,12 +508,7 @@ Custom property | Description | Default
           this.fire('px-drawer-reset-layout', this);
         }, 1);
       },
-      /**
-       * Handle when iron-resize event fires.
-       */
-      _resizeHandler: function () {
-        //this.resetLayout();
-      },
+
       /**
        * Handle moving the drawer
        * @param translateX
