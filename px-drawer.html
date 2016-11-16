@@ -17,7 +17,7 @@
 The `px-drawer` is a navigation drawer that can slide in from the left, right, top or bottom.
 
 
-For demos visit <a href="demo.html" target="_blank">here</a>
+For more demos visit <a href="demo.html" target="_blank">here</a>
 
 
 ### Usage
@@ -212,7 +212,6 @@ Custom property | Description | Default
          * Enable overlay when drawer is opened. (Only when closed)
          */
         overlay: {
-
           type: Boolean,
           reflectToAttribute: true,
           value: function(){
@@ -226,6 +225,7 @@ Custom property | Description | Default
           type: String,
           reflectToAttribute: true,
           notify: true,
+          observer: '_alignHandler',
           value: function(){
             return 'left';
           }
@@ -286,8 +286,6 @@ Custom property | Description | Default
        */
       _init: function () {
         document.addEventListener('keydown', this._escKeydownHandler.bind(this));
-        this.toggleClass('drawer--' + this.align, true, this.$.drawer);
-
         this.debounce('resetLayout', function () {
           this.fire('px-drawer-layout-reset');
         }, 500);
@@ -296,6 +294,12 @@ Custom property | Description | Default
         if (this._boundEscKeydownHandler) {
           document.removeEventListener('keydown', this._boundEscKeydownHandler);
         }
+      },
+      _alignHandler: function(newVal, oldVal){
+        this.debounce('_alignHandler', function(){
+          this.toggleClass('drawer--' + oldVal, false, this.$.drawer);
+          this.toggleClass('drawer--' + newVal, true, this.$.drawer);
+        }, 500);
       },
       _updateUi: function(fixed, overlay, persistent){
         if (fixed) {
@@ -318,17 +322,19 @@ Custom property | Description | Default
       _swipeDir: null, //direction of the swipe
       _handleTrack: function (e) {
         e.preventDefault();
-        switch (e.detail.state) {
-          case 'start':
-            this._handleTrackStart(e);
-            break;
-          case 'move':
-            this._handleTrackMove(e);
-            break;
-          case 'end':
-            this._handleTrackEnd(e);
-            break;
-          default:
+        if(this.get('swipeOpen')){
+          switch (e.detail.state) {
+            case 'start':
+              this._handleTrackStart(e);
+              break;
+            case 'track':
+              this._handleTrackMove(e);
+              break;
+            case 'end':
+              this._handleTrackEnd(e);
+              break;
+            default:
+          }
         }
       },
 

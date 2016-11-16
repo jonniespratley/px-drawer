@@ -26,6 +26,7 @@
         height: 100%;
         width: 100%;
         min-height: 300px;
+        border: 10px solid black;
       }
 
 		</style>
@@ -67,13 +68,14 @@
                 <div class="u-ml-">Overlay</div>
               </div>
             </li>
+            <!--
             <li class="u-mb-">
               <div class="flex u-mb-">
                 <input id="mini" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.mini::change}}">
                 <label for="mini" class="toggle__label toggle__label--small"></label>
                 <div class="u-ml-">Mini</div>
               </div>
-            </li>
+            </li>-->
             <li class="u-mb-">
               <div class="flex u-mb-">
                 <input id="persistent" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.persistent::change}}">
@@ -88,6 +90,22 @@
                 <div class="u-ml-">Fixed</div>
               </div>
             </li>
+            <li class="u-mb-">
+              <div class="flex u-mb-">
+                <input id="swipeOpen" class="toggle__input toggle__input--small" type="checkbox" checked="{{props.swipeOpen::change}}">
+                <label for="swipeOpen" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Swipe Open</div>
+              </div>
+            </li>
+            <!--
+            <li class="u-mb-">
+              <div class="u-mb-">
+								<label class="u-mb-">Align</label>
+                <input is="iron-input" id="align" class="text-input" type="text" bind-value="{{props.align}}">
+
+              </div>
+            </li>
+          -->
 					</ul>
 				</div>
 
@@ -95,9 +113,10 @@
 					<div class="position-relative">
             <px-drawer id="drawer1"
               overlay="{{props.overlay}}"
+              swipe-open="{{props.swipeOpen}}"
               opened="{{props.opened}}"
               fixed="{{props.fixed}}">
-              <p>
+              <p class="u-m">
                 This is content inside of the drawer
               </p>
             </px-drawer>
@@ -111,10 +130,10 @@
 				var scope = document.querySelector('#scope');
 				scope.props = {
 					opened: false,
-					mini: false,
 					persistent: false,
 					overlay: false,
-					fixed: false
+					fixed: false,
+					swipeOpen: true
 				};
 			});
 		</script>
